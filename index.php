@@ -42,8 +42,7 @@
 			</div><!--row end-->
 		</div><!--outer div end-->
 
-<p>test</p>
-
+		<p>test</p>
 
 	</body>
 </html>
