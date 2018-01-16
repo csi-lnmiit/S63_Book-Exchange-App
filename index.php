@@ -41,7 +41,7 @@
 					</div><!--col-md-6 end-->
 			</div><!--row end-->
 		</div><!--outer div end-->
-		<div
+		<div prateek mittal><!--change here-->
 
 	</body>
 </html>
