@@ -41,7 +41,8 @@
 					</div><!--col-md-6 end-->
 			</div><!--row end-->
 		</div><!--outer div end-->
-		<div
+		
+		<p>test</p>
 
 	</body>
 </html>
