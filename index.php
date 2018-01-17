@@ -11,13 +11,15 @@
 
 	<body>
 
-	<!-- particles.js container -->
-	<div id="particles-js"></div>
-	<!-- stats - count particles -->
-	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-	<!-- stats.js lib -->
-	<script src="particle.js"></script>
+		<div class="col-md-12"style="position:fixed">
+		<!-- particles.js container -->
+		<div id="particles-js"></div>
+		<!-- stats - count particles -->
+		<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+		<!-- stats.js lib -->
+		<script src="particle.js"></script></div>
 
+		<br>
 		<div style="margin-top:150px;margin-left:200px;margin-right:200px;"><!--outer div start-->
 			<div class="row"><!--row start-->
 				<div class="col-md-6"><!--col-md-6 start-->
@@ -48,19 +50,7 @@
 				</div><!--col-md-6 end-->
 			</div><!--row end-->
 		</div><!--outer div end-->
-<<<<<<< HEAD
 
 
-||||||| merged common ancestors
-<<<<<<< HEAD
-
-
-		<div prateek mittal><!--change here-->
-=======
-		<div prateek mittal new new change><!--change here-->
->>>>>>> 2e1da50f9e44b0378915eb2c8c3dfad24793f3e3
-
-=======
->>>>>>> 319c7087ba596dd0ac4f8b0123f972276d4b077e
 	</body>
 </html>
