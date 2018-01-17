@@ -5,53 +5,60 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <!--<link rel="stylesheet" type="text/css" href="style.css">-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 
 	<body>
 
-		<div class="col-md-12"style="position:fixed">
-		<!-- particles.js container -->
-		<div id="particles-js"></div>
-		<!-- stats - count particles -->
-		<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-		<!-- stats.js lib -->
-		<script src="particle.js"></script></div>
+		<header style="height:100px;background-color:#164682">
+			<img src="logo.png" style="height:100px;">
+		</header>
 
-		<br>
-		<div style="margin-top:150px;margin-left:200px;margin-right:200px;"><!--outer div start-->
-			<div class="row"><!--row start-->
-				<div class="col-md-6"><!--col-md-6 start-->
-					<div class="jumbotron"style="height:350px;padding-top:5px"><!--login div start-->
-						<div align="center">
-        				<h3>Login</h3><br>
-						<form>
-    						Username : <input type="text" name="uname"><br><br>
-        					Password : <input type="text" name="pws">
-						</form>
-						</div>
-					</div><!--login div end-->
-				</div><!--col-md-6 end-->
+		<div style="margin-top:50px;margin-left:100px;margin-right:300px;"><!--outer div start-->
+            <ul class="nav nav-pills">
+                <li class="active"><a data-toggle="pill" href="#login">Login</a></li>
+                <li><a data-toggle="pill" href="#signup">Sign Up</a></li>
+            </ul>
+            
+            <!--tab pill start-->
+            <div class="tab-content">
+                <div id="login" class="tab-pane fade in active">
+                	<div class="row"><!--row start-->
+                		<div class="col-md-6"><!--col-md-6 start-->
+                			<div class="jumbotron"style="height:350px;padding-top:5px"><!--login div start-->
+                				<div align="center">
+                    				<h3>Login</h3><br>
+                    				<form action="login.php" method="post">
+                    					Username : <input type="text" name="user"><br><br>
+                    					Password : <input type="password" name="pass"><br><br>
+                    					<input type="submit" name="Login">
+                    				</form>
+                				</div>
+                			</div><!--login div end-->
+                		</div><!--col-md-6 end-->
+                    </div><!--row end-->
+                </div>
 
-
-		    	<div class="col-md-6"><!--col-md-6 start-->
-					<div class="jumbotron"style="height:350px;padding-top:5px"><!--sign up div start-->
-						<div align="center">
-		        			<h3>Sign Up</h3><br>
-	  						<form>
-								Full Name : <input type="text" name="name"><br><br>
-								E-Mail ID : <input type="text" name="email"><br><br>
-								Username : <input type="text" name="email"><br><br>
-								Password : <input type="text" name="email">
-							</form>
-						</div>
-		    		</div><!--sign up div end-->
-				</div><!--col-md-6 end-->
-			</div><!--row end-->
-		</div><!--outer div end-->
-
-
-	</body>
+                <div id="signup" class="tab-pane fade">
+                    <div class="row"><!--row start-->
+                        <div class="col-md-6"><!--col-md-6 start-->
+                            <div class="jumbotron"style="height:350px;padding-top:5px"><!--sign up div start-->
+                                <div align="center">
+                                    <h3>Sign Up</h3><br>
+                                    <form action="signup.php" method="post">
+                                        Full Name : <input type="text" name="name"><br><br>
+                                        E-Mail ID : <input type="email" name="email"><br><br>
+                                        Username : <input type="text" name="user"><br><br>
+                                        Password : <input type="password" name="pass"><br><br>
+                                        <input type="submit" name="Sign Up">
+                                    </form>
+                                </div>
+                            </div><!--sign up div end-->
+                        </div><!--col-md-6 end-->
+                    </div><!--row end-->
+                </div>
+            </div>
+        </div><!--outer div end-->
+    </body>
 </html>
