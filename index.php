@@ -11,6 +11,13 @@
 
 	<body>
 
+	<!-- particles.js container -->
+	<div id="particles-js"></div>
+	<!-- stats - count particles -->
+	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+	<!-- stats.js lib -->
+	<script src="particle.js"></script>
+
 		<div style="margin-top:150px;margin-left:200px;margin-right:200px;"><!--outer div start-->
 				<div class="row"><!--row start-->
 						<div class="col-md-6"><!--col-md-6 start-->
@@ -41,8 +48,6 @@
 					</div><!--col-md-6 end-->
 			</div><!--row end-->
 		</div><!--outer div end-->
-
-		<p>test</p>
 
 	</body>
 </html>
