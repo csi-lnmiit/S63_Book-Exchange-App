@@ -5,6 +5,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <!--<link rel="stylesheet" type="text/css" href="style.css">-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
@@ -23,7 +24,7 @@
 		<div style="margin-top:150px;margin-left:200px;margin-right:200px;"><!--outer div start-->
 			<div class="row"><!--row start-->
 				<div class="col-md-6"><!--col-md-6 start-->
-					<div class="jumbotron"style="height:350px"><!--login div start-->
+					<div class="jumbotron"style="height:350px;padding-top:5px"><!--login div start-->
 						<div align="center">
         				<h3>Login</h3><br>
 						<form>
@@ -36,7 +37,7 @@
 
 
 		    	<div class="col-md-6"><!--col-md-6 start-->
-					<div class="jumbotron"style="height:350px"><!--sign up div start-->
+					<div class="jumbotron"style="height:350px;padding-top:5px"><!--sign up div start-->
 						<div align="center">
 		        			<h3>Sign Up</h3><br>
 	  						<form>
