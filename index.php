@@ -22,7 +22,6 @@
 	</head>
 
 	<body style="background-color:beige">
-
 		<header style="height:100px;background-color:#6a1b9a;">
 			<img src="Images/logo.png" style="height:100px;">
 		</header>
@@ -62,9 +61,10 @@
                             <div class="jumbotron"style="height:350px;padding-top:5px;background-color:lightblue;box-shadow:8px 8px 8px #c9c9c9;border-radius:5px 25%;"><!--signup div start-->
                                 <div align="center">
                                     <h3>Sign Up</h3><br>
-                                    <form action="login.php" method="post">
+                                    <form action="index.php" method="post">
                                         Full Name : <input type="text" name="name"><br><br>
                                         E-Mail ID : <input type="email" name="email"><br><br>
+										Mobile No. : <input type="tel" name="mobile"><br><br>
                                         Username : <input type="text" name="user"><br><br>
                                         Password : <input type="password" name="pass"><br><br>
                                         <input type="submit" name="signup" value="Sign Up">
@@ -77,7 +77,7 @@
             </div>
         </div><!--outer div end-->
 
-    	<footer class="jumbotron" style="height:100px;margin-top:78px;margin-bottom:0px;background-color:white">
+    	<footer class="jumbotron" style="height:100px;margin-top:78px;margin-bottom:0px;background-color:lightgrey">
 			<div style="font-size:18px" align="center">Libromate © 2018  |  All rights reserved</div>
 		</footer>
     </body>
