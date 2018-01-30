@@ -3,10 +3,17 @@
 	require_once "connect.php";
 
 	if($_POST["login"]) { //if user clicks on login
-
+		$_SESSION["user"] = $_POST["user"];
+		$_SESSION["pass"] = $_POST["pass"];
 	}
 	else if($_POST["signup"]) { //if user clicks on signup
-
+		$_SESSION["name"] = $_POST["name"];
+		$_SESSION["email"] = $_POST["email"];
+		$_SESSION["mobile"] = $_POST["mobile"];
+		$_SESSION["user"] = $_POST["user"];
+		$_SESSION["pass"] = $_POST["pass"];
+		$_SESSION["level"] = 0;
+		$_SESSION["point"] = 10;
 	}
 ?>
 
