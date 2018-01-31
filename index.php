@@ -6,6 +6,7 @@
 		$_SESSION["user"] = $_POST["user"];
 		$_SESSION["pass"] = $_POST["pass"];
 	}
+
 	else if($_POST["signup"]) { //if user clicks on signup
 		$_SESSION["name"] = $_POST["name"];
 		$_SESSION["email"] = $_POST["email"];
@@ -34,7 +35,7 @@
 		</header>
 
 		<img src="Images/book.jpg" style ="position:absolute;right:0px;">
-		<div id="container" style ="position:absolute;left:835px;font-style:italic;font-size:40px;text-align:center;color:white;font-family:serif;margin-top:210px;margin-left:20px;margin-right:20px;">
+		<div id="container" style ="position:absolute;left:835px;font-style:italic;font-size:40px;text-align:center;color:beige;font-family:serif;margin-top:210px;margin-left:20px;margin-right:20px;">
 			There is no friend as loyal as a book
 		</div>
 
@@ -48,15 +49,19 @@
                 <div id="login" class="tab-pane fade in active">
                 	<div class="row"><!--row start-->
                 		<div class="col-md-6"><!--col-md-6 start-->
-                			<div class="jumbotron"style="height:350px;padding-top:5px;background-color:lightgreen;box-shadow:8px 8px 8px #c9c9c9;border-radius:5px 25%;"><!--login div start-->
-                				<div align="center">
-                    				<h3>Login</h3><br>
-                    				<form action="index.php" method="post">
-                    					Username : <input type="text" name="user"><br><br>
-                    					Password : <input type="password" name="pass"><br><br>
-                    					<input type="submit" name="login" value="Login">
-                    				</form>
-                				</div>
+                			<div class="jumbotron"style="height:350px;padding-top:15px;background-color:palegreen;box-shadow:5px 5px 5px #c9c9c9;border-radius:5px"><!--login div start-->
+								<div align="center"><img src="Images/user.png" style="width:150px;"></div>
+								<form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
+									<div class="input-group">
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  										<input type="text" class="form-control" name="user" placeholder="Username">
+									</div>
+									<div class="input-group">
+								      	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								      	<input type="password" class="form-control" name="pass" placeholder="Password">
+								    </div><br>
+                					<button class="btn btn-block btn-success" type="submit" name="login">Login</button>
+                				</form>
                 			</div><!--login div end-->
                 		</div><!--col-md-6 end-->
                     </div><!--row end-->
@@ -65,23 +70,35 @@
                 <div id="signup" class="tab-pane fade">
                     <div class="row"><!--row start-->
                         <div class="col-md-6"><!--col-md-6 start-->
-                            <div class="jumbotron"style="height:350px;padding-top:5px;background-color:lightblue;box-shadow:8px 8px 8px #c9c9c9;border-radius:5px 25%;"><!--signup div start-->
-                                <div align="center">
-                                    <h3>Sign Up</h3><br>
-                                    <form action="index.php" method="post">
-                                        Full Name : <input type="text" name="name"><br><br>
-                                        E-Mail ID : <input type="email" name="email"><br><br>
-										Mobile No. : <input type="tel" name="mobile"><br><br>
-                                        Username : <input type="text" name="user"><br><br>
-                                        Password : <input type="password" name="pass"><br><br>
-                                        <input type="submit" name="signup" value="Sign Up">
-                                    </form>
-                                </div>
+                            <div class="jumbotron"style="height:350px;padding-top:5px;background-color:lightblue;box-shadow:5px 5px 5px #c9c9c9;border-radius:5px"><!--signup div start-->
+                                <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:50px;">
+									<div class="input-group">
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+  										<input type="text" class="form-control" name="name" placeholder="Full Name">
+									</div>
+									<div class="input-group">
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  										<input type="email" class="form-control" name="email" placeholder="Email">
+									</div>
+									<div class="input-group">
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+  										<input type="tel" class="form-control" name="mobile" placeholder="Mobile No">
+									</div><br>
+									<div class="input-group">
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  										<input type="text" class="form-control" name="user" placeholder="Username">
+									</div>
+									<div class="input-group">
+								      	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+								      	<input type="password" class="form-control" name="pass" placeholder="Password">
+								    </div><br>
+                					<button class="btn btn-block btn-primary" type="submit" name="signup">Sign Up</button>
+                                </form>
                             </div><!--sign up div end-->
                         </div><!--col-md-6 end-->
                     </div><!--row end-->
                 </div>
-            </div>
+            </div><!--tab pill end-->
         </div><!--outer div end-->
 
     	<footer class="jumbotron" style="height:100px;margin-top:78px;margin-bottom:0px;background-color:lightgrey">
