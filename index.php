@@ -39,7 +39,7 @@
 			The more that you read, the more things you will know. The more that you learn, the more places you’ll go.
 		</div>
 
-		<div style="margin-top:80px;margin-left:190px;margin-right:210px;"><!--outer div start-->
+		<div style="margin-top:90px;margin-left:200px;margin-right:200px;"><!--outer div start-->
             <ul class="nav nav-pills">
                 <li class="active"><a data-toggle="pill" href="#login">Login</a></li>
                 <li><a data-toggle="pill" href="#signup">Sign Up</a></li>
@@ -101,7 +101,7 @@
             </div><!--tab pill end-->
         </div><!--outer div end-->
 
-    	<footer class="jumbotron" style="height:100px;margin-top:78px;margin-bottom:0px;background-color:lightgrey">
+    	<footer class="jumbotron" style="height:100px;margin-top:68px;margin-bottom:0px;background-color:lightgrey">
 			<div style="font-size:18px" align="center">Libromate © 2018  |  All rights reserved</div>
 		</footer>
     </body>
