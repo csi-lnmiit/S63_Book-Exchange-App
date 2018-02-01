@@ -35,8 +35,8 @@
 		</header>
 
 		<img src="Images/book.jpg" style ="position:absolute;right:0px;">
-		<div id="container" style ="position:absolute;left:835px;font-style:italic;font-size:40px;text-align:center;color:beige;font-family:serif;margin-top:210px;margin-left:20px;margin-right:20px;">
-			There is no friend as loyal as a book
+		<div id="container" style ="position:absolute;left:835px;font-size:45px;text-align:center;color:beige;font-family:courier;margin-top:45px;margin-left:50px;margin-right:50px;font-variant:small-caps;">
+			The more that you read, the more things you will know. The more that you learn, the more places you’ll go.
 		</div>
 
 		<div style="margin-top:80px;margin-left:190px;margin-right:210px;"><!--outer div start-->
