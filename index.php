@@ -49,7 +49,7 @@
                 <div id="login" class="tab-pane fade in active">
                 	<div class="row"><!--row start-->
                 		<div class="col-md-6"><!--col-md-6 start-->
-                			<div class="jumbotron"style="height:350px;padding-top:15px;background-color:palegreen;box-shadow:5px 5px 5px #c9c9c9;border-radius:5px"><!--login div start-->
+                			<div class="jumbotron"style="height:350px;padding-top:15px;background-color:skyblue;box-shadow:5px 5px 5px #c9c9c9;border-radius:5px"><!--login div start-->
 								<div align="center"><img src="Images/user.png" style="width:150px;"></div>
 								<form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
 									<div class="input-group">
@@ -60,7 +60,7 @@
 								      	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 								      	<input type="password" class="form-control" name="pass" placeholder="Password">
 								    </div><br>
-                					<button class="btn btn-block btn-success" type="submit" name="login">Login</button>
+                					<button class="btn btn-block btn-primary" type="submit" name="login">Login</button>
                 				</form>
                 			</div><!--login div end-->
                 		</div><!--col-md-6 end-->
@@ -70,7 +70,7 @@
                 <div id="signup" class="tab-pane fade">
                     <div class="row"><!--row start-->
                         <div class="col-md-6"><!--col-md-6 start-->
-                            <div class="jumbotron"style="height:350px;padding-top:5px;background-color:lightblue;box-shadow:5px 5px 5px #c9c9c9;border-radius:5px"><!--signup div start-->
+                            <div class="jumbotron"style="height:350px;padding-top:5px;background-color:skyblue;box-shadow:5px 5px 5px #c9c9c9;border-radius:5px"><!--signup div start-->
                                 <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:50px;">
 									<div class="input-group">
   										<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
@@ -101,8 +101,8 @@
             </div><!--tab pill end-->
         </div><!--outer div end-->
 
-    	<footer class="jumbotron" style="height:100px;margin-top:68px;margin-bottom:0px;background-color:lightgrey">
-			<div style="font-size:18px" align="center">Libromate © 2018  |  All rights reserved</div>
+    	<footer class="footer jumbotron" style="height:100px;margin-top:68px;margin-bottom:0px;background-color:lightgrey">
+			<div style="font-size:18px" align="center">© Libromate 2018  |  All rights reserved</div>
 		</footer>
     </body>
 </html>
