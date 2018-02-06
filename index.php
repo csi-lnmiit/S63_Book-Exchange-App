@@ -1,21 +1,99 @@
 <?php
 	if (!isset($_SESSION)) session_start();
 	require_once "connect.php";
+    $flag=0;
 
 	if($_POST["login"]) { //if user clicks on login
-		$_SESSION["user"] = $_POST["user"];
-		$_SESSION["pass"] = $_POST["pass"];
+//		$_SESSION["user"] = $_POST["user"];
+//		$_SESSION["pass"] = md5($_POST["pass"]);
+        
+        $query="select user from user where user=".$_POST["user"]." and pass=".md5($_POST["pass"]);
+        $newuser=mysqli_query($con,$query);
+        
+        if(trim($_POST["user"])==NULL)
+        {
+            $flag=1;
+            $msg="Username is required!";
+        }
+        else if(trim($_POST["pass"])==NULL)
+        {
+            $flag=1;
+            $msg="Password is required!";
+        }
+        else if($newuser==NULL)
+        {
+            $flag=1;
+            $msg="Username or Password incorrect";
+        }
+        
+        else {
+            
+        } 
 	}
 
 	else if($_POST["signup"]) { //if user clicks on signup
-		$_SESSION["name"] = $_POST["name"];
-		$_SESSION["email"] = $_POST["email"];
-		$_SESSION["mobile"] = $_POST["mobile"];
-		$_SESSION["user"] = $_POST["user"];
-		$_SESSION["pass"] = $_POST["pass"];
-		$_SESSION["level"] = 0;
-		$_SESSION["point"] = 10;
+//		$_SESSION["name"] = $_POST["name"];
+//		$_SESSION["email"] = $_POST["email"];
+//		$_SESSION["mobile"] = $_POST["mobile"];
+//		$_SESSION["user"] = $_POST["user"];
+//		$_SESSION["pass"] = md5($_POST["pass"]);
+//		$_SESSION["level"] = 0;
+//		$_SESSION["point"] = 10;
+        
+        $query="select user from user where user=".$_POST["user"];
+        $newuser=mysqli_query($con,$query);
+            
+        if(trim($_POST["name"])==NULL)
+        {
+            $flag=1;
+            $msg="Name is required!";
+        }
+        else if(trim($_POST["email"])==NULL)
+        {
+            $flag=1;
+            $msg="Email is required!";
+        }
+        else if(trim($_POST["mobile"])==NULL)
+        {
+            $flag=1;
+            $msg="Phone number is required!";
+        }
+        else if(trim($_POST["user"])==NULL)
+        {
+            $flag=1;
+            $msg="Username is required!";
+        }
+        else if(trim($_POST["pass"])==NULL)
+        {
+            $flag=1;
+            $msg="Password is required!";
+        }
+        else if(strlen($_POST["pass"])<6)
+        {
+            $flag=1;
+            $msg="Password should be of minimum 6 letters";
+        }
+        else if($newuser!=NULL)
+        {
+            $flag=1;
+            $msg="Username already exists";
+        }
+        else if(!is_numeric($_POST["mobile"]) && strlen($_POST["mobile"])!=10)
+        {
+            $flag=1;
+            $msg="Invalid mobile number ";  
+        }
+        
 	}
+
+    if($flag==1)
+    {
+        echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:580px;margin-left:200px;width:32%;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'
+        </div>';
+
+        unset($_POST);
+    }
 ?>
 
 <html>
@@ -39,7 +117,7 @@
 			The more that you read, the more things you will know. The more that you learn, the more places you’ll go.
 		</div>
 
-		<div style="margin-top:90px;margin-left:200px;margin-right:200px;"><!--outer div start-->
+		<div style="margin-top:70px;margin-left:200px;margin-right:200px;width:850px;"><!--outer div start-->
             <ul class="nav nav-pills">
                 <li class="active"><a data-toggle="pill" href="#login">Login</a></li>
                 <li><a data-toggle="pill" href="#signup">Sign Up</a></li>
@@ -60,7 +138,7 @@
 								      	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 								      	<input type="password" class="form-control" name="pass" placeholder="Password">
 								    </div><br>
-                					<button class="btn btn-block btn-primary" type="submit" name="login">Login</button>
+                					<input class="btn btn-block btn-primary" type="submit" name="login" value="Login">
                 				</form>
                 			</div><!--login div end-->
                 		</div><!--col-md-6 end-->
@@ -92,7 +170,7 @@
 								      	<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 								      	<input type="password" class="form-control" name="pass" placeholder="Password">
 								    </div><br>
-                					<button class="btn btn-block btn-primary" type="submit" name="signup">Sign Up</button>
+                					<input class="btn btn-block btn-primary" type="submit" name="signup" value="Sign Up">
                                 </form>
                             </div><!--sign up div end-->
                         </div><!--col-md-6 end-->
@@ -101,7 +179,7 @@
             </div><!--tab pill end-->
         </div><!--outer div end-->
 
-    	<footer class="footer jumbotron" style="height:100px;margin-top:68px;margin-bottom:0px;background-color:lightgrey">
+    	<footer class="footer jumbotron" style="height:100px;margin-top:88px;margin-bottom:0px;background-color:lightgrey">
 			<div style="font-size:18px" align="center">© Libromate 2018  |  All rights reserved</div>
 		</footer>
     </body>
