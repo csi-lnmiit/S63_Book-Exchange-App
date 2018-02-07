@@ -6,10 +6,10 @@
 	if($_POST["login"]) { //if user clicks on login
 //		$_SESSION["user"] = $_POST["user"];
 //		$_SESSION["pass"] = md5($_POST["pass"]);
-        
-        $query="select user from user where user=".$_POST["user"]." and pass=".md5($_POST["pass"]);
+
+        $query="select user from user where user='".$_POST["user"]."' and pass='".md5($_POST["pass"]."'");
         $newuser=mysqli_query($con,$query);
-        
+
         if(trim($_POST["user"])==NULL)
         {
             $flag=1;
@@ -25,10 +25,10 @@
             $flag=1;
             $msg="Username or Password incorrect";
         }
-        
+
         else {
-            
-        } 
+
+        }
 	}
 
 	else if($_POST["signup"]) { //if user clicks on signup
@@ -39,10 +39,10 @@
 //		$_SESSION["pass"] = md5($_POST["pass"]);
 //		$_SESSION["level"] = 0;
 //		$_SESSION["point"] = 10;
-        
-        $query="select user from user where user=".$_POST["user"];
+
+        $query="select user from user where user='".$_POST["user"]."'";
         $newuser=mysqli_query($con,$query);
-            
+
         if(trim($_POST["name"])==NULL)
         {
             $flag=1;
@@ -81,9 +81,12 @@
         else if(!is_numeric($_POST["mobile"]) && strlen($_POST["mobile"])!=10)
         {
             $flag=1;
-            $msg="Invalid mobile number ";  
+            $msg="Invalid mobile number";
         }
-        
+
+		else {
+
+		}
 	}
 
     if($flag==1)
