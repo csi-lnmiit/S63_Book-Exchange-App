@@ -146,7 +146,7 @@
 	</head>
 
 	<body style="background-color:beige">
-		<header style="height:100px;background-color:#6a1b9a;">
+		<header style="height:100px;background-color:#35374C;">
 			<img src="Images/logo.png" style="height:100px;">
 		</header>
 

@@ -24,20 +24,20 @@
 
 <body>
     <!--top header-->
-    <header style="height:100px;background-color:#6a1b9a;">
+    <header style="height:100px;background-color:darkgray;">
         <img src="Images/logo.png" style="height:100px;">
     </header>
     <!--left column list -->
-    <div class="col-md-3" style="padding-left: 0">
+    <div id="id1" class="col-md-3" style="padding-left: 0">
         <ul>
-            <p style="padding-left: 16px;padding-top:10px;color: #868899;font-size: 11px;">MENU</p>
+            <p>MENU</p>
             <li><a class="active" href="#">
                 <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
             </li>
             <li><a href="#">
                 <span class="glyphicon glyphicon-user"></span>&emsp;Profile</a>
             </li>
-            <p style="padding-left: 16px;padding-top:10px;color: #868899;font-size: 11px;">BOOKS</p>
+            <p>BOOKS</p>
             <li><a href="#">
                 <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
             </li>
