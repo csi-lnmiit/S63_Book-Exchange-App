@@ -1,22 +1,23 @@
-<?php 
-if (!isset($_SESSION)) session_start();
-	
+<?php
+	if (!isset($_SESSION)) session_start();
+
 	//make connection with database
-	$link = mysqli_connect("localhost","slp","qwerty","libromate"); 
+	$link = mysqli_connect("localhost","slp","qwerty","libromate");
 	// Check connection
-	if($link === false){
+	if($link === false) {
     	die("ERROR: Could not connect. " . mysqli_connect_error());
 	}
 
+	$flag = 0;
+
 	//if user clicks on login
-	if(isset($_POST["login"])){
+	if(isset($_POST["login"])) {
 
 		$username = $_POST['user'];
-		$password = $_POST['pass'];
-		$query="select * from users where username='$username' AND password='$password'";
-        $newuser=mysqli_query($link,$query);
-        
-        $flag=0;
+		$password = md5($_POST['pass']);
+		$query = "select * from users where username='$username' and password='$password'";
+        $newuser = mysqli_query($link,$query);
+
 		if(trim($_POST["user"])==NULL){
             $flag=1;
             $msg="Username is required!";
@@ -25,34 +26,42 @@ if (!isset($_SESSION)) session_start();
             $flag=1;
             $msg="Password is required!";
         }
-        else if(!$newuser){
+        else if(mysqli_num_rows($newuser)==0){
             $flag=1;
             $msg="Username or Password incorrect";
         }
-        else{
+        else {
+			$row = mysqli_fetch_assoc($newuser);
+
         	//declaration of global session variables
         	$_SESSION["user"] = $_POST["user"];
-            $_SESSION["pass"] = md5($_POST["pass"]);
-      
-            if (mysqli_num_rows($newuser) > 0) 
-              header("Location: dashboard.php");         
+            $_SESSION["pass"] = $_POST["pass"];
+			$_SESSION["name"] = $row["name"];
+            $_SESSION["email"] = $row["email"];
+			$_SESSION["mobile"] = $row["mobile"];
+			$_SESSION["level"] = $row["level"];
+			$_SESSION["points"] = $row["points"];
+
+			//transfer to dashboard
+        	header("Location: dashboard.php");
         }
 	}
+
 	//if user clicks on sign up
-	else if(isset($_POST["signup"])){
+	else if(isset($_POST["signup"])) {
 
 		$username = $_POST["user"];
-		$password = $_POST["pass"];
-		$full_name = $_POST["name"];
+		$password = md5($_POST["pass"]);
+		$name = $_POST["name"];
 		$email = $_POST["email"];
 		$mobile = $_POST["mobile"];
 		$level = 0;
 		$points = 10;
+
 		//check duplicate username
 		$query="select * from users where username='$username'";
         $newuser=mysqli_query($link,$query);
-        
-		$flag=0;
+
 		if(trim($_POST["name"])==NULL)
         {
             $flag=1;
@@ -91,37 +100,36 @@ if (!isset($_SESSION)) session_start();
         else if(!is_numeric($_POST["mobile"]) && strlen($_POST["mobile"])!=10)
         {
             $flag=1;
-            $msg="Invalid mobile number ";  
+            $msg="Invalid mobile number ";
         }
-        else{
+        else {
         	//declaration of global session variables
-        	$_SESSION["name"] = $_POST["name"];
         	$_SESSION["user"] = $_POST["user"];
-            $_SESSION["pass"] = md5($_POST["pass"]);
+            $_SESSION["pass"] = $_POST["pass"];
+			$_SESSION["name"] = $_POST["name"];
             $_SESSION["email"] = $_POST["email"];
 			$_SESSION["mobile"] = $_POST["mobile"];
 			$_SESSION["level"] = 0;
 			$_SESSION["points"] = 10;
+
       		//query to insert data to MySQL
-			$sql = "insert into users (username,password,name,mobile,email,level,points) values ('$username','$password','$full_name','$mobile','$email','$level','$points')";
+			$sql = "insert into users (username,password,name,mobile,email,level,points) values ('$username','$password','$name','$mobile','$email','$level','$points')";
 			$result = mysqli_query($link,$sql);
-					
+
 			//transfer to dashboard
-            if(mysqli_num_rows($newuser)==0) 
-              header("Location: dashboard.php");         
+            header("Location: dashboard.php");
         }
-        
 	}
+
 	//if any text field is missing or user/pass combination is incorrect
-	if($flag==1)
+	if($flag)
     {
-    	$flag=0;
         echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:580px;margin-left:200px;width:32%;">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'
-        </div>';
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'</div>';
+
+		unset($_POST);
     }
 ?>
-
 
 <html>
 	<head>
@@ -145,7 +153,7 @@ if (!isset($_SESSION)) session_start();
 			The more that you read, the more things you will know. The more that you learn, the more places you’ll go.
 		</div>
 
-		<div style="margin-top:70px;margin-left:200px;margin-right:200px;width:850px;"><!--outer div start-->
+		<div style="margin-top:70px;margin-left:200px;margin-right:200px;width:66%;"><!--outer div start-->
             <ul class="nav nav-pills">
                 <li class="active"><a data-toggle="pill" href="#login">Login</a></li>
                 <li><a data-toggle="pill" href="#signup">Sign Up</a></li>
@@ -178,7 +186,7 @@ if (!isset($_SESSION)) session_start();
                         <div class="col-md-6"><!--col-md-6 start-->
                             <div class="jumbotron"style="height:350px;padding-top:5px;background-color:skyblue;box-shadow:5px 5px 5px #c9c9c9;border-radius:5px">
                                 <!--signup div start-->
-                                <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:50px;">
+                                <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:30px;">
 									<div class="input-group">
   										<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
   										<input type="text" class="form-control" name="name" placeholder="Full Name">
