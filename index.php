@@ -26,7 +26,7 @@
             $flag=1;
             $msg="Password is required!";
         }
-        else if(mysqli_num_rows($newuser)==0){
+        else if(!$newuser){
             $flag=1;
             $msg="Username or Password incorrect";
         }
@@ -35,7 +35,7 @@
 
         	//declaration of global session variables
         	$_SESSION["user"] = $_POST["user"];
-            $_SESSION["pass"] = $_POST["pass"];
+            $_SESSION["pass"] = md5($_POST["pass"]);
 			$_SESSION["name"] = $row["name"];
             $_SESSION["email"] = $row["email"];
 			$_SESSION["mobile"] = $row["mobile"];
@@ -43,7 +43,8 @@
 			$_SESSION["points"] = $row["points"];
 
 			//transfer to dashboard
-        	header("Location: dashboard.php");
+            if(mysqli_num_rows($newuser)>0)
+        	   header("Location: dashboard.php");
         }
 	}
 
@@ -105,7 +106,7 @@
         else {
         	//declaration of global session variables
         	$_SESSION["user"] = $_POST["user"];
-            $_SESSION["pass"] = $_POST["pass"];
+            $_SESSION["pass"] = md5($_POST["pass"]);
 			$_SESSION["name"] = $_POST["name"];
             $_SESSION["email"] = $_POST["email"];
 			$_SESSION["mobile"] = $_POST["mobile"];
@@ -117,7 +118,8 @@
 			$result = mysqli_query($link,$sql);
 
 			//transfer to dashboard
-            header("Location: dashboard.php");
+            if(mysqli_num_rows($newuser)==0)
+                header("Location: dashboard.php");
         }
 	}
 
