@@ -157,7 +157,7 @@ if (!isset($_SESSION)) session_start();
                 		<div class="col-md-6"><!--col-md-6 start-->
                 			<div class="jumbotron"style="height:350px;padding-top:15px;background-color:skyblue;box-shadow:5px 5px 5px #c9c9c9;border-radius:5px"><!--login div start-->
 								<div align="center"><img src="Images/user.png" style="width:150px;"></div>
-								<form action="login.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
+								<form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
 									<div class="input-group">
   										<span id=1 class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
   										<input type="text" class="form-control" name="user" placeholder="Username" value="<?php echo htmlentities($user); ?>">
@@ -178,7 +178,7 @@ if (!isset($_SESSION)) session_start();
                         <div class="col-md-6"><!--col-md-6 start-->
                             <div class="jumbotron"style="height:350px;padding-top:5px;background-color:skyblue;box-shadow:5px 5px 5px #c9c9c9;border-radius:5px">
                                 <!--signup div start-->
-                                <form action="login.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:50px;">
+                                <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:50px;">
 									<div class="input-group">
   										<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
   										<input type="text" class="form-control" name="name" placeholder="Full Name">

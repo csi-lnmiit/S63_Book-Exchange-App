@@ -9,7 +9,7 @@ if(isset($_COOKIE[$_SESSION])) {
 }
 session_destroy();
 //redirecting to login
-header("Location:login.php");
+header("Location:index.php");
 ?>
 
 
