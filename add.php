@@ -64,7 +64,11 @@ require_once('db_connect.php'); //connect to database
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 	</head>
-
+    <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+    </script>
 	<body>
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">

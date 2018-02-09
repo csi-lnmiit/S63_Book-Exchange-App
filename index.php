@@ -156,7 +156,11 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="style.css" type="text/css">
 	</head>
-
+    <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+    </script>
 	<body>
 		<header style="height:100px;background-color:#1A1927;">
 			<img src="Images/logo.png" style="height:100px;">
