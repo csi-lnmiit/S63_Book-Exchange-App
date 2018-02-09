@@ -1,5 +1,8 @@
 <?php
-	if (!isset($_SESSION)) session_start();
+	session_start();
+
+	if(isset($_SESSION["user"]))
+		header("Location:dashboard.php");
 
 	//make connection with database
 	$link = mysqli_connect("localhost","slp","qwerty","libromate");
@@ -26,7 +29,7 @@
             $flag=1;
             $msg="Password is required!";
         }
-        else if(!$newuser){
+        else if(mysqli_num_rows($newuser)==0){
             $flag=1;
             $msg="Username or Password incorrect";
         }
@@ -145,8 +148,8 @@
 		<link rel="stylesheet" href="style.css" type="text/css">
 	</head>
 
-	<body style="background-color:beige">
-		<header style="height:100px;background-color:#35374C;">
+	<body>
+		<header style="height:100px;background-color:#2D2E40;">
 			<img src="Images/logo.png" style="height:100px;">
 		</header>
 
@@ -169,7 +172,7 @@
 								<div align="center"><img src="Images/user.png" style="width:150px;"></div>
 								<form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
 									<div class="input-group">
-  										<span id=1 class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
   										<input type="text" class="form-control" name="user" placeholder="Username" value="<?php echo htmlentities($user); ?>">
 									</div>
 									<div class="input-group">
