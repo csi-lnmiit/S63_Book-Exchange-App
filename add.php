@@ -6,22 +6,21 @@
 
 require_once('db_connect.php'); //connect to database
     if(isset($_POST["add"])){
-        
+
         //generate unique user id
         $t = microtime(true);
         $micro = sprintf("%06d",($t - floor($t)) * 1000000);
         $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
         $bid="b".substr($d->format("ymdHisu"),0,14);
-        
+
         $status=1;
         $owner=$_SESSION["user_id"];
-        
-        
+
         $bname=$_POST["bname"];
         $bauthor=$_POST["bauthor"];
-        
+
         $query="insert into books(bid,bname,author,owner,status) values ('$bid','$bname','$bauthor','$owner',$status)";
-        
+
 			$result = mysqli_query($link,$query);
     }
 ?>
@@ -41,7 +40,11 @@ require_once('db_connect.php'); //connect to database
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 	</head>
-
+	<script>
+	if ( window.history.replaceState ) {
+		window.history.replaceState( null, null, window.location.href );
+	}
+	</script>
 	<body>
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
@@ -61,7 +64,7 @@ require_once('db_connect.php'); //connect to database
 	            </li>
 				<br>
 	            <p>BOOKS</p>
-	            <li><a href="add.php class="active">
+	            <li><a href="add.php" class="active">
 	                <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
 	            </li>
 	            <li><a href="#">
@@ -86,7 +89,7 @@ require_once('db_connect.php'); //connect to database
 	        </ul>
 	    </div>
 
-	    
+
 
         <!--form for adding books-->
         <div style="padding-top:10px;padding-right:500px;padding-left:400px;">
@@ -108,6 +111,6 @@ require_once('db_connect.php'); //connect to database
                                 </form>
 
 
-	    
+
 	</body>
 </html>

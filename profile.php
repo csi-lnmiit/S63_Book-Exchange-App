@@ -38,7 +38,7 @@
 	            </li>
 				<br>
 	            <p>BOOKS</p>
-	            <li><a href="#">
+	            <li><a href="add.php">
 	                <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
 	            </li>
 	            <li><a href="#">
