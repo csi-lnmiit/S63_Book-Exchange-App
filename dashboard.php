@@ -5,7 +5,6 @@
 		header("Location:index.php");
 ?>
 
-<!--Display submitted form data -->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -28,7 +27,7 @@
 	    </header>
 
 	    <!--left column list -->
-	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0">
+	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0"><!--col-md-3 start-->
 	        <ul>
 				<br>
 	            <p>MENU</p>
@@ -63,20 +62,46 @@
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
 	            </li>
 	        </ul>
-	    </div>
+	    </div><!--col-md-3 end-->
 
-	    <div class="col-md-9">
+	    <div class="col-md-9"><!--col-md-9 start-->
 	        <h3>Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
-	        <p>Here is the information you have submitted:</p>
-	        <ol>
-	            <li><em>Name:</em> <?php echo $_SESSION["name"]?>
-	            <li><em>E-Mail:</em> <?php echo $_SESSION["email"]?>
-	            <li><em>Mobile:</em> <?php echo $_SESSION["mobile"]?>
-	            <li><em>Points:</em> <?php echo $_SESSION["points"]?>
-	            <li><em>Username:</em> <?php echo $_SESSION["user"]?>
-	            <li><em>Password:</em> <?php echo $_SESSION["pass"]?>
-	        </ol>
+            <?php 
+                require_once('db_connect.php'); //connect with database
 
-	    </div>
+                $query = "select * from books b where b.owner='".$_SESSION['user_id']."'";
+                $result = mysqli_query($link,$query);
+                
+                if(mysqli_num_rows($result)==0)
+                    echo "Oops !! you have not added any books recently";
+                else {
+                    echo nl2br("\nFollwing is the list of books you have added\n");
+                } 
+                echo nl2br("\n");
+
+                //draw table outline with headings
+                echo "<table border='1'>
+                <tr>
+                <th>S.No.</th>
+                <th>Book Id</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                </tr>";
+                //fetch and display data from MySQL
+                $i=1;
+                while($row = mysqli_fetch_array($result))
+                {
+                echo "<tr>";
+                echo "<td>".$i."</td>";
+                echo "<td>".$row["bid"]."</td>";
+                echo "<td>" . $row["bname"] . "</td>";
+                echo "<td>" . $row["author"]. "</td>";
+                echo "</tr>";
+                ++$i;
+                }
+                echo "</table>";
+            ?>
+
+	    </div><!--col-md-9 end-->
 	</body>
 </html>

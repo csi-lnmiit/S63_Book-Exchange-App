@@ -4,12 +4,7 @@
 	if(isset($_SESSION["user"]))
 		header("Location:dashboard.php");
 
-	//make connection with database
-	$link = mysqli_connect("localhost","slp","qwerty","libromate");
-	// Check connection
-	if($link === false) {
-    	die("ERROR: Could not connect. " . mysqli_connect_error());
-	}
+	require_once('db_connect.php'); //connect to database
 
 	$flag = 0;
 
@@ -38,12 +33,12 @@
 
             //generate unique user id
             $t = microtime(true);
-            $micro = sprintf("%06d",($t - floor($t)) * 1000000);
+            $micro = sprintf("%02d",($t - floor($t)) * 1000000);
             $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
             $user_id="u".substr($d->format("ymdHisu"),0,14);
 
         	//declaration of global session variables
-            $_SESSION["user_id"] = $user_id;
+            $_SESSION["user_id"] = $row["id"];
         	$_SESSION["user"] = $_POST["user"];
             $_SESSION["pass"] = md5($_POST["pass"]);
 			$_SESSION["name"] = $row["name"];
