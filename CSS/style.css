@@ -19,7 +19,7 @@ ul {
 li a {
     display: block;
     color: #D6DBDF;
-    padding: 8px 16px;
+    padding: 10px 25px;
     text-decoration: none;
 }
 
@@ -34,8 +34,8 @@ li a:hover:not(.active) {
     color: white;
     text-decoration: none;
 }
-#id1 p{
-    padding-left: 16px;
+#dashboard_left_col p{
+    padding-left: 25px;
     padding-top:10px;
     color: #868899;
     font-size: 11px;
