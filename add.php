@@ -85,9 +85,6 @@ require_once('db_connect.php'); //connect to database
 	            <li><a href="add.php" class="active">
 	                <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
 	            </li>
-	            <li><a href="#">
-	                <span class="glyphicon glyphicon-trash"></span>&emsp;Delete</a>
-	            </li>
 	            <li><a href="modify.php">
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
@@ -103,6 +100,9 @@ require_once('db_connect.php'); //connect to database
 	            <p>SESSION</p>
 	            <li><a href="logout.php">
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
+	            </li>
+	            <li><a href="#">
+	                <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
 	            </li>
 	        </ul>
 	    </div>

@@ -42,9 +42,6 @@
 	            <li><a href="add.php">
 	                <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
 	            </li>
-	            <li><a href="#">
-	                <span class="glyphicon glyphicon-trash"></span>&emsp;Delete</a>
-	            </li>
 	            <li><a href="#" class="active">
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
@@ -61,6 +58,10 @@
 	            <li><a href="logout.php">
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
 	            </li>
+	           	<li><a href="#">
+	                <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
+	            </li>
+
 	        </ul>
 	    </div><!--col-md-3 end-->
 
@@ -81,6 +82,7 @@
                 <th>Book Id</th>
                 <th>Book Name</th>
                 <th>Author</th>
+                <th>Edit Book</th>
                 <th>Delete Book</th>
                 </tr>";
                 //fetch and display data from MySQL
@@ -88,11 +90,13 @@
                 while($row = mysqli_fetch_array($result))
                 {
                 echo "<tr>";
-                echo "<td>".$i."</td>";
-                echo "<td>".$row["bid"]."</td>";
-                echo "<td>" . $row["bname"] . "</td>";
-                echo "<td>" . $row["author"]. "</td>";
-                echo "<td><a href='#'><span class='glyphicon glyphicon-trash'></span></a></td>";
+                echo "<td align='center'>".$i."</td>";
+                echo "<td align='center'>".$row["bid"]."</td>";
+                echo "<td align='center'>" . $row["bname"] . "</td>";
+                echo "<td align='center'>" . $row["author"]. "</td>";
+                echo "<td align='center'><a href='#edit' data-toggle='popover'>
+               		  <span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span></a></td>";
+                echo "<td align='center'><a href='modify.php' data-toggle='popover'><span class='glyphicon glyphicon-trash' style='font-size:25px;padding:5px;'></span></a></td>";
                 echo "</tr>";
                 ++$i;
                 }
@@ -100,5 +104,14 @@
             ?>
 
 	    </div><!--col-md-9 end-->
+	    <script  type='text/javascript'>
+	    	$("[data-toggle=popover]")
+			.popover({html:true})
+			
+			
+
+	    	
+		</script>
+
 	</body>
 </html>
