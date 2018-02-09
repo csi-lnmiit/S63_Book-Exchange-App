@@ -71,6 +71,7 @@
 
                 $query = "select * from books b where b.owner='".$_SESSION['user_id']."'";
                 $result = mysqli_query($link,$query);
+
                 
                 if(mysqli_num_rows($result)==0)
                     echo "Oops !! you have not added any books recently";

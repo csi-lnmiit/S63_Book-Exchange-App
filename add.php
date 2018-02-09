@@ -5,11 +5,6 @@
 		header("Location:index.php");
 
 require_once('db_connect.php'); //connect to database
-//    $link = mysqli_connect("localhost","slp","qwerty","libromate");
-//	// Check connection
-//	if($link === false) {
-//    	die("ERROR: Could not connect. " . mysqli_connect_error());
-//	}
     if(isset($_POST["add"])){
         
         //generate unique user id
@@ -17,7 +12,7 @@ require_once('db_connect.php'); //connect to database
         $micro = sprintf("%06d",($t - floor($t)) * 1000000);
         $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
         $bid="b".substr($d->format("ymdHisu"),0,14);
-        echo $bid;
+        
         $status=1;
         $owner=$_SESSION["user_id"];
         
@@ -49,7 +44,7 @@ require_once('db_connect.php'); //connect to database
 
 	<body>
 	    <!--top header-->
-	    <header style="height:100px;background-color:#2D2E40;width:20%">
+	    <header style="height:100px;background-color:#1A1927;width:20%">
 	        <img src="Images/logo.png" style="height:100px;">
 	    </header>
 
@@ -61,18 +56,18 @@ require_once('db_connect.php'); //connect to database
 	            <li><a href="dashboard.php">
 	                <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
 	            </li>
-	            <li><a class="active" href="profile.php">
+	            <li><a href="profile.php">
 	                <span class="glyphicon glyphicon-user"></span>&emsp;Profile</a>
 	            </li>
 				<br>
 	            <p>BOOKS</p>
-	            <li><a href="add.php">
+	            <li><a href="add.php class="active">
 	                <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
 	            </li>
 	            <li><a href="#">
 	                <span class="glyphicon glyphicon-trash"></span>&emsp;Delete</a>
 	            </li>
-	            <li><a href="#">
+	            <li><a href="modify.php">
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
