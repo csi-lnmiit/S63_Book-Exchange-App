@@ -7,6 +7,7 @@
 require_once('db_connect.php'); //connect to database
     if(isset($_POST["add"])){
         
+        
         //generate unique user id
         $t = microtime(true);
         $micro = sprintf("%06d",($t - floor($t)) * 1000000);
@@ -40,6 +41,7 @@ require_once('db_connect.php'); //connect to database
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'</div>';
 
 		unset($_POST);
+            
                 
         } 
         
@@ -116,7 +118,7 @@ require_once('db_connect.php'); //connect to database
         </div>
         <form action="add.php" method="post" style="padding-left:100px;padding-right:300px;padding-top:30px;">
 					<div class="input-group">
-  						<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+  						<span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
   						<input type="text" class="form-control" style="width:250px;" name="bname" placeholder="Book Name">
 				    </div>
 					<div class="input-group">
