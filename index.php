@@ -158,7 +158,7 @@
 	</head>
 
 	<body>
-		<header style="height:100px;background-color:#2D2E40;">
+		<header style="height:100px;background-color:#1A1927;">
 			<img src="Images/logo.png" style="height:100px;">
 		</header>
 

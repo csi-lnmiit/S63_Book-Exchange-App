@@ -12,7 +12,7 @@ ul {
     position: fixed;
     height: 100%;
     overflow: auto;
-    font-size: 13px;
+    font-size: 14px;
 }
 
 
@@ -38,5 +38,5 @@ li a:hover:not(.active) {
     padding-left: 25px;
     padding-top:10px;
     color: #868899;
-    font-size: 11px;
+    font-size: 12px;
 }

@@ -22,7 +22,7 @@
 
 	<body>
 	    <!--top header-->
-	    <header style="height:100px;background-color:#2D2E40;width:20%">
+	    <header style="height:100px;background-color:#1A1927;width:20%">
 	        <img src="Images/logo.png" style="height:100px;">
 	    </header>
 
@@ -45,7 +45,7 @@
 	            <li><a href="#">
 	                <span class="glyphicon glyphicon-trash"></span>&emsp;Delete</a>
 	            </li>
-	            <li><a href="#">
+	            <li><a href="modify.php">
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>

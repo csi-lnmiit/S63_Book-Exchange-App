@@ -5,7 +5,6 @@
 		header("Location:index.php");
 ?>
 
-<!--Display submitted form data -->
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -16,24 +15,26 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 	</head>
 
 	<body>
 	    <!--top header-->
-	    <header style="height:100px;background-color:#1A1927;;width:20%">
+	    <header style="height:100px;background-color:#1A1927;width:20%">
 	        <img src="Images/logo.png" style="height:100px;">
 	    </header>
 
 	    <!--left column list -->
-	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0">
+	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0"><!--col-md-3 start-->
 	        <ul>
 				<br>
 	            <p>MENU</p>
 	            <li><a href="dashboard.php">
 	                <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
 	            </li>
-	            <li><a class="active" href="profile.php">
+	            <li><a href="profile.php">
 	                <span class="glyphicon glyphicon-user"></span>&emsp;Profile</a>
 	            </li>
 				<br>
@@ -44,7 +45,7 @@
 	            <li><a href="#">
 	                <span class="glyphicon glyphicon-trash"></span>&emsp;Delete</a>
 	            </li>
-	            <li><a href="modify.php">
+	            <li><a href="#" class="active">
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
@@ -55,26 +56,49 @@
 	            <li><a href="#">
 	                 <span class="glyphicon glyphicon-book"></span>&emsp;Borrowed</a>
 	            </li>
-	            <br>
-	            <p>SESSION</p>
+                <br>
+                <p>SESSION</p>
 	            <li><a href="logout.php">
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
 	            </li>
 	        </ul>
-	    </div>
+	    </div><!--col-md-3 end-->
 
-	    <div class="col-md-9">
-	        <h3>Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
-	        <p>Here is the information you have submitted:</p>
-	        <ol>
-	            <li><em>Name:</em> <?php echo $_SESSION["name"]?>
-	            <li><em>E-Mail:</em> <?php echo $_SESSION["email"]?>
-	            <li><em>Mobile:</em> <?php echo $_SESSION["mobile"]?>
-	            <li><em>Points:</em> <?php echo $_SESSION["points"]?>
-	            <li><em>Username:</em> <?php echo $_SESSION["user"]?>
-	            <li><em>Password:</em> <?php echo $_SESSION["pass"]?>
-	        </ol>
+	    <div class="col-md-9"><!--col-md-9 start-->
+            <?php 
+                require_once('db_connect.php'); //connect with database
 
-	    </div>
+                $query = "select * from books b where b.owner='".$_SESSION['user_id']."'";
+                $result = mysqli_query($link,$query);
+                
+                if(mysqli_num_rows($result)==0)
+                    echo nl2br("You don't have any books in your repository\n");      
+
+                //draw table outline with headings
+                echo "<table border='1'>
+                <tr>
+                <th>S.No.</th>
+                <th>Book Id</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                <th>Delete Book</th>
+                </tr>";
+                //fetch and display data from MySQL
+                $i=1;
+                while($row = mysqli_fetch_array($result))
+                {
+                echo "<tr>";
+                echo "<td>".$i."</td>";
+                echo "<td>".$row["bid"]."</td>";
+                echo "<td>" . $row["bname"] . "</td>";
+                echo "<td>" . $row["author"]. "</td>";
+                echo "<td><a href='#'><span class='glyphicon glyphicon-trash'></span></a></td>";
+                echo "</tr>";
+                ++$i;
+                }
+                echo "</table>";
+            ?>
+
+	    </div><!--col-md-9 end-->
 	</body>
 </html>
