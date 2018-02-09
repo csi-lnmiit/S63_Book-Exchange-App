@@ -33,6 +33,10 @@ require_once('db_connect.php'); //connect to database
             $query="insert into books(bid,bname,author,owner,status) values ('$bid','$bname','$bauthor','$owner',$status)";
 
 			$result = mysqli_query($link,$query);
+            $success="Your Book added successfully";
+            echo '<div class="alert alert-success" style="position:absolute;margin-top:330px;margin-left:425px;width:22%;">
+     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$success.'</div>';
+
         }
 
         if($flag){
@@ -63,11 +67,11 @@ require_once('db_connect.php'); //connect to database
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 	</head>
-	<script>
-	if ( window.history.replaceState ) {
-		window.history.replaceState( null, null, window.location.href );
-	}
-	</script>
+    <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+    </script>
 	<body>
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
