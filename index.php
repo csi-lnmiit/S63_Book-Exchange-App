@@ -38,7 +38,7 @@
             $user_id="u".substr($d->format("ymdHisu"),0,14);
 
         	//declaration of global session variables
-            $_SESSION["user_id"] = $row["id"];
+            $_SESSION["user_id"] = $row["uid"];
         	$_SESSION["user"] = $_POST["user"];
             $_SESSION["pass"] = md5($_POST["pass"]);
 			$_SESSION["name"] = $row["name"];
@@ -126,7 +126,7 @@
 			$_SESSION["points"] = 10;
 
       		//query to insert data to MySQL
-			$sql = "insert into users (id,name,username,password,mobile,email,level,points) values ('$user_id','$name','$username','$password','$mobile','$email','$level','$points')";
+			$sql = "insert into users (uid,name,username,password,mobile,email,level,points) values ('$user_id','$name','$username','$password','$mobile','$email','$level','$points')";
 			$result = mysqli_query($link,$sql);
 
 			//transfer to dashboard
