@@ -36,7 +36,14 @@
         else {
 			$row = mysqli_fetch_assoc($newuser);
 
+            //generate unique user id
+            $t = microtime(true);
+            $micro = sprintf("%06d",($t - floor($t)) * 1000000);
+            $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
+            $user_id="u".substr($d->format("ymdHisu"),0,14);
+
         	//declaration of global session variables
+            $_SESSION["user_id"] = $user_id;
         	$_SESSION["user"] = $_POST["user"];
             $_SESSION["pass"] = md5($_POST["pass"]);
 			$_SESSION["name"] = $row["name"];
@@ -53,6 +60,12 @@
 
 	//if user clicks on sign up
 	else if(isset($_POST["signup"])) {
+
+        //generate unique user id
+        $t = microtime(true);
+        $micro = sprintf("%06d",($t - floor($t)) * 1000000);
+        $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
+        $user_id="u".substr($d->format("ymdHisu"),0,14);
 
 		$username = $_POST["user"];
 		$password = md5($_POST["pass"]);
@@ -108,6 +121,7 @@
         }
         else {
         	//declaration of global session variables
+            $_SESSION["user_id"] = $user_id;
         	$_SESSION["user"] = $_POST["user"];
             $_SESSION["pass"] = md5($_POST["pass"]);
 			$_SESSION["name"] = $_POST["name"];
@@ -117,7 +131,7 @@
 			$_SESSION["points"] = 10;
 
       		//query to insert data to MySQL
-			$sql = "insert into users (username,password,name,mobile,email,level,points) values ('$username','$password','$name','$mobile','$email','$level','$points')";
+			$sql = "insert into users (id,name,username,password,mobile,email,level,points) values ('$user_id','$name','$username','$password','$mobile','$email','$level','$points')";
 			$result = mysqli_query($link,$sql);
 
 			//transfer to dashboard

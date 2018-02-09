@@ -75,6 +75,17 @@
 	            <li><em>Password:</em> <?php echo $_SESSION["pass"]?>
 	        </ol>
 
+	        <?php
+
+	        $t = microtime(true);
+			$micro = sprintf("%06d",($t - floor($t)) * 1000000);
+			$d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
+			$user_id="u".substr($d->format("ymdHisu"),0,14);
+
+			
+	         ?>
+
+
 	    </div>
 	</body>
 </html>
