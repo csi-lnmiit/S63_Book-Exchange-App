@@ -1,12 +1,10 @@
 <?php
-	if (!isset($_SESSION)) session_start();
+	session_start();
 
-	//make connection with database
-	$link = mysqli_connect("localhost","slp","qwerty","libromate");
-	// Check connection
-	if($link === false) {
-    	die("ERROR: Could not connect. " . mysqli_connect_error());
-	}
+	if(isset($_SESSION["user"]))
+		header("Location:dashboard.php");
+
+	require_once('db_connect.php'); //connect to database
 
 	$flag = 0;
 
@@ -26,14 +24,21 @@
             $flag=1;
             $msg="Password is required!";
         }
-        else if(!$newuser){
+        else if(mysqli_num_rows($newuser)==0){
             $flag=1;
             $msg="Username or Password incorrect";
         }
         else {
 			$row = mysqli_fetch_assoc($newuser);
 
+            //generate unique user id
+            $t = microtime(true);
+            $micro = sprintf("%02d",($t - floor($t)) * 1000000);
+            $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
+            $user_id="u".substr($d->format("ymdHisu"),0,14);
+
         	//declaration of global session variables
+            $_SESSION["user_id"] = $row["id"];
         	$_SESSION["user"] = $_POST["user"];
             $_SESSION["pass"] = md5($_POST["pass"]);
 			$_SESSION["name"] = $row["name"];
@@ -50,6 +55,12 @@
 
 	//if user clicks on sign up
 	else if(isset($_POST["signup"])) {
+
+        //generate unique user id
+        $t = microtime(true);
+        $micro = sprintf("%06d",($t - floor($t)) * 1000000);
+        $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
+        $user_id="u".substr($d->format("ymdHisu"),0,14);
 
 		$username = $_POST["user"];
 		$password = md5($_POST["pass"]);
@@ -105,6 +116,7 @@
         }
         else {
         	//declaration of global session variables
+            $_SESSION["user_id"] = $user_id;
         	$_SESSION["user"] = $_POST["user"];
             $_SESSION["pass"] = md5($_POST["pass"]);
 			$_SESSION["name"] = $_POST["name"];
@@ -114,7 +126,7 @@
 			$_SESSION["points"] = 10;
 
       		//query to insert data to MySQL
-			$sql = "insert into users (username,password,name,mobile,email,level,points) values ('$username','$password','$name','$mobile','$email','$level','$points')";
+			$sql = "insert into users (id,name,username,password,mobile,email,level,points) values ('$user_id','$name','$username','$password','$mobile','$email','$level','$points')";
 			$result = mysqli_query($link,$sql);
 
 			//transfer to dashboard
@@ -145,8 +157,8 @@
 		<link rel="stylesheet" href="style.css" type="text/css">
 	</head>
 
-	<body style="background-color:beige">
-		<header style="height:100px;background-color:#6a1b9a;">
+	<body>
+		<header style="height:100px;background-color:#2D2E40;">
 			<img src="Images/logo.png" style="height:100px;">
 		</header>
 
@@ -169,7 +181,7 @@
 								<div align="center"><img src="Images/user.png" style="width:150px;"></div>
 								<form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
 									<div class="input-group">
-  										<span id=1 class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  										<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
   										<input type="text" class="form-control" name="user" placeholder="Username" value="<?php echo htmlentities($user); ?>">
 									</div>
 									<div class="input-group">

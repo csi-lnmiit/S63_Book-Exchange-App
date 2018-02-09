@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background-color:beige;
 }
 
 ul {
@@ -18,7 +19,7 @@ ul {
 li a {
     display: block;
     color: #D6DBDF;
-    padding: 8px 16px;
+    padding: 10px 25px;
     text-decoration: none;
 }
 
@@ -32,4 +33,10 @@ li a:hover:not(.active) {
     background-color: #35374C;
     color: white;
     text-decoration: none;
+}
+#dashboard_left_col p{
+    padding-left: 25px;
+    padding-top:10px;
+    color: #868899;
+    font-size: 11px;
 }
