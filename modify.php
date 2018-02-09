@@ -31,7 +31,7 @@
 	        <ul>
 				<br>
 	            <p>MENU</p>
-	            <li><a class="active" href="dashboard.php">
+	            <li><a href="dashboard.php">
 	                <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
 	            </li>
 	            <li><a href="profile.php">
@@ -45,7 +45,7 @@
 	            <li><a href="#">
 	                <span class="glyphicon glyphicon-trash"></span>&emsp;Delete</a>
 	            </li>
-	            <li><a href="modify.php">
+	            <li><a href="#" class="active">
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
@@ -65,20 +65,14 @@
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
-	        <h3>Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
             <?php 
                 require_once('db_connect.php'); //connect with database
 
                 $query = "select * from books b where b.owner='".$_SESSION['user_id']."'";
                 $result = mysqli_query($link,$query);
-
                 
                 if(mysqli_num_rows($result)==0)
-                    echo "Oops !! you have not added any books recently";
-                else {
-                    echo nl2br("\nFollwing is the list of books you have added\n");
-                } 
-                echo nl2br("\n");
+                    echo nl2br("You don't have any books in your repository\n");      
 
                 //draw table outline with headings
                 echo "<table border='1'>
@@ -87,6 +81,7 @@
                 <th>Book Id</th>
                 <th>Book Name</th>
                 <th>Author</th>
+                <th>Delete Book</th>
                 </tr>";
                 //fetch and display data from MySQL
                 $i=1;
@@ -97,6 +92,7 @@
                 echo "<td>".$row["bid"]."</td>";
                 echo "<td>" . $row["bname"] . "</td>";
                 echo "<td>" . $row["author"]. "</td>";
+                echo "<td><a href='#'><span class='glyphicon glyphicon-trash'></span></a></td>";
                 echo "</tr>";
                 ++$i;
                 }

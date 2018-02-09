@@ -38,7 +38,7 @@
             $user_id="u".substr($d->format("ymdHisu"),0,14);
 
         	//declaration of global session variables
-            $_SESSION["user_id"] = $row["uid"];
+            $_SESSION["user_id"] = $row["id"];
         	$_SESSION["user"] = $_POST["user"];
             $_SESSION["pass"] = md5($_POST["pass"]);
 			$_SESSION["name"] = $row["name"];
@@ -126,7 +126,7 @@
 			$_SESSION["points"] = 10;
 
       		//query to insert data to MySQL
-			$sql = "insert into users (uid,name,username,password,mobile,email,level,points) values ('$user_id','$name','$username','$password','$mobile','$email','$level','$points')";
+			$sql = "insert into users (id,name,username,password,mobile,email,level,points) values ('$user_id','$name','$username','$password','$mobile','$email','$level','$points')";
 			$result = mysqli_query($link,$sql);
 
 			//transfer to dashboard
@@ -156,9 +156,13 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" href="style.css" type="text/css">
 	</head>
-
+    <script>
+    if ( window.history.replaceState ) {
+        window.history.replaceState( null, null, window.location.href );
+    }
+    </script>
 	<body>
-		<header style="height:100px;background-color:#2D2E40;">
+		<header style="height:100px;background-color:#1A1927;">
 			<img src="Images/logo.png" style="height:100px;">
 		</header>
 
