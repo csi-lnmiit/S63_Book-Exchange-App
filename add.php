@@ -34,6 +34,10 @@ require_once('db_connect.php'); //connect to database
             $query="insert into books(bid,bname,author,owner,status) values ('$bid','$bname','$bauthor','$owner',$status)";
         
 			$result = mysqli_query($link,$query);
+            $success="Your Book added successfully";
+            echo '<div class="alert alert-success" style="position:absolute;margin-top:330px;margin-left:425px;width:22%;">
+     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$success.'</div>';
+  
         }
         
         if($flag){
