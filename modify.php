@@ -107,17 +107,29 @@
         				<td><?php echo $row["bname"] ?></td>
         				<td><?php echo $row["author"] ?></td>
         				<td>
-        					<a href="edit_book.php">
+        					<a href="#">
         					<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
         					</a>
         				</td>
-        				<td>
-        					<a href="#" id='<?php $_SESSION["bid"]=$row["bid"]?>'data-toggle="popover" data-trigger="focus" data-content="<form action='modify.php' method='post'><button name='delete' type='submit' class='btn btn-link'>confirm delete</button></form>">	
+        				<td>      					
+        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='modify.php?del=<?php echo $row['bid']; ?>'>confirm delete</a>">	
         					<span class='glyphicon glyphicon-trash' style='font-size:25px;padding:5px;'></span>
         					</a>
         				</td>
+        				<?php ++$i; } 
+        				//header('location: modify.php');
+      					if (isset($_GET['del'])){
+						$bid = $_GET['del'];
+						$sql="DELETE FROM books WHERE bid='$bid'";
+						mysqli_query($link,$sql);
+						//$_SESSION['message'] = "Address deleted!"; 
+						header("Refresh:0; url=modify.php");
+						header('location: modify.php');
+
+						}	
+      					?>
       					</tr>
-      					<?php ++$i; } ?>
+      					
     				</tbody>
   				</table>
   				</div>
