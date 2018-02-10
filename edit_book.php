@@ -3,12 +3,6 @@
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
-
-	//if delete button is confirmed
-	if(isset($_POST["delete"])){
-		
-		echo $_SESSION["bid"];
-	}
 ?>
 
 <!DOCTYPE html>
@@ -72,61 +66,7 @@
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
-	    	<div class="table-responsive"> 
-                <table class="table">
-    				<thead>
-      					<tr>
-        				<th>S.No.</th>
-        				<th>Book Id</th>
-        				<th>Book Name</th>
-        				<th>Author</th>
-        				<th>Edit Book</th>
-        				<th>Delete Book</th>
-      					</tr>
-    				</thead>
-            <?php 
-                require_once('db_connect.php'); //connect with database
-
-                $query = "select * from books b where b.owner='".$_SESSION['user_id']."'";
-                $result = mysqli_query($link,$query);
-                
-                if(mysqli_num_rows($result)==0)
-                    echo nl2br("You don't have any books in your repository\n");      
-           			
-           		$i=1;
-                while($row = mysqli_fetch_array($result))
-                {
-
-            ?>
-                
-
-            		<tbody>
-      					<tr>
-        				<td><?php echo $i ?></td>
-        				<td><?php echo $row["bid"] ?></td>
-        				<td><?php echo $row["bname"] ?></td>
-        				<td><?php echo $row["author"] ?></td>
-        				<td>
-        					<a href="edit_book.php">
-        					<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
-        					</a>
-        				</td>
-        				<td>
-        					<a href="#" id='<?php $_SESSION["bid"]=$row["bid"]?>'data-toggle="popover" data-trigger="focus" data-content="<form action='modify.php' method='post'><button name='delete' type='submit' class='btn btn-link'>confirm delete</button></form>">	
-        					<span class='glyphicon glyphicon-trash' style='font-size:25px;padding:5px;'></span>
-        					</a>
-        				</td>
-      					</tr>
-      					<?php ++$i; } ?>
-    				</tbody>
-  				</table>
-  				</div>
-
 
 	    </div><!--col-md-9 end-->
-	    <script  type='text/javascript'>
-	    	$("[data-toggle=popover]")
-			.popover({html:true})	    	
-		</script>
-	</body>
+</body>
 </html>
