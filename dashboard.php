@@ -23,9 +23,7 @@
 	<body>
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
-	        <a href="dashboard.php">
-                <img src="Images/logo.png" style="height:100px;">
-            </a>    
+	        <img src="Images/logo.png" style="height:100px;">
 	    </header>
 
 	    <!--left column list -->
@@ -67,7 +65,7 @@
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
-	        <h3 style="font-size:30px;">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
+	        <h3>Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
             <?php 
                 require_once('db_connect.php'); //connect with database
 
@@ -80,23 +78,18 @@
                 else {
                     echo nl2br("\nFollwing is the list of books you have added\n");
                 } 
-                echo nl2br("\n\n");
-            ?>
-                
-            
-	    	<div class="table-responsive"> 
-                <table class="table">
-    				<thead><!--table header start-->
-      					<tr>
-        				<th>S.No.</th>
-        				<th>Book Id</th>
-        				<th>Book Name</th>
-        				<th>Author</th>
-        				</tr>
-    				</thead><!--table header close-->
-                <!--fetch and display data from MySQL-->
-                <?php
-                    $i=1;
+                echo nl2br("\n");
+
+                //draw table outline with headings
+                echo "<table border='1'>
+                <tr>
+                <th>S.No.</th>
+                <th>Book Id</th>
+                <th>Book Name</th>
+                <th>Author</th>
+                </tr>";
+                //fetch and display data from MySQL
+                $i=1;
                 while($row = mysqli_fetch_array($result))
                 {
                 echo "<tr>";
@@ -107,10 +100,9 @@
                 echo "</tr>";
                 ++$i;
                 }
-
+                echo "</table>";
             ?>
-                </table>    
-            </div>        
+
 	    </div><!--col-md-9 end-->
 	</body>
 </html>

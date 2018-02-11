@@ -73,7 +73,7 @@
 
 	    <div class="col-md-9"><!--col-md-9 start-->
 	    	<div class="table-responsive"> 
-                <table class="table"><!--table header start-->
+                <table class="table">
     				<thead>
       					<tr>
         				<th>S.No.</th>
@@ -83,7 +83,7 @@
         				<th>Edit Book</th>
         				<th>Delete Book</th>
       					</tr>
-    				</thead><!--table header close-->
+    				</thead>
             <?php 
                 require_once('db_connect.php'); //connect with database
 
@@ -96,22 +96,37 @@
            		$i=1;
                 while($row = mysqli_fetch_array($result))
                 {
+
             ?>
                 
-            		<tbody><!--print table data-->
+
+            		<tbody>
       					<tr>
         				<td><?php echo $i ?></td>
         				<td><?php echo $row["bid"] ?></td>
         				<td><?php echo $row["bname"] ?></td>
         				<td><?php echo $row["author"] ?></td>
         				<td>
-        					<a href="#">
+        					<a href="#" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
+        					<form action='#'>
+    							<div class='form-group'>
+      								<label for='bname'>Book Name :</label>
+      								<input type='text' class='form-control' id='bname' placeholder='Enter book name' name='bname'>
+    							</div>
+    							<div class='form-group'>
+      								<label for='author'>Author :</label>
+      								<input type='text' class='form-control' id='author' placeholder='Enter author name' name='author'>
+    							</div>
+    							<button type='submit' class='btn btn-default'>Save</button>
+  							</form>
+
+        					">	
         					<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
         					</a>
         				</td>
         				<td>      					
-        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'>confirm delete</a>">	
-        					<span class='glyphicon glyphicon-trash' style='font-size:25px;padding:5px;'></span>
+        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">	
+        					<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
         					</a>
         				</td>
         		<?php ++$i; } ?> <!--php to increment S.NO. count of books--> 
@@ -125,7 +140,6 @@
 
 	    <!--JS SCRIPTS-->
 	    <script  type='text/javascript'>
-	    	//popover script
 	    	$("[data-toggle=popover]")
 			.popover({html:true})	    	
 		</script>
