@@ -75,7 +75,9 @@ require_once('db_connect.php'); //connect to database
 	<body>
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
-	        <img src="Images/logo.png" style="height:100px;">
+	        <a href="dashboard.php">
+                <img src="Images/logo.png" style="height:100px;">
+            </a>  
 	    </header>
 
 	    <!--left column list -->
