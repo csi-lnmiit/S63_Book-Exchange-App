@@ -73,7 +73,7 @@
 
 	    <div class="col-md-9"><!--col-md-9 start-->
 	    	<div class="table-responsive"> 
-                <table class="table">
+                <table class="table"><!--table header start-->
     				<thead>
       					<tr>
         				<th>S.No.</th>
@@ -83,7 +83,7 @@
         				<th>Edit Book</th>
         				<th>Delete Book</th>
       					</tr>
-    				</thead>
+    				</thead><!--table header close-->
             <?php 
                 require_once('db_connect.php'); //connect with database
 
@@ -96,11 +96,9 @@
            		$i=1;
                 while($row = mysqli_fetch_array($result))
                 {
-
             ?>
                 
-
-            		<tbody>
+            		<tbody><!--print table data-->
       					<tr>
         				<td><?php echo $i ?></td>
         				<td><?php echo $row["bid"] ?></td>
@@ -112,31 +110,22 @@
         					</a>
         				</td>
         				<td>      					
-        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='modify.php?del=<?php echo $row['bid']; ?>'>confirm delete</a>">	
+        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'>confirm delete</a>">	
         					<span class='glyphicon glyphicon-trash' style='font-size:25px;padding:5px;'></span>
         					</a>
         				</td>
-        				<?php ++$i; } 
-        				//header('location: modify.php');
-      					if (isset($_GET['del'])){
-						$bid = $_GET['del'];
-						$sql="DELETE FROM books WHERE bid='$bid'";
-						mysqli_query($link,$sql);
-						//$_SESSION['message'] = "Address deleted!"; 
-						header("Refresh:0; url=modify.php");
-						header('location: modify.php');
-
-						}	
-      					?>
+        		<?php ++$i; } ?> <!--php to increment S.NO. count of books--> 
+ 					
       					</tr>
       					
     				</tbody>
   				</table>
-  				</div>
-
-
+  			</div><!--table responsive div close-->
 	    </div><!--col-md-9 end-->
+
+	    <!--JS SCRIPTS-->
 	    <script  type='text/javascript'>
+	    	//popover script
 	    	$("[data-toggle=popover]")
 			.popover({html:true})	    	
 		</script>
