@@ -3,6 +3,12 @@
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
+
+	//if delete button is confirmed
+	if(isset($_POST["delete"])){
+		
+		echo $_SESSION["bid"];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +48,7 @@
 	            <li><a href="add.php">
 	                <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
 	            </li>
-	            <li><a href="#" class="active">
+	            <li><a href="modify.php" class="active">
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
@@ -66,6 +72,18 @@
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
+	    	<div class="table-responsive"> 
+                <table class="table"><!--table header start-->
+    				<thead>
+      					<tr>
+        				<th>S.No.</th>
+        				<th>Book Id</th>
+        				<th>Book Name</th>
+        				<th>Author</th>
+        				<th>Edit Book</th>
+        				<th>Delete Book</th>
+      					</tr>
+    				</thead><!--table header close-->
             <?php 
                 require_once('db_connect.php'); //connect with database
 
@@ -74,44 +92,42 @@
                 
                 if(mysqli_num_rows($result)==0)
                     echo nl2br("You don't have any books in your repository\n");      
-
-                //draw table outline with headings
-                echo "<table border='1'>
-                <tr>
-                <th>S.No.</th>
-                <th>Book Id</th>
-                <th>Book Name</th>
-                <th>Author</th>
-                <th>Edit Book</th>
-                <th>Delete Book</th>
-                </tr>";
-                //fetch and display data from MySQL
-                $i=1;
+           			
+           		$i=1;
                 while($row = mysqli_fetch_array($result))
                 {
-                echo "<tr>";
-                echo "<td align='center'>".$i."</td>";
-                echo "<td align='center'>".$row["bid"]."</td>";
-                echo "<td align='center'>" . $row["bname"] . "</td>";
-                echo "<td align='center'>" . $row["author"]. "</td>";
-                echo "<td align='center'><a href='#edit' data-toggle='popover'>
-               		  <span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span></a></td>";
-                echo "<td align='center'><a href='modify.php' data-toggle='popover'><span class='glyphicon glyphicon-trash' style='font-size:25px;padding:5px;'></span></a></td>";
-                echo "</tr>";
-                ++$i;
-                }
-                echo "</table>";
             ?>
-
+                
+            		<tbody><!--print table data-->
+      					<tr>
+        				<td><?php echo $i ?></td>
+        				<td><?php echo $row["bid"] ?></td>
+        				<td><?php echo $row["bname"] ?></td>
+        				<td><?php echo $row["author"] ?></td>
+        				<td>
+        					<a href="#">
+        					<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
+        					</a>
+        				</td>
+        				<td>      					
+        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'>confirm delete</a>">	
+        					<span class='glyphicon glyphicon-trash' style='font-size:25px;padding:5px;'></span>
+        					</a>
+        				</td>
+        		<?php ++$i; } ?> <!--php to increment S.NO. count of books--> 
+ 					
+      					</tr>
+      					
+    				</tbody>
+  				</table>
+  			</div><!--table responsive div close-->
 	    </div><!--col-md-9 end-->
+
+	    <!--JS SCRIPTS-->
 	    <script  type='text/javascript'>
+	    	//popover script
 	    	$("[data-toggle=popover]")
-			.popover({html:true})
-			
-			
-
-	    	
+			.popover({html:true})	    	
 		</script>
-
 	</body>
 </html>
