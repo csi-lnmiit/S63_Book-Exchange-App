@@ -139,7 +139,7 @@
     if($flag)
     {
                
-                       echo '<div class="alert alert-danger alert-dismissable fade in"               style="position:absolute;margin-top:580px;margin-left:450px;width:31%;">
+                       echo '<div class="alert alert-danger alert-dismissable fade in"               style="position:absolute;margin-top:580px;margin-left:450px;width:400px;">
                             <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'
                         </div>';
                    
