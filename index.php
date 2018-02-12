@@ -186,9 +186,10 @@
        <img src="Images/logo.png" style="height:100px;">
     </header>
 
-        <div class="col-md-4"></div>
+    <div class="col-md-12"><!--outer div start-->
+        <div class="col-md-4"></div><!--left div end-->
 
-        <div class="col-md-4" style="padding-top: 70px"><!--outer div start-->
+        <div class="col-md-4" style="padding-top: 70px"><!--mid div start-->
             <ul class="nav nav-pills">
                 <li class="active"><a data-toggle="pill" href="#login"><b>Login</b></a></li>
                 <li ><a data-toggle="pill" href="#signup"><b>Sign Up</b></a></li>
@@ -250,9 +251,15 @@
                     </div><!--row end-->
                 </div>
             </div><!--tab pill end-->
-        </div><!--outer div end-->
+        </div><!--mid div end-->
 
-        <div class="col-md-4"></div>
+        <div class="col-md-4"></div><!--right div end-->
+      </div><!--outer div end-->
+    
+        <div class="footer">
+            <p><span class="glyphicon glyphicon-copyright-mark"> </span>&nbsp;2018 Libromate | All Rights Reserved</p>
+        </div>
+
 
 
 
