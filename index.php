@@ -138,8 +138,13 @@
     //if any text field is missing or user/pass combination is incorrect
     if($flag)
     {
-        echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:580px;margin-left:200px;width:32%;">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'</div>';
+               
+                       echo '<div class="alert alert-danger alert-dismissable fade in"               style="position:absolute;margin-top:580px;margin-left:450px;width:31%;">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'
+                        </div>';
+                   
+                
+        
 
         unset($_POST);
         //header('Location:'.$_SERVER['PHP_SELF']);
