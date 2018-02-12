@@ -21,10 +21,11 @@
 	</head>
 
 	<body>
+		
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
 	        <a href="dashboard.php">
-                <img src="Images/logo.png" style="height:100px; margin-left:25px">
+                <img src="Images/logo.png" style="height:100px; margin-left:25px;">
             </a>
 	    </header>
 
@@ -78,7 +79,7 @@
                 if(mysqli_num_rows($result)==0)
                     echo "Oops !! you have not added any books recently";
                 else {
-                    echo nl2br("\nFollwing is the list of books you have added\n");
+                    echo nl2br("\nFollowing is the list of books you have added:\n");
                 }
                 echo nl2br("\n\n");
             ?>
@@ -100,13 +101,13 @@
                     $i=1;
                 while($row = mysqli_fetch_array($result))
                 {
-                echo "<tr>";
-                echo "<td>".$i."</td>";
-                echo "<td>".$row["bid"]."</td>";
-                echo "<td>" . $row["bname"] . "</td>";
-                echo "<td>" . $row["author"]. "</td>";
-                echo "</tr>";
-                ++$i;
+	                echo "<tr>";
+	                echo "<td>".$i."</td>";
+	                echo "<td>".$row["bid"]."</td>";
+	                echo "<td>" . $row["bname"] . "</td>";
+	                echo "<td>" . $row["author"]. "</td>";
+	                echo "</tr>";
+	                ++$i;
                 }
             ?>
                 </table>

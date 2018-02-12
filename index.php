@@ -158,7 +158,7 @@
         <link rel="stylesheet" type="text/css" href="CSS/responsive.css">
 
         <style>
-            body  {
+            body {
                 background-image: url("Images/bg.jpg");
                 background-repeat: no-repeat;
                 background-attachment: fixed;
@@ -191,7 +191,7 @@
                     <div id="login" class="tab-pane fade in active">
                         <div class="row"><!--row start-->
                             <div class="col-md-12"><!--col-md-12 start-->
-                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:15px; background-color:white;border-radius:5px"><!--login div start-->
+                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:20px; background-color:beige;border-radius:5px"><!--login div start-->
                                     <div align="center"><img src="Images/user.png" style="width:150px;"></div>
                                     <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
                                         <div class="input-group">
@@ -212,7 +212,7 @@
                     <div id="signup" class="tab-pane fade">
                         <div class="row"><!--row start-->
                             <div class="col-md-12"><!--col-md-12 start-->
-                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:15px; background-color:white;border-radius:5px">
+                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:20px; background-color:beige;border-radius:5px">
                                     <!--signup div start-->
                                     <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:30px;">
                                         <div class="input-group">
@@ -235,8 +235,12 @@
                                             <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
                                             <input type="password" class="form-control" name="pass" placeholder="Password">
                                         </div><br>
-                                        <input class="btn btn-block btn-primary" type="submit" name="signup" value="Sign Up">
-                                        <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset">
+                                        <div style="float: left; width: 120px">
+                        	        		<input class="btn btn-block btn-primary" type="submit" name="signup" value="Sign Up">
+                        	         	</div>
+                                        <div style="float: right; width: 120px;">
+                        	                <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset">
+                        	          	</div>
                                     </form>
                                 </div><!--sign up div end-->
                             </div><!--col-md-12 end-->
