@@ -1,7 +1,9 @@
 # Libromate
 
-### Project Idea ( What is the need ? ) -
-We have often come across a situation when we are in a need of some resource and we don’t have it.This is because either the resource is unavailable or present in very limited amounts.Through our web application, we aim at overcoming the same problem with one such resource i.e BOOKS !!
+### Project Description -
+Let’s consider a situation - in school/college library it often happens that there is no availability of certain books other than academics which a student want to read. But that same book could be available with some other person on the campus.But the problem is that we couldn’t get to know about that person who possesses it. We may call our friends for the same, but the resource may be available with some other person on campus.
+In response to this problem Libromate - A Book Sharing Web Portal comes to your rescue. And yes this could also be used for Academics related books also.
+
 
 ### Technologies used in the project -
 We have used PHP for backend development and MySQL for database management.Tech used in developing front end interface are - HTML5, CSS3, Bootstrap 4 & JavaScript
