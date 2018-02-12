@@ -24,8 +24,8 @@
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
 	        <a href="dashboard.php">
-                <img src="Images/logo.png" style="height:100px;">
-            </a>    
+                <img src="Images/logo.png" style="height:100px; margin-left:25px">
+            </a>
 	    </header>
 
 	    <!--left column list -->
@@ -68,23 +68,23 @@
 
 	    <div class="col-md-9"><!--col-md-9 start-->
 	        <h3 style="font-size:30px;">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
-            <?php 
+            <?php
                 require_once('db_connect.php'); //connect with database
 
                 $query = "select * from books b where b.owner='".$_SESSION['user_id']."'";
                 $result = mysqli_query($link,$query);
 
-                
+
                 if(mysqli_num_rows($result)==0)
                     echo "Oops !! you have not added any books recently";
                 else {
                     echo nl2br("\nFollwing is the list of books you have added\n");
-                } 
+                }
                 echo nl2br("\n\n");
             ?>
-                
-            
-	    	<div class="table-responsive"> 
+
+
+	    	<div class="table-responsive">
                 <table class="table">
     				<thead><!--table header start-->
       					<tr>
@@ -94,6 +94,7 @@
         				<th>Author</th>
         				</tr>
     				</thead><!--table header close-->
+
                 <!--fetch and display data from MySQL-->
                 <?php
                     $i=1;
@@ -107,10 +108,9 @@
                 echo "</tr>";
                 ++$i;
                 }
-
             ?>
-                </table>    
-            </div>        
+                </table>
+            </div>
 	    </div><!--col-md-9 end-->
 	</body>
 </html>

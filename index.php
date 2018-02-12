@@ -139,18 +139,12 @@
     if($flag)
     {
 
-                       echo '<div class="alert alert-danger alert-dismissable fade in"               style="position:absolute;margin-top:580px;margin-left:450px;width:400px;">
-                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'
-                        </div>';
-
-
-
+        echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:580px;margin-left:450px;width:400px;">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
 
         unset($_POST);
-        //header('Location:'.$_SERVER['PHP_SELF']);
     }
 ?>
-
 
 <html>
     <head>
@@ -162,109 +156,100 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="CSS/responsive.css">
-<script src="reload.js"></script>
 
-    <style>
-        body  {
-            background-image: url("Images/bg.jpg");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-size: 1500px 1200px;
+        <style>
+            body  {
+                background-image: url("Images/bg.jpg");
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                background-size: 1500px 1200px;
             }
-    </style>
-
+        </style>
     </head>
 
     <script>
-    if ( window.history.replaceState ) {
-        window.history.replaceState( null, null, window.location.href );
-    }
+        if ( window.history.replaceState ) {
+            window.history.replaceState( null, null, window.location.href );
+        }
     </script>
 
-<body>
+    <body>
+        <header style="height:100px;background-color:#1A1927;">
+           <img src="Images/logo.png" style="height:100px;margin-left:25px">
+        </header>
 
-    <header style="height:100px;background-color:#1A1927;">
-       <img src="Images/logo.png" style="height:100px;">
-    </header>
+        <div class="col-md-12"><!--outer div start-->
+            <div class="col-md-4"></div><!--left div end-->
 
-    <div class="col-md-12"><!--outer div start-->
-        <div class="col-md-4"></div><!--left div end-->
+            <div class="col-md-4" style="padding-top: 70px"><!--mid div start-->
+                <ul class="nav nav-pills">
+                    <li class="active"><a data-toggle="pill" href="#login"><b>Login</b></a></li>
+                    <li ><a data-toggle="pill" href="#signup"><b>Sign Up</b></a></li>
+                </ul>
 
-        <div class="col-md-4" style="padding-top: 70px"><!--mid div start-->
-            <ul class="nav nav-pills">
-                <li class="active"><a data-toggle="pill" href="#login"><b>Login</b></a></li>
-                <li ><a data-toggle="pill" href="#signup"><b>Sign Up</b></a></li>
-            </ul>
+                <div class="tab-content" ><!--tab pill start-->
+                    <div id="login" class="tab-pane fade in active">
+                        <div class="row"><!--row start-->
+                            <div class="col-md-12"><!--col-md-12 start-->
+                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:15px; background-color:white;border-radius:5px"><!--login div start-->
+                                    <div align="center"><img src="Images/user.png" style="width:150px;"></div>
+                                    <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input type="text" class="form-control" name="user" placeholder="Username" value="<?php echo htmlentities($user); ?>">
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="password" class="form-control" name="pass" placeholder="Password">
+                                        </div><br>
+                                        <input class="btn btn-block btn-primary" type="submit" name="login" value="Login">
+                                    </form>
+                                </div><!--login div end-->
+                            </div><!--col-md-12 end-->
+                        </div><!--row end-->
+                    </div>
 
-            <div class="tab-content" ><!--tab pill start-->
-                <div id="login" class="tab-pane fade in active">
-                    <div class="row"><!--row start-->
-                        <div class="col-md-12"><!--col-md-12 start-->
-                            <div class="jumbotron" style=" height:350px; width:400px; padding-top:15px; background-color:white;border-radius:5px"><!--login div start-->
-                                <div align="center"><img src="Images/user.png" style="width:150px;"></div>
-                                <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" class="form-control" name="user" placeholder="Username" value="<?php echo htmlentities($user); ?>">
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input type="password" class="form-control" name="pass" placeholder="Password">
-                                    </div><br>
-                                    <input class="btn btn-block btn-primary" type="submit" name="login" value="Login">
-                                </form>
-                            </div><!--login div end-->
-                        </div><!--col-md-12 end-->
-                    </div><!--row end-->
-                </div>
+                    <div id="signup" class="tab-pane fade">
+                        <div class="row"><!--row start-->
+                            <div class="col-md-12"><!--col-md-12 start-->
+                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:15px; background-color:white;border-radius:5px">
+                                    <!--signup div start-->
+                                    <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:30px;">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                                            <input type="text" class="form-control" name="name" placeholder="Full Name">
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                            <input type="email" class="form-control" name="email" placeholder="Email">
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
+                                            <input type="tel" class="form-control" name="mobile" placeholder="Mobile No">
+                                        </div><br>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                            <input type="text" class="form-control" name="user" placeholder="Username">
+                                        </div>
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                            <input type="password" class="form-control" name="pass" placeholder="Password">
+                                        </div><br>
+                                        <input class="btn btn-block btn-primary" type="submit" name="signup" value="Sign Up">
+                                        <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset">
+                                    </form>
+                                </div><!--sign up div end-->
+                            </div><!--col-md-12 end-->
+                        </div><!--row end-->
+                    </div>
+                </div><!--tab pill end-->
+            </div><!--mid div end-->
 
-                <div id="signup" class="tab-pane fade">
-                    <div class="row"><!--row start-->
-                        <div class="col-md-12"><!--col-md-12 start-->
-                            <div class="jumbotron" style=" height:350px; width:400px; padding-top:15px; background-color:white;border-radius:5px">
-                                <!--signup div start-->
-                                <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:30px;">
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                                        <input type="text" class="form-control" name="name" placeholder="Full Name">
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-                                        <input type="email" class="form-control" name="email" placeholder="Email">
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-                                        <input type="tel" class="form-control" name="mobile" placeholder="Mobile No">
-                                    </div><br>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input type="text" class="form-control" name="user" placeholder="Username">
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input type="password" class="form-control" name="pass" placeholder="Password">
-                                    </div><br>
-                                    <input class="btn btn-block btn-primary" type="submit" name="signup" value="Sign Up">
-                                    <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset">
-                                </form>
-                            </div><!--sign up div end-->
-                        </div><!--col-md-12 end-->
-                    </div><!--row end-->
-                </div>
-            </div><!--tab pill end-->
-        </div><!--mid div end-->
-
-        <div class="col-md-4"></div><!--right div end-->
-      </div><!--outer div end-->
+            <div class="col-md-4"></div><!--right div end-->
+        </div><!--outer div end-->
 
         <div class="footer">
             <p><span class="glyphicon glyphicon-copyright-mark"> </span>&nbsp;2018 Libromate | All Rights Reserved</p>
         </div>
-
-
-
-
-
-
-</body>
+    </body>
 </html>

@@ -6,7 +6,6 @@
 
 	//if delete button is confirmed
 	if(isset($_POST["delete"])){
-		
 		echo $_SESSION["bid"];
 	}
 ?>
@@ -27,9 +26,12 @@
 	</head>
 
 	<body>
+
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
-	        <img src="Images/logo.png" style="height:100px;">
+			<a href="dashboard.php">
+                <img src="Images/logo.png" style="height:100px; margin-left:25px">
+            </a>
 	    </header>
 
 	    <!--left column list -->
@@ -67,12 +69,11 @@
 	           	<li><a href="#">
 	                <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
 	            </li>
-
 	        </ul>
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
-	    	<div class="table-responsive"> 
+	    	<div class="table-responsive">
                 <table class="table"><!--table header start-->
     				<thead>
       					<tr>
@@ -84,20 +85,21 @@
         				<th>Delete Book</th>
       					</tr>
     				</thead><!--table header close-->
-            <?php 
-                require_once('db_connect.php'); //connect with database
 
-                $query = "select * from books b where b.owner='".$_SESSION['user_id']."'";
-                $result = mysqli_query($link,$query);
-                
-                if(mysqli_num_rows($result)==0)
-                    echo nl2br("You don't have any books in your repository\n");      
-           			
-           		$i=1;
-                while($row = mysqli_fetch_array($result))
-                {
-            ?>
-                
+					<?php
+		                require_once('db_connect.php'); //connect with database
+
+		                $query = "select * from books b where b.owner='".$_SESSION['user_id']."'";
+		                $result = mysqli_query($link,$query);
+
+		                if(mysqli_num_rows($result)==0)
+		                    echo nl2br("You don't have any books in your repository\n");
+
+		           		$i=1;
+		                while($row = mysqli_fetch_array($result))
+		                {
+		            ?>
+
             		<tbody><!--print table data-->
       					<tr>
         				<td><?php echo $i ?></td>
@@ -106,30 +108,30 @@
         				<td><?php echo $row["author"] ?></td>
         				<td>
         					<a href="#" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
-        					<form action='#'>
-    							<div class='form-group'>
-      								<label for='bname'>Book Name :</label>
-      								<input type='text' class='form-control' id='bname' placeholder='Enter book name' name='bname'>
-    							</div>
-    							<div class='form-group'>
-      								<label for='author'>Author :</label>
-      								<input type='text' class='form-control' id='author' placeholder='Enter author name' name='author'>
-    							</div>
-    							<button type='submit' class='btn btn-default'>Save</button>
-  							</form>
-        					">	
+	        					<form action='#'>
+	    							<div class='form-group'>
+	      								<label for='bname'>Book Name :</label>
+	      								<input type='text' class='form-control' id='bname' placeholder='Enter book name' name='bname'>
+	    							</div>
+	    							<div class='form-group'>
+	      								<label for='author'>Author :</label>
+	      								<input type='text' class='form-control' id='author' placeholder='Enter author name' name='author'>
+	    							</div>
+	    							<button type='submit' class='btn btn-default'>Save</button>
+	  							</form>">
         					<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
         					</a>
         				</td>
-        				<td>      					
-        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">	
+        				<td>
+        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
         					<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
         					</a>
         				</td>
-        		<?php ++$i; } ?> <!--php to increment S.NO. count of books--> 
- 					
+
+        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
+
       					</tr>
-      					
+
     				</tbody>
   				</table>
   			</div><!--table responsive div close-->
@@ -139,7 +141,7 @@
 	    <script  type='text/javascript'>
 	    	//popover script
 	    	$("[data-toggle=popover]")
-			.popover({html:true})	    	
+			.popover({html:true})
 		</script>
 	</body>
 </html>

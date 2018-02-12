@@ -23,8 +23,8 @@
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
 	        <a href="dashboard.php">
-                <img src="Images/logo.png" style="height:100px;">
-            </a>  
+                <img src="Images/logo.png" style="height:100px; margin-left:25px">
+            </a>
 	    </header>
 
 	    <!--left column list -->
@@ -67,7 +67,7 @@
 
 	    <div class="col-md-9">
 	        <h3>Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
-	        
+
               <div class="table-responsive"> <!-- user info table -->
                 <table class="table">
     				<thead><!--table header start-->
@@ -75,7 +75,7 @@
                             <td style="font-size:20px;">Name</td>
                             <td><?php echo $_SESSION["name"]?></td>
                         </tr>
-                        
+
                         <tr>
                             <td style="font-size:20px;">Username</td>
                             <td><?php echo $_SESSION["user"]?></td>
@@ -83,30 +83,30 @@
                         <tr>
                             <td style="font-size:20px;">Password</td>
                             <td><?php echo $_SESSION["pass"]?></td>
-                        </tr>   
-                        
+                        </tr>
+
                         <tr>
                             <td style="font-size:20px;">E-mail Id</td>
                             <td><?php echo $_SESSION["email"]?></td>
                         </tr>
-                        
+
                         <tr>
                             <td style="font-size:20px;">Phone Number</td>
                             <td><?php echo $_SESSION["mobile"]?></td>
-                        </tr> 
-                        
+                        </tr>
+
                         <tr>
                             <td style="font-size:20px;">Points</td>
                             <td><?php echo $_SESSION["points"]?></td>
-                        </tr> 
-                        
+                        </tr>
+
                     </thead><!--table header close-->
                   </table>
             </div>  <!-- table div close -->
 
-                    
-        				
-        				
+
+
+
 
 
 	    </div>
