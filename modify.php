@@ -29,7 +29,7 @@
 	<body>
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
-	        <img src="Images/logo.png" style="height:100px;">
+	        <img src="Images/logo.png" style="height:100px;position: fixed;">
 	    </header>
 
 	    <!--left column list -->

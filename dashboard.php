@@ -22,9 +22,9 @@
 
 	<body>
 	    <!--top header-->
-	    <header style="height:100px;background-color:#1A1927;width:20%">
+	    <header style="height:100px;background-color:#1A1927;width:20%;">
 	        <a href="dashboard.php">
-                <img src="Images/logo.png" style="height:100px;">
+                <img src="Images/logo.png" style="height:100px;position: fixed">
             </a>    
 	    </header>
 
