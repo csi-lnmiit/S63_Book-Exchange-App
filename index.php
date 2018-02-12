@@ -191,7 +191,7 @@
                     <div id="login" class="tab-pane fade in active">
                         <div class="row"><!--row start-->
                             <div class="col-md-12"><!--col-md-12 start-->
-                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:20px; background-color:beige;border-radius:5px"><!--login div start-->
+                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:20px; background-color:white;border-radius:5px"><!--login div start-->
                                     <div align="center"><img src="Images/user.png" style="width:150px;"></div>
                                     <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:15px;">
                                         <div class="input-group">
@@ -212,7 +212,7 @@
                     <div id="signup" class="tab-pane fade">
                         <div class="row"><!--row start-->
                             <div class="col-md-12"><!--col-md-12 start-->
-                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:20px; background-color:beige;border-radius:5px">
+                                <div class="jumbotron" style=" height:350px; width:400px; padding-top:20px; background-color:white;border-radius:5px">
                                     <!--signup div start-->
                                     <form action="index.php" method="post" style="padding-left:75px;padding-right:75px;padding-top:30px;">
                                         <div class="input-group">
