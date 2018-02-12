@@ -1,0 +1,38 @@
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 20%;
+    background-color: #35374C;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    font-size: 14px;
+}
+
+li a {
+    display: block;
+    color: #D6DBDF;
+    padding: 10px 25px;
+    text-decoration: none;
+}
+
+li a.active {
+    background-color: #2D2E40;
+    color: white;
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #35374C;
+    color: white;
+    text-decoration: none;
+}
+
+#dashboard_left_col p {
+    padding-left: 25px;
+    padding-top:10px;
+    color: #868899;
+    font-size: 12px;
+}
