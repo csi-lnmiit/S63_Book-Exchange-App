@@ -29,15 +29,9 @@
 
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%">
-<<<<<<< HEAD
 			<a href="dashboard.php">
                 <img src="Images/logo.png" style="height:100px; margin-left:25px">
             </a>
-||||||| merged common ancestors
-	        <img src="Images/logo.png" style="height:100px;">
-=======
-	        <img src="Images/logo.png" style="height:100px;position: fixed;">
->>>>>>> d2780c226511758b45402ae5cc0c8e0b4f19f82a
 	    </header>
 
 	    <!--left column list -->
