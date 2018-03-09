@@ -28,14 +28,14 @@
 	<body>
 
 	    <!--top header-->
-	    <header style="height:100px;background-color:#1A1927;width:20%">
+	    <header style="height:100px;background-color:#1A1927;width:20%;position: fixed;">
 			<a href="dashboard.php">
                 <img src="Images/logo.png" style="height:100px; margin-left:25px">
             </a>
 	    </header>
 
 	    <!--left column list -->
-	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0"><!--col-md-3 start-->
+	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0;padding-top:100px"><!--col-md-3 start-->
 	        <ul>
 				<br>
 	            <p>MENU</p>
@@ -107,18 +107,20 @@
         				<td><?php echo $row["bname"] ?></td>
         				<td><?php echo $row["author"] ?></td>
         				<td>
-        					<a href="#" data-toggle="popover" data-placement="bottom" data-trigger="focus" data-content="
-	        					<form action='#'>
-	    							<div class='form-group'>
-	      								<label for='bname'>Book Name :</label>
-	      								<input type='text' class='form-control' id='bname' placeholder='Enter book name' name='bname'>
-	    							</div>
-	    							<div class='form-group'>
-	      								<label for='author'>Author :</label>
-	      								<input type='text' class='form-control' id='author' placeholder='Enter author name' name='author'>
-	    							</div>
-	    							<button type='submit' class='btn btn-default'>Save</button>
-	  							</form>">
+        					<a href="#" data-toggle="popover" data-trigger="focus" data-content='
+        					<form action="modify.php">
+  								<div class="form-group">
+								    <label for="email">Email address:</label>
+								    <input type="email" class="form-control" id="email">
+								</div>
+								<div class="form-group">
+								    <label for="pwd">Password:</label>
+								    <input type="password" class="form-control" id="pwd">
+								</div>
+								<a href="#"><button type="submit" class="btn btn-default">Submit</button>
+								</a>
+							</form>
+        					'>
         					<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
         					</a>
         				</td>
