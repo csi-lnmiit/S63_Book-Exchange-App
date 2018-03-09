@@ -28,7 +28,7 @@
                 <img src="Images/logo.png" style="height:100px; margin-left:25px;">
             </a>
 	    </header>
-	    
+
 	    <!--left column list -->
 	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0;padding-top:100px"><!--col-md-3 start-->
 	        <ul>
@@ -61,7 +61,7 @@
 	            <li><a href="logout.php">
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
 	            </li>
-                <li><a href="#">
+                <li><a href="trash.php">
                     <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
                 </li>
 	        </ul>
@@ -72,7 +72,7 @@
             <?php
                 require_once('db_connect.php'); //connect with database
 
-                $query = "select * from books b where b.owner='".$_SESSION['user_id']."'";
+                $query = "select * from books b where b.trash='0' AND b.owner='".$_SESSION['user_id']."'";
                 $result = mysqli_query($link,$query);
 
 

@@ -109,7 +109,7 @@
 	            <li><a href="logout.php">
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
 	            </li>
-	            <li><a href="#">
+	            <li><a href="trash.php">
 	                <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
 	            </li>
 	        </ul>
