@@ -18,6 +18,8 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+	   	<link rel="stylesheet" type="text/css" href="CSS/search_nav.css">
+
 	</head>
 
 	<body>
@@ -68,6 +70,19 @@
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
+
+	    	<div class="topnav"><!--search bar nav start-->
+			  <br>
+			  <div class="search-container">
+			    <form action="search.php">
+			      <input type="text" placeholder="Search book name or author name .." name="search" size="65%">
+			      <button type="submit"><i class="glyphicon glyphicon-search"></i></button>
+			    </form>
+			  </div>
+			  <a href="#">link</a>
+			</div><!--search bar nav end-->
+
+
 	        <h3 style="font-size:30px;">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
             <?php
                 require_once('db_connect.php'); //connect with database
