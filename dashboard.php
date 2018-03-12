@@ -74,9 +74,9 @@
 	    	<div class="topnav"><!--search bar nav start-->
 			  <br>
 			  <div class="search-container">
-			    <form action="search.php">
-			      <input type="text" placeholder="Search book name or author name .." name="search" size="65%">
-			      <button type="submit"><i class="glyphicon glyphicon-search"></i></button>
+			    <form action="search.php" method="post">
+			      <input type="text" placeholder="Search book name or author name .." name="search_input" size="65%">
+			      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 			    </form>
 			  </div>
 			  <a href="#">link</a>
