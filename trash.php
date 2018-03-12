@@ -3,13 +3,18 @@
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
+
+	//if delete button is confirmed
+	if(isset($_POST["delete"])){
+		echo $_SESSION["bid"];
+	}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<link rel="shortcut icon" type="image/png" href="Images/favicon.png">
-	    <title>Dashboard</title>
+	    <title>Modify</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -18,16 +23,14 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
-	   	<link rel="stylesheet" type="text/css" href="CSS/search_nav.css">
-
 	</head>
 
 	<body>
-		
+
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%;position: fixed;">
-	        <a href="dashboard.php">
-                <img src="Images/logo.png" style="height:100px; margin-left:25px;">
+			<a href="dashboard.php">
+                <img src="Images/logo.png" style="height:100px; margin-left:25px">
             </a>
 	    </header>
 
@@ -36,7 +39,7 @@
 	        <ul>
 				<br>
 	            <p>MENU</p>
-	            <li><a class="active" href="dashboard.php">
+	            <li><a href="dashboard.php">
 	                <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
 	            </li>
 	            <li><a href="profile.php">
@@ -63,70 +66,71 @@
 	            <li><a href="logout.php">
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
 	            </li>
-                <li><a href="trash.php">
-                    <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
-                </li>
+	           	<li><a href="trash.php" class="active">
+	                <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
+	            </li>
 	        </ul>
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
-
-	    	<div class="topnav"><!--search bar nav start-->
-			  <br>
-			  <div class="search-container">
-			    <form action="search.php" method="post">
-			      <input type="text" placeholder="Search book name or author name .." name="search_input" size="65%">
-			      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-			    </form>
-			  </div>
-			  <a href="#">link</a>
-			</div><!--search bar nav end-->
-
-
-	        <h3 style="font-size:30px;">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
-            <?php
-                require_once('db_connect.php'); //connect with database
-
-                $query = "select * from books b where b.trash='0' AND b.owner='".$_SESSION['user_id']."'";
-                $result = mysqli_query($link,$query);
-
-
-                if(mysqli_num_rows($result)==0)
-                    echo "Oops !! you have not added any books recently";
-                else {
-                    echo nl2br("\nFollowing is the list of books you have added:\n");
-                }
-                echo nl2br("\n\n");
-            ?>
-
-
 	    	<div class="table-responsive">
-                <table class="table">
-    				<thead><!--table header start-->
+                <table class="table"><!--table header start-->
+    				<thead>
       					<tr>
         				<th>S.No.</th>
         				<th>Book Id</th>
         				<th>Book Name</th>
         				<th>Author</th>
-        				</tr>
+        				<th>Restore Book</th>
+        				<th>Delete Permanently</th>
+      					</tr>
     				</thead><!--table header close-->
 
-                <!--fetch and display data from MySQL-->
-                <?php
-                    $i=1;
-                while($row = mysqli_fetch_array($result))
-                {
-	                echo "<tr>";
-	                echo "<td>".$i."</td>";
-	                echo "<td>".$row["bid"]."</td>";
-	                echo "<td>" . $row["bname"] . "</td>";
-	                echo "<td>" . $row["author"]. "</td>";
-	                echo "</tr>";
-	                ++$i;
-                }
-            ?>
-                </table>
-            </div>
+					<?php
+		                require_once('db_connect.php'); //connect with database
+
+		                $query = "select * from books b where b.trash='1' AND b.owner='".$_SESSION['user_id']."'";
+		                $result = mysqli_query($link,$query);
+
+		                if(mysqli_num_rows($result)==0)
+		                    echo nl2br("Trash is empty !!\n");
+
+		           		$i=1;
+		                while($row = mysqli_fetch_array($result))
+		                {
+		            ?>
+
+            		<tbody><!--print table data-->
+      					<tr>
+        				<td><?php echo $i ?></td>
+        				<td><?php echo $row["bid"] ?></td>
+        				<td><?php echo $row["bname"] ?></td>
+        				<td><?php echo $row["author"] ?></td>
+        				<td>
+        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?res=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#27AE60'>confirm restore</a>">
+        					<span class='glyphicon glyphicon-refresh' style='color:#27AE60;font-size:25px;padding:5px;'></span>
+        					</a>
+        				</td>
+        				<td>
+        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
+        					<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
+        					</a>
+        				</td>
+
+        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
+
+      					</tr>
+
+    				</tbody>
+  				</table>
+  			</div><!--table responsive div close-->
 	    </div><!--col-md-9 end-->
+
+	    <!--JS SCRIPTS-->
+	    <script  type='text/javascript'>
+	    	//popover script
+	    	$("[data-toggle=popover]")
+			.popover({html:true})
+		</script>
 	</body>
 </html>

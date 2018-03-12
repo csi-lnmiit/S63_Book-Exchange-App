@@ -36,7 +36,7 @@
 	        <ul>
 				<br>
 	            <p>MENU</p>
-	            <li><a class="active" href="dashboard.php">
+	            <li><a href="dashboard.php">
 	                <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
 	            </li>
 	            <li><a href="profile.php">
@@ -72,32 +72,37 @@
 	    <div class="col-md-9"><!--col-md-9 start-->
 
 	    	<div class="topnav"><!--search bar nav start-->
-			  <br>
-			  <div class="search-container">
-			    <form action="search.php" method="post">
-			      <input type="text" placeholder="Search book name or author name .." name="search_input" size="65%">
-			      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-			    </form>
-			  </div>
-			  <a href="#">link</a>
+				<br>
+				<div class="search-container">
+				    <form action="search.php" method="post">
+				      <input type="text" placeholder="Search book name or author name .." name="search_input" size="65%">
+				      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+				    </form>
+				</div>
+				<a href="#">link</a>
 			</div><!--search bar nav end-->
 
 
-	        <h3 style="font-size:30px;">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
             <?php
                 require_once('db_connect.php'); //connect with database
 
-                $query = "select * from books b where b.trash='0' AND b.owner='".$_SESSION['user_id']."'";
-                $result = mysqli_query($link,$query);
+                if(isset($_POST["search"])){
+                	$input = $_POST["search_input"];
+					
+					$query = "SELECT * FROM books AS b, users AS u
+							  WHERE b.bname='".$input."' AND b.owner=u.id AND b.owner!='".$_SESSION["user_id"]."' OR b.author='".$input."' AND b.owner=u.id AND b.owner!='".$_SESSION["user_id"]."';";
+					$result = mysqli_query($link,$query);
 
-
-                if(mysqli_num_rows($result)==0)
-                    echo "Oops !! you have not added any books recently";
-                else {
-                    echo nl2br("\nFollowing is the list of books you have added:\n");
-                }
-                echo nl2br("\n\n");
-            ?>
+	                if(mysqli_num_rows($result)==0)
+	                    echo nl2br("\nNo matching search found !!");
+	                else {
+	                	echo nl2br("\n".mysqli_num_rows($result)." result(s) found \n");
+	                    
+	    	            }
+	                echo nl2br("\n\n");
+	  				
+		           }
+	          ?>
 
 
 	    	<div class="table-responsive">
@@ -108,6 +113,8 @@
         				<th>Book Id</th>
         				<th>Book Name</th>
         				<th>Author</th>
+        				<th>Owner Id</th>
+        				<th>Owner Name</th>
         				</tr>
     				</thead><!--table header close-->
 
@@ -121,6 +128,8 @@
 	                echo "<td>".$row["bid"]."</td>";
 	                echo "<td>" . $row["bname"] . "</td>";
 	                echo "<td>" . $row["author"]. "</td>";
+	                echo "<td>" . $row["id"] . "</td>";
+	                echo "<td>" . $row["name"]. "</td>";
 	                echo "</tr>";
 	                ++$i;
                 }
@@ -130,3 +139,5 @@
 	    </div><!--col-md-9 end-->
 	</body>
 </html>
+
+

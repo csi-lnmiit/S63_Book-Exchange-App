@@ -158,6 +158,7 @@
         <link rel="stylesheet" type="text/css" href="CSS/responsive.css">
 
         <style>
+            /* body background image */
             body {
                 background-image: url("Images/bg.jpg");
                 background-repeat: no-repeat;
@@ -178,14 +179,21 @@
            <img src="Images/logo.png" style="height:100px;margin-left:25px">
         </header>
 
-        <div class="col-md-12"><!--outer div start-->
+    
+        <div class="col-md-12" align="center">
+            
             <div class="col-md-4"></div><!--left div end-->
+            <div class="col-md-4">
+                
 
-            <div class="col-md-4" style="padding-top: 70px"><!--mid div start-->
+                <div style="padding-top: 70px" ><!--mid div start-->
+
+                
                 <ul class="nav nav-pills">
                     <li class="active"><a data-toggle="pill" href="#login"><b>Login</b></a></li>
                     <li ><a data-toggle="pill" href="#signup"><b>Sign Up</b></a></li>
                 </ul>
+
 
                 <div class="tab-content" ><!--tab pill start-->
                     <div id="login" class="tab-pane fade in active">
@@ -236,11 +244,11 @@
                                             <input type="password" class="form-control" name="pass" placeholder="Password">
                                         </div><br>
                                         <div style="float: left; width: 120px">
-                        	        		<input class="btn btn-block btn-primary" type="submit" name="signup" value="Sign Up">
-                        	         	</div>
+                                            <input class="btn btn-block btn-primary" type="submit" name="signup" value="Sign Up">
+                                        </div>
                                         <div style="float: right; width: 120px;">
-                        	                <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset">
-                        	          	</div>
+                                            <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset">
+                                        </div>
                                     </form>
                                 </div><!--sign up div end-->
                             </div><!--col-md-12 end-->
@@ -248,10 +256,12 @@
                     </div>
                 </div><!--tab pill end-->
             </div><!--mid div end-->
+        </div>
+        <div class="col-md-4"></div><!--right div end-->
 
-            <div class="col-md-4"></div><!--right div end-->
-        </div><!--outer div end-->
-
+        </div>
+        
+        
         <div class="footer">
             <p><span class="glyphicon glyphicon-copyright-mark"> </span>&nbsp;2018 Libromate | All Rights Reserved</p>
         </div>
