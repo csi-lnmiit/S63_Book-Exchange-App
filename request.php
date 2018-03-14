@@ -52,7 +52,7 @@
 	            </li>
 				<br>
 	            <p>STATS</p>
-	            <li><a href="request.php">
+	            <li><a href="request.php" class="active">
 	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Request status</a>
 	             </li>
 	            <li><a href="#">
@@ -82,26 +82,22 @@
 			</div><!--search bar nav end-->
 
 
+
             <?php
                 require_once('db_connect.php'); //connect with database
 
-                if(isset($_POST["search"])){
-                	$input = $_POST["search_input"];
-					
-					$query = "SELECT * FROM books AS b, users AS u
-							  WHERE b.bname='".$input."' AND b.owner=u.id AND b.owner!='".$_SESSION["user_id"]."' OR b.author='".$input."' AND b.owner=u.id AND b.owner!='".$_SESSION["user_id"]."'";
-					$result = mysqli_query($link,$query);
+                $query = "SELECT r.bid,b.bname,r.toId,r.status
+                		  FROM requests AS r,books AS b where r.rn=1 AND b.bid=r.bid AND r.fromID='".$_SESSION['user_id']."'";
+                $result = mysqli_query($link,$query);
 
-	                if(mysqli_num_rows($result)==0)
-	                    echo nl2br("\nNo matching search found !!");
-	                else {
-	                	echo nl2br("\n".mysqli_num_rows($result)." result(s) found \n");
-	                    
-	    	            }
-	                echo nl2br("\n\n");
-	  				
-		           }
-	          ?>
+
+                if(mysqli_num_rows($result)==0)
+                    echo nl2br("\nNo active requests found !!\n");
+                else {
+                    echo nl2br("\nFollowing are the active requests :\n");
+                }
+                echo nl2br("\n\n");
+            ?>
 
 
 	    	<div class="table-responsive">
@@ -111,41 +107,28 @@
         				<th>S.No.</th>
         				<th>Book Id</th>
         				<th>Book Name</th>
-        				<th>Author</th>
-        				<th>Owner Id</th>
-        				<th>Owner Name</th>
-        				<th>Request Book</th>
+        				<th>Lender Name</th>
+        				<th>Status</th>
         				</tr>
     				</thead><!--table header close-->
 
-	                <!--fetch and display data from MySQL-->
-	                <?php
-	                    $i=1;
-	                while($row = mysqli_fetch_array($result))
-	                {
-
-	                ?>
-
-	                <tbody><!--print table data-->
-	      				<tr>
-	        			<td><?php echo $i ?></td>
-	        			<td><?php echo $row["bid"] ?></td>
-	        			<td><?php echo $row["bname"] ?></td>
-	        			<td><?php echo $row["author"] ?></td>
-	       				<td><?php echo $row["id"] ?></td>
-	        			<td><?php echo $row["name"] ?></td>
-	        			<td> 
-	        				<input type="button" class="button" value="Request">
-	        			</td>
-	        			
-	        			<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
-	        			</tr>
-	        		</tbody>
-
-	              </table>
+                <!--fetch and display data from MySQL-->
+                <?php
+                    $i=1;
+                while($row = mysqli_fetch_array($result))
+                {
+	                echo "<tr>";
+	                echo "<td>".$i."</td>";
+	                echo "<td>".$row["bid"]."</td>";
+	                echo "<td>" . $row["bname"] . "</td>";
+	                echo "<td>" . $row["toId"]. "</td>";
+	                echo "<td>" . $row["status"]. "</td>";
+	                echo "</tr>";
+	                ++$i;
+                }
+            ?>
+                </table>
             </div>
 	    </div><!--col-md-9 end-->
 	</body>
 </html>
-
-
