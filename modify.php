@@ -55,7 +55,7 @@
 	            </li>
 				<br>
 	            <p>STATS</p>
-	            <li><a href="#">
+	            <li><a href="request.php">
 	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Request status</a>
 	             </li>
 	            <li><a href="#">
@@ -73,6 +73,7 @@
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
+	    	<br>
 	    	<div class="table-responsive">
                 <table class="table"><!--table header start-->
     				<thead>
@@ -98,6 +99,7 @@
 		           		$i=1;
 		                while($row = mysqli_fetch_array($result))
 		                {
+		            	
 		            ?>
 
             		<tbody><!--print table data-->

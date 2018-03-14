@@ -98,7 +98,7 @@
 	            </li>
 				<br>
 	            <p>STATS</p>
-	            <li><a href="#">
+	            <li><a href="request.php">
 	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Request status</a>
 	             </li>
 	            <li><a href="#">
