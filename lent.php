@@ -9,7 +9,7 @@
 <html lang="en">
 	<head>
 		<link rel="shortcut icon" type="image/png" href="Images/favicon.png">
-	    <title>Dashboard</title>
+	    <title>Lent</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -19,11 +19,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 	   	<link rel="stylesheet" type="text/css" href="CSS/search_nav.css">
-
 	</head>
 
 	<body>
-		
+
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%;position: fixed;">
 	        <a href="dashboard.php">
@@ -51,12 +50,12 @@
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
-	            <p>STATS</p>
-	            <li><a href="request.php" class="active">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Request status</a>
+				<p>STATUS</p>
+	            <li><a href="borrow.php">
+	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
 	             </li>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Borrowed</a>
+	            <li><a class="active" href="lent.php">
+	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
 	            </li>
                 <br>
                 <p>SESSION</p>
@@ -70,65 +69,15 @@
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
-
 	    	<div class="topnav"><!--search bar nav start-->
 				<br>
 				<div class="search-container">
 				    <form action="search.php" method="post">
-				      <input type="text" placeholder="Search book name or author name .." name="search_input" size="65%">
+				      <input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
 				      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 				    </form>
 				</div>
 			</div><!--search bar nav end-->
-
-
-
-            <?php
-                require_once('db_connect.php'); //connect with database
-
-                $query = "SELECT r.bid,b.bname,r.toId,r.status
-                		  FROM requests AS r,books AS b where r.rn=1 AND b.bid=r.bid AND r.fromID='".$_SESSION['user_id']."'";
-                $result = mysqli_query($link,$query);
-
-
-                if(mysqli_num_rows($result)==0)
-                    echo nl2br("\nNo active requests found !!\n");
-                else {
-                    echo nl2br("\nFollowing are the active requests :\n");
-                }
-                echo nl2br("\n\n");
-            ?>
-
-
-	    	<div class="table-responsive">
-                <table class="table">
-    				<thead><!--table header start-->
-      					<tr>
-        				<th>S.No.</th>
-        				<th>Book Id</th>
-        				<th>Book Name</th>
-        				<th>Lender Name</th>
-        				<th>Status</th>
-        				</tr>
-    				</thead><!--table header close-->
-
-                <!--fetch and display data from MySQL-->
-                <?php
-                    $i=1;
-                while($row = mysqli_fetch_array($result))
-                {
-	                echo "<tr>";
-	                echo "<td>".$i."</td>";
-	                echo "<td>".$row["bid"]."</td>";
-	                echo "<td>" . $row["bname"] . "</td>";
-	                echo "<td>" . $row["toId"]. "</td>";
-	                echo "<td>" . $row["status"]. "</td>";
-	                echo "</tr>";
-	                ++$i;
-                }
-            ?>
-                </table>
-            </div>
 	    </div><!--col-md-9 end-->
 	</body>
 </html>

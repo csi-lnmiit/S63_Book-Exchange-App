@@ -1,20 +1,12 @@
-
 <?php
 	//connection to database
 	require_once('db_connect.php');
-	if(isset($_GET['edit'])){
+
+	if(isset($_GET['edit'])) {
 		$bid = $_GET['edit'];
 		$sql="SELECT bname,author FROM books WHERE bid='$bid'";
 		mysqli_query($link,$sql);
-		//header('location: modify.php');
-
-	
 	}
-
-/*
-
-*/
-
 ?>
 
 <form action='edit_book.php'>
