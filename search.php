@@ -86,8 +86,8 @@
 		        	$input = $_POST["search_input"];
 
 					$query = "SELECT * FROM books AS b, users AS u
-							  WHERE b.bname='".$input."' AND b.owner=u.id AND b.owner!='".$_SESSION["user_id"].
-							  "' OR b.author='".$input."' AND b.owner=u.id AND b.owner!='".$_SESSION["user_id"]."'";
+							  WHERE b.bname='" . $input . "' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] .
+							  "' OR b.author='" . $input . "' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] . "'";
 					$result = mysqli_query($link,$query);
 
 		            if(mysqli_num_rows($result)==0)

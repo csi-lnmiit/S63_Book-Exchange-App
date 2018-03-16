@@ -82,14 +82,14 @@
             <?php
                 require_once('db_connect.php'); //connect with database
 
-                $query = "SELECT * FROM requests AS r,books AS b
-						  where r.rn=1 AND b.bid=r.bid AND r.fromID='".$_SESSION['user_id']."'";
+                $query = "SELECT * FROM requests AS r, books AS b, users as u
+						  where b.bid=r.bid AND u.id=b.owner AND r.to_user=u.id AND r.from_user='" . $_SESSION['user_id'] . "'";
                 $result = mysqli_query($link,$query);
 
                 if(mysqli_num_rows($result)==0)
-                    echo nl2br("\nNo active requests found!!");
+                    echo nl2br("\nYou have not requested any book yet!!");
                 else
-                    echo nl2br("\nFollowing are the active requests:");
+                    echo nl2br("\nFollowing are the books requested by you:");
 
                 echo nl2br("\n\n");
             ?>
@@ -100,9 +100,9 @@
     				<thead><!--table header start-->
       					<tr>
             				<th>S.No.</th>
-            				<th>Book Id</th>
             				<th>Book Name</th>
-            				<th>Lender Name</th>
+            				<th>Book Author</th>
+            				<th>Lender Details</th>
             				<th>Status</th>
         				</tr>
     				</thead><!--table header close-->
@@ -114,10 +114,34 @@
                         while($row = mysqli_fetch_array($result)) {
         	                echo "<tr>";
         	                echo "<td>" . $i . "</td>";
-        	                echo "<td>" . $row["bid"] . "</td>";
         	                echo "<td>" . $row["bname"] . "</td>";
-        	                echo "<td>" . $row["toId"] . "</td>";
-        	                echo "<td>" . $row["status"] . "</td>";
+        	                echo "<td>" . $row["author"] . "</td>";
+
+							if($row["status"] == 1) {
+					?>
+								<td>
+									<a href='#' data-toggle='popover' data-trigger='focus' data-content="
+									Email: <?php echo $_SESSION['email'] ?><br>
+									Mobile: <?php echo $_SESSION['mobile'] ?>">
+										<?php echo $row["name"] ?>
+									</a>
+								</td>
+
+					<?php
+							}
+							else {
+								echo "<td>" . $row["name"] . "</td>";
+							}
+
+							if($row["status"] == 0) {
+								echo "<td>Pending</td>";
+							}
+							else if($row["status"] == 1) {
+								echo "<td>Accepted</td>";
+							}
+							else if($row["status"] == 2) {
+								echo "<td>Declined</td>";
+							}
         	                echo "</tr>";
         	                ++$i;
                         }
@@ -126,5 +150,12 @@
                 </table>
             </div>
 	    </div><!--col-md-9 end-->
+
+		<!--JS SCRIPTS-->
+	    <script  type='text/javascript'>
+	    	//popover script
+	    	$("[data-toggle=popover]")
+			.popover({html:true})
+		</script>
 	</body>
 </html>

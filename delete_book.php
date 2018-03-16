@@ -19,7 +19,7 @@
 		header('location: trash.php');
 	}
 
-	//if confirm resttore is clicked on trash
+	//if confirm restore is clicked on trash
 	else if (isset($_GET['res'])) {
 		$bid = $_GET['res'];
 		$sql="UPDATE books b SET b.trash='0' WHERE bid='$bid'";
@@ -33,6 +33,6 @@
 		$to_user = $_GET['to_user'];
 		$sql = "insert into requests values('" . $bid . "','" . $_SESSION['user_id'] . "','" . $to_user . "',0,1,0)";
 		mysqli_query($link,$sql);
-		header('location:search.php');
+		header('location:borrow.php');
 	}
 ?>
