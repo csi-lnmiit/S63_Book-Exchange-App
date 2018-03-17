@@ -52,8 +52,8 @@
 				<br>
 				<p>STATUS</p>
 	            <li><a class="active" href="borrow.php">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
-	             </li>
+	                 	<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
+	            </li>
 	            <li><a href="lent.php">
 	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
 	            </li>
@@ -130,7 +130,7 @@
 									<a href='#' data-toggle='popover' data-trigger='focus' data-content="
 									Email: <?php echo $info['email'] ?><br>
 									Mobile: <?php echo $info['mobile'];echo $info['name']; ?>">
-										<?php echo $row["name"] ; ?>
+										<?php echo $row["name"] ;?>
 									</a>
 								</td>
 

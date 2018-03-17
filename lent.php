@@ -78,6 +78,68 @@
 				    </form>
 				</div>
 			</div><!--search bar nav end-->
+			<?php
+                require_once('db_connect.php'); //connect with database
+
+                $query = "SELECT r.bid,b.bname,b.author,u.id,u.name,r.status FROM requests AS r, books AS b, users as u
+						  WHERE b.bid=r.bid AND r.from_user=u.id AND r.to_user='" . $_SESSION['user_id'] . "'";
+                $result = mysqli_query($link,$query);
+
+                if(mysqli_num_rows($result)==0)
+                    echo nl2br("\nYou have not requested any book yet!!");
+                else
+                    echo nl2br("\nFollowing are the books requested from others :");
+
+                echo nl2br("\n\n");
+            ?>
+
+
+	    	<div class="table-responsive">
+                <table class="table">
+    				<thead><!--table header start-->
+      					<tr>
+            				<th>S.No.</th>
+            				<th>Book Id</th>
+            				<th>Book Name</th>
+            				<th>Book Author</th>
+            				<th>Requested By</th>
+            				<th>Action</th>
+        				</tr>
+    				</thead><!--table header close-->
+
+                    <!--fetch and display data from MySQL-->
+                    <?php
+                        $i=1;
+
+                        while($row = mysqli_fetch_array($result)) {
+        	                echo "<tr>";
+        	                echo "<td>" . $i . "</td>";
+        	                echo "<td>" . $row["bid"] . "</td>";
+        	                echo "<td>" . $row["bname"] . "</td>";
+        	                echo "<td>" . $row["author"] . "</td>";
+	
+							$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE r.to_user='".$_SESSION["user_id"]."' AND r.bid=b.bid";
+							$info_result = mysqli_query($link,$info_query);
+							$info = mysqli_fetch_array($info_result);
+							echo "<td>".$row['name']."</td>";
+					
+							if($row["status"]==0){
+							echo "<td><button class='btn btn-success'>Accept</button>"." ".
+								"<button class='btn btn-danger'>Decline</button></td>";
+							}
+							else if($row["status"]==1){
+								echo "<td>"."Request Accepted"."</td>";
+							}
+							else if($row["status"]==2){
+								echo "<td>"."Request Declined"."</td>";
+							}
+							echo "</tr>";
+        	                ++$i;
+                        }
+                    ?>
+
+                </table>
+            </div>
 	    </div><!--col-md-9 end-->
 	</body>
 </html>
