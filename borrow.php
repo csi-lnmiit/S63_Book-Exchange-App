@@ -82,8 +82,8 @@
             <?php
                 require_once('db_connect.php'); //connect with database
 
-                $query = "SELECT * FROM requests AS r, books AS b, users as u
-						  where b.bid=r.bid AND u.id=b.owner AND r.to_user=u.id AND r.from_user='" . $_SESSION['user_id'] . "'";
+                $query = "SELECT r.bid,b.bname,b.author,u.id,u.name,r.status FROM requests AS r, books AS b, users as u
+						  WHERE b.bid=r.bid AND u.id=b.owner AND r.to_user=u.id AND r.from_user='" . $_SESSION['user_id'] . "'";
                 $result = mysqli_query($link,$query);
 
                 if(mysqli_num_rows($result)==0)
@@ -100,6 +100,7 @@
     				<thead><!--table header start-->
       					<tr>
             				<th>S.No.</th>
+            				<th>Book Id</th>
             				<th>Book Name</th>
             				<th>Book Author</th>
             				<th>Lender Details</th>
@@ -114,16 +115,22 @@
                         while($row = mysqli_fetch_array($result)) {
         	                echo "<tr>";
         	                echo "<td>" . $i . "</td>";
+        	                echo "<td>" . $row["bid"] . "</td>";
         	                echo "<td>" . $row["bname"] . "</td>";
         	                echo "<td>" . $row["author"] . "</td>";
 
-							if($row["status"] == 1) {
+							if($row['status'] == 1) {
+								
+								$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE u.id='".$row['id']."' AND r.bid=b.bid";
+								$info_result = mysqli_query($link,$info_query);
+								$info = mysqli_fetch_array($info_result);
 					?>
 								<td>
+									
 									<a href='#' data-toggle='popover' data-trigger='focus' data-content="
-									Email: <?php echo $_SESSION['email'] ?><br>
-									Mobile: <?php echo $_SESSION['mobile'] ?>">
-										<?php echo $row["name"] ?>
+									Email: <?php echo $info['email'] ?><br>
+									Mobile: <?php echo $info['mobile'];echo $info['name']; ?>">
+										<?php echo $row["name"] ; ?>
 									</a>
 								</td>
 
@@ -134,13 +141,13 @@
 							}
 
 							if($row["status"] == 0) {
-								echo "<td>Pending</td>";
+								echo "<td><button class='btn btn-warning'>Pending</button></td>";
 							}
 							else if($row["status"] == 1) {
-								echo "<td>Accepted</td>";
+								echo "<td><button class='btn btn-success'>Accepted</button></td>";
 							}
 							else if($row["status"] == 2) {
-								echo "<td>Declined</td>";
+								echo "<td><button class='btn btn-danger'>Declined</button></td>";
 							}
         	                echo "</tr>";
         	                ++$i;
