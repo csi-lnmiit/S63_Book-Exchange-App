@@ -107,12 +107,12 @@
 	        				<td><?php echo $row["bname"] ?></td>
 	        				<td><?php echo $row["author"] ?></td>
 	        				<td>
-	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?res=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#27AE60'>confirm restore</a>">
+	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='query.php?res=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#27AE60'>confirm restore</a>">
 	        					<span class='glyphicon glyphicon-refresh' style='color:#27AE60;font-size:25px;padding:5px;'></span>
 	        					</a>
 	        				</td>
 	        				<td>
-	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
+	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='query.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
 	        						<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
 	        					</a>
 	        				</td>

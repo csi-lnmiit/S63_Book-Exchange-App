@@ -120,7 +120,7 @@
 	        					</a>
 	        				</td>
 	        				<td>
-	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?trash=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>Move to trash</a>">
+	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='query.php?trash=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>Move to trash</a>">
 	        						<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
 	        					</a>
 	        				</td>

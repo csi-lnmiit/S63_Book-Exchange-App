@@ -105,6 +105,7 @@
             				<th>Book Author</th>
             				<th>Lender Details</th>
             				<th>Status</th>
+							<th>Action</th>
         				</tr>
     				</thead><!--table header close-->
 
@@ -120,17 +121,17 @@
         	                echo "<td>" . $row["author"] . "</td>";
 
 							if($row['status'] == 1) {
-								
+
 								$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE u.id='".$row['id']."' AND r.bid=b.bid";
 								$info_result = mysqli_query($link,$info_query);
 								$info = mysqli_fetch_array($info_result);
 					?>
+
 								<td>
-									
 									<a href='#' data-toggle='popover' data-trigger='focus' data-content="
 									Email: <?php echo $info['email'] ?><br>
-									Mobile: <?php echo $info['mobile'];echo $info['name']; ?>">
-										<?php echo $row["name"] ;?>
+									Mobile: <?php echo $info['mobile']; ?>">
+										<?php echo $info['name']; ?>
 									</a>
 								</td>
 
@@ -142,13 +143,23 @@
 
 							if($row["status"] == 0) {
 								echo "<td><button class='btn btn-warning'>Pending</button></td>";
+								echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] .
+									 "'><input class='btn btn-primary' type='button' name='cancel' value='Cancel Request'>
+									 </a></td>";
 							}
 							else if($row["status"] == 1) {
 								echo "<td><button class='btn btn-success'>Accepted</button></td>";
+								echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] .
+									 "'><input class='btn btn-primary' type='button' name='return' value='Return Book'>
+									 </a></td>";
 							}
 							else if($row["status"] == 2) {
 								echo "<td><button class='btn btn-danger'>Declined</button></td>";
+								echo "<td><a href='query.php?request=" . $row['bid'] . "&to_user=" . $row['id'] .
+									 "'><input class='btn btn-primary' type='button' name='request' value='Request Again'>
+									 </a></td>";
 							}
+
         	                echo "</tr>";
         	                ++$i;
                         }

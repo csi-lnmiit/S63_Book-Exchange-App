@@ -142,7 +142,7 @@
 										echo "Accepted";
 
 									else {
-										echo "<a href='delete_book.php?request="  . $row['bid'] . "&to_user=" . $row['id'] .
+										echo "<a href='query.php?request="  . $row['bid'] . "&to_user=" . $row['id'] .
 											 "'><input class='btn btn-primary' type='button' name='request' value='Request'>
 										     </a>";
 									}

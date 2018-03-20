@@ -132,7 +132,7 @@
     //if any text field is missing or user/pass combination is incorrect
     if($flag)
     {
-        echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:580px;margin-left:450px;width:400px;">
+        echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:580px;margin-left:454px;width:400px;">
         <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
 
         unset($_POST);
@@ -151,7 +151,7 @@
         <link rel="stylesheet" type="text/css" href="CSS/responsive.css">
 
         <style>
-        
+
             /* body background image */
             body {
                 background-image: url("Images/bg.jpg");
