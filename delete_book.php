@@ -35,4 +35,11 @@
 		mysqli_query($link,$sql);
 		header('location:borrow.php');
 	}
+
+    else if(isset($_GET["accept"])){
+        $bid=$_GET['accept'];
+        $sql="UPDATE requests r SET r.sn=1,r.rn=0,status=1 WHERE bid='$bid'";
+        mysqli_query($link,$sql);
+        header('location:lent.php');
+    }
 ?>

@@ -124,8 +124,7 @@
 							echo "<td>".$row['name']."</td>";
 					
 							if($row["status"]==0){
-							echo "<td><button class='btn btn-success'>Accept</button>"." ".
-								"<button class='btn btn-danger'>Decline</button></td>";
+							echo "<td><a href='delete_book.php?accept=<?php echo $row["bid"];?>'> <button class='btn btn-success' value='accept'>Accept</button></a></td>";
 							}
 							else if($row["status"]==1){
 								echo "<td>"."Request Accepted"."</td>";
