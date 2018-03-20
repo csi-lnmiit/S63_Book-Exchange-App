@@ -52,7 +52,7 @@
     else if(isset($_GET["accept"])) {
         $bid=$_GET['accept'];
 		$to_user = $_GET['to_user'];
-        $sql="UPDATE requests r SET r.sn=1,r.rn=0,status=1 WHERE bid='$bid' and to_user='$to_user'";
+        $sql="UPDATE requests SET sn=1,rn=0,status=1 WHERE bid='$bid' and to_user='$to_user'";
         mysqli_query($link,$sql);
         header('location:lent.php');
     }
@@ -61,7 +61,7 @@
     else if(isset($_GET["decline"])) {
         $bid=$_GET['decline'];
 		$to_user = $_GET['to_user'];
-        $sql="UPDATE requests r SET r.sn=1,r.rn=0,status=2 WHERE bid='$bid' and to_user='$to_user'";
+        $sql="UPDATE requests SET sn=1,rn=0,status=2 WHERE bid='$bid' and to_user='$to_user'";
         mysqli_query($link,$sql);
         header('location:lent.php');
     }
@@ -70,7 +70,7 @@
     else if(isset($_GET["cancel"])) {
         $bid=$_GET['cancel'];
 		$to_user = $_GET['to_user'];
-        $sql="UPDATE requests r SET r.sn=1,r.rn=0,status=0 WHERE bid='$bid' and to_user='$to_user'";
+        $sql="UPDATE requests r SET r.sn=0,r.rn=1,status=0 WHERE bid='$bid' and to_user='$to_user'";
         mysqli_query($link,$sql);
         header('location:lent.php');
     }

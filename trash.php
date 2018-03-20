@@ -4,10 +4,7 @@
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
 
-	//if delete button is confirmed
-	if(isset($_POST["delete"])){
-		echo $_SESSION["bid"];
-	}
+	include 'count.php'; //shows badge notification
 ?>
 
 <!DOCTYPE html>
@@ -56,10 +53,22 @@
 				<br>
 				<p>STATUS</p>
 	            <li><a href="borrow.php">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
-	             </li>
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
+	            </li>
 	            <li><a href="lent.php">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 		<?php
+					 			if($lent!=0) {
+									echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
 	            </li>
                 <br>
                 <p>SESSION</p>
@@ -112,7 +121,7 @@
 	        					</a>
 	        				</td>
 	        				<td>
-	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='query.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
+	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
 	        						<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
 	        					</a>
 	        				</td>

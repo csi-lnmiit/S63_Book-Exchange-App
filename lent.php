@@ -3,6 +3,8 @@
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
+
+	include 'count.php'; //shows badge notification
 ?>
 
 <!DOCTYPE html>
@@ -52,10 +54,22 @@
 				<br>
 				<p>STATUS</p>
 	            <li><a href="borrow.php">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
-	             </li>
-	            <li><a class="active" href="lent.php">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
+	            </li>
+	            <li><a href="lent.php">
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 		<?php
+					 			if($lent!=0) {
+									echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
 	            </li>
                 <br>
                 <p>SESSION</p>
@@ -73,15 +87,15 @@
 				<br>
 				<div class="search-container">
 				    <form action="search.php" method="post">
-				      <input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
-				      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+				      	<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+				      	<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 				    </form>
 				</div>
 			</div><!--search bar nav end-->
 			<?php
                 require_once('db_connect.php'); //connect with database
 
-                $query = "SELECT r.bid,b.bname,b.author,u.id,u.name,r.status FROM requests AS r, books AS b, users as u
+                $query = "SELECT * FROM requests AS r, books AS b, users as u
 						  WHERE b.bid=r.bid AND r.from_user=u.id AND r.to_user='" . $_SESSION['user_id'] . "'";
                 $result = mysqli_query($link,$query);
 
@@ -113,6 +127,10 @@
                         $i=1;
 
                         while($row = mysqli_fetch_array($result)) {
+							if($row['rn']==1) {
+								echo "<span class='label label-primary'>NEW</span>";
+							}
+
         	                echo "<tr>";
         	                echo "<td>" . $i . "</td>";
         	                echo "<td>" . $row["bid"] . "</td>";

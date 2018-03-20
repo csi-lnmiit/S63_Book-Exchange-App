@@ -5,6 +5,7 @@
 		header("Location:index.php");
 
 	require_once('db_connect.php'); //connect to database
+	include 'count.php'; //shows badge notification
 
     if(isset($_POST["add"])){
 
@@ -98,10 +99,22 @@
 				<br>
 				<p>STATUS</p>
 	            <li><a href="borrow.php">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
-	             </li>
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
+	            </li>
 	            <li><a href="lent.php">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 		<?php
+					 			if($lent!=0) {
+									echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
 	            </li>
 	            <br>
 	            <p>SESSION</p>
