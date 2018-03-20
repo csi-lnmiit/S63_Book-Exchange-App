@@ -9,7 +9,7 @@
 <html lang="en">
 	<head>
 		<link rel="shortcut icon" type="image/png" href="Images/favicon.png">
-	    <title>Dashboard</title>
+	    <title>Lent</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -24,7 +24,7 @@
 	<body>
 
 	    <!--top header-->
-	    <header style="height:100px;background-color:#1A1927;width:20%;position:fixed;">
+	    <header style="height:100px;background-color:#1A1927;width:20%;position: fixed;">
 	        <a href="dashboard.php">
                 <img src="Images/logo.png" style="height:100px; margin-left:25px;">
             </a>
@@ -35,7 +35,7 @@
 	        <ul>
 				<br>
 	            <p>MENU</p>
-	            <li><a class="active" href="dashboard.php">
+	            <li><a href="dashboard.php">
 	                <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
 	            </li>
 	            <li><a href="profile.php">
@@ -50,11 +50,11 @@
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
-	            <p>STATUS</p>
+				<p>STATUS</p>
 	            <li><a href="borrow.php">
 	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
 	             </li>
-	            <li><a href="lent.php">
+	            <li><a class="active" href="lent.php">
 	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
 	            </li>
                 <br>
@@ -69,58 +69,74 @@
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
-
-			<div class="topnav"><!--search bar nav start-->
+	    	<div class="topnav"><!--search bar nav start-->
 				<br>
 				<div class="search-container">
-				<form action="search.php" method="post">
-					<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
-					<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-				</form>
+				    <form action="search.php" method="post">
+				      <input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+				      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+				    </form>
 				</div>
 			</div><!--search bar nav end-->
-
-	        <h3 style="font-size:30px;">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
-
-            <?php
+			<?php
                 require_once('db_connect.php'); //connect with database
 
-                $query = "select * from books b where b.trash='0' AND b.owner='".$_SESSION['user_id']."'";
+                $query = "SELECT r.bid,b.bname,b.author,u.id,u.name,r.status FROM requests AS r, books AS b, users as u
+						  WHERE b.bid=r.bid AND r.from_user=u.id AND r.to_user='" . $_SESSION['user_id'] . "'";
                 $result = mysqli_query($link,$query);
 
                 if(mysqli_num_rows($result)==0)
-                    echo "Oops !! you have not added any books recently";
-                else {
-                    echo nl2br("\nFollowing is the list of books you have added:");
-                }
+                    echo nl2br("\nYou have not requested any book yet!!");
+                else
+                    echo nl2br("\nFollowing are the books requested from others :");
+
                 echo nl2br("\n\n");
             ?>
+
 
 	    	<div class="table-responsive">
                 <table class="table">
     				<thead><!--table header start-->
       					<tr>
-	        				<th>S.No.</th>
-	        				<th>Book Id</th>
-	        				<th>Book Name</th>
-	        				<th>Author</th>
+            				<th>S.No.</th>
+            				<th>Book Id</th>
+            				<th>Book Name</th>
+            				<th>Book Author</th>
+            				<th>Requested By</th>
+            				<th>Action</th>
         				</tr>
     				</thead><!--table header close-->
 
-                <!--fetch and display data from MySQL-->
-                <?php
-                    $i=1;
+                    <!--fetch and display data from MySQL-->
+                    <?php
+                        $i=1;
 
-	                while($row = mysqli_fetch_array($result)) {
-		                echo "<tr>";
-		                echo "<td>" . $i . "</td>";
-		                echo "<td>" . $row["bid"] . "</td>";
-		                echo "<td>" . $row["bname"] . "</td>";
-		                echo "<td>" . $row["author"] . "</td>";
-		                echo "</tr>";
-		                ++$i;
-	                }
-            	?>
+                        while($row = mysqli_fetch_array($result)) {
+        	                echo "<tr>";
+        	                echo "<td>" . $i . "</td>";
+        	                echo "<td>" . $row["bid"] . "</td>";
+        	                echo "<td>" . $row["bname"] . "</td>";
+        	                echo "<td>" . $row["author"] . "</td>";
+	
+							$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE r.to_user='".$_SESSION["user_id"]."' AND r.bid=b.bid";
+							$info_result = mysqli_query($link,$info_query);
+							$info = mysqli_fetch_array($info_result);
+							echo "<td>".$row['name']."</td>";
+					
+							if($row["status"]==0){
+							echo "<td><button class='btn btn-success'>Accept</button>"." ".
+								"<button class='btn btn-danger'>Decline</button></td>";
+							}
+							else if($row["status"]==1){
+								echo "<td>"."Request Accepted"."</td>";
+							}
+							else if($row["status"]==2){
+								echo "<td>"."Request Declined"."</td>";
+							}
+							echo "</tr>";
+        	                ++$i;
+                        }
+                    ?>
 
                 </table>
             </div>

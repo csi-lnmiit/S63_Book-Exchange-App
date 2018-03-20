@@ -8,7 +8,7 @@
 
     if(isset($_POST["add"])){
 
-        //generate unique user id
+        //generate unique book id
         $t = microtime(true);
         $micro = sprintf("%06d",($t - floor($t)) * 1000000);
         $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
@@ -31,19 +31,18 @@
         }
         else {
             $query="insert into books(bid,bname,author,owner,status) values ('$bid','$bname','$bauthor','$owner',$status)";
-						$result = mysqli_query($link,$query);
+			$result = mysqli_query($link,$query);
 
             $success="Your Book added successfully";
             echo '<div class="alert alert-success" style="position:absolute;margin-top:330px;margin-left:425px;width:22%;">
-     				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$success.'</div>';
-
+     		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$success.'</div>';
         }
 
         if($flag){
             echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:330px;margin-left:425px;width:22%;">
-        		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'</div>';
+        	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'</div>';
 
-						unset($_POST);
+			unset($_POST);
         }
     }
 ?>
@@ -71,14 +70,14 @@
 	<body>
 
 	    <!--top header-->
-	    <header style="height:100px;background-color:#1A1927;width:20%">
+	    <header style="height:100px;background-color:#1A1927;width:20%;position: fixed;">
 	        <a href="dashboard.php">
                 <img src="Images/logo.png" style="height:100px; margin-left:25px">
             </a>
 	    </header>
 
 	    <!--left column list -->
-	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0">
+	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0;padding-top:100px">
 	        <ul>
 				<br>
 	            <p>MENU</p>
@@ -97,19 +96,19 @@
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
-	            <p>STATS</p>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Request status</a>
+				<p>STATUS</p>
+	            <li><a href="borrow.php">
+	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
 	             </li>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Borrowed</a>
+	            <li><a href="lent.php">
+	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
 	            </li>
 	            <br>
 	            <p>SESSION</p>
 	            <li><a href="logout.php">
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
 	            </li>
-	            <li><a href="#">
+	            <li><a href="trash.php">
 	                <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
 	            </li>
 	        </ul>

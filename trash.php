@@ -3,6 +3,11 @@
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
+
+	//if delete button is confirmed
+	if(isset($_POST["delete"])){
+		echo $_SESSION["bid"];
+	}
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +50,7 @@
 	            <li><a href="add.php">
 	                <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
 	            </li>
-	            <li><a href="modify.php" class="active">
+	            <li><a href="modify.php">
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
@@ -61,14 +66,13 @@
 	            <li><a href="logout.php">
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
 	            </li>
-	           	<li><a href="trash.php">
+	           	<li><a href="trash.php" class="active">
 	                <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
 	            </li>
 	        </ul>
 	    </div><!--col-md-3 end-->
 
 	    <div class="col-md-9"><!--col-md-9 start-->
-	    	<br>
 	    	<div class="table-responsive">
                 <table class="table"><!--table header start-->
     				<thead>
@@ -77,21 +81,22 @@
 	        				<th>Book Id</th>
 	        				<th>Book Name</th>
 	        				<th>Author</th>
-	        				<th>Edit Book</th>
-	        				<th>Delete Book</th>
+	        				<th>Restore Book</th>
+	        				<th>Delete Permanently</th>
       					</tr>
     				</thead><!--table header close-->
 
 					<?php
 		                require_once('db_connect.php'); //connect with database
 
-		                $query = "select * from books b where b.trash='0' AND b.owner='".$_SESSION['user_id']."'";
+		                $query = "select * from books b where b.trash='1' AND b.owner='".$_SESSION['user_id']."'";
 		                $result = mysqli_query($link,$query);
 
 		                if(mysqli_num_rows($result)==0)
-		                    echo nl2br("You don't have any books in your repository\n");
+		                    echo nl2br("Trash is empty !!\n");
 
 		           		$i=1;
+
 		                while($row = mysqli_fetch_array($result)) {
 		            ?>
 
@@ -102,30 +107,17 @@
 	        				<td><?php echo $row["bname"] ?></td>
 	        				<td><?php echo $row["author"] ?></td>
 	        				<td>
-	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content='
-	        					<form action="modify.php">
-	  								<div class="form-group">
-									    <label for="email">Email address:</label>
-									    <input type="email" class="form-control" id="email">
-									</div>
-									<div class="form-group">
-									    <label for="pwd">Password:</label>
-									    <input type="password" class="form-control" id="pwd">
-									</div>
-									<a href="#"><button type="submit" class="btn btn-default">Submit</button>
-									</a>
-								</form>
-	        					'>
-	        					<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
+	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?res=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#27AE60'>confirm restore</a>">
+	        					<span class='glyphicon glyphicon-refresh' style='color:#27AE60;font-size:25px;padding:5px;'></span>
 	        					</a>
 	        				</td>
 	        				<td>
-	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?trash=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>Move to trash</a>">
+	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
 	        						<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
 	        					</a>
 	        				</td>
 
-        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
+        					<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
 
       					</tr>
     				</tbody>
