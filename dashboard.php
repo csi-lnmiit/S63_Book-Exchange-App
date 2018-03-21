@@ -3,6 +3,8 @@
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
+
+	include 'count.php'; //shows badge notification
 ?>
 
 <!DOCTYPE html>
@@ -19,13 +21,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 	   	<link rel="stylesheet" type="text/css" href="CSS/search_nav.css">
-
 	</head>
 
 	<body>
-		
+
 	    <!--top header-->
-	    <header style="height:100px;background-color:#1A1927;width:20%;position: fixed;">
+	    <header style="height:100px;background-color:#1A1927;width:20%;position:fixed;">
 	        <a href="dashboard.php">
                 <img src="Images/logo.png" style="height:100px; margin-left:25px;">
             </a>
@@ -51,12 +52,24 @@
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
-	            <p>STATS</p>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Request status</a>
-	             </li>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Borrowed</a>
+				<p>STATUS</p>
+	            <li><a href="borrow.php">
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
+	            </li>
+	            <li><a href="lent.php">
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
+					 	}
+					 	?>
+					</a>
 	            </li>
                 <br>
                 <p>SESSION</p>
@@ -71,60 +84,58 @@
 
 	    <div class="col-md-9"><!--col-md-9 start-->
 
-	    	<div class="topnav"><!--search bar nav start-->
-			  <br>
-			  <div class="search-container">
-			    <form action="search.php" method="post">
-			      <input type="text" placeholder="Search book name or author name .." name="search_input" size="65%">
-			      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-			    </form>
-			  </div>
-			  <a href="#">link</a>
+			<div class="topnav"><!--search bar nav start-->
+				<br>
+				<div class="search-container">
+				<form action="search.php" method="post">
+					<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+					<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+				</form>
+				</div>
 			</div><!--search bar nav end-->
 
-
 	        <h3 style="font-size:30px;">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
+
             <?php
                 require_once('db_connect.php'); //connect with database
 
                 $query = "select * from books b where b.trash='0' AND b.owner='".$_SESSION['user_id']."'";
                 $result = mysqli_query($link,$query);
 
-
                 if(mysqli_num_rows($result)==0)
                     echo "Oops !! you have not added any books recently";
                 else {
-                    echo nl2br("\nFollowing is the list of books you have added:\n");
+                    echo nl2br("\nFollowing is the list of books you have added:");
                 }
                 echo nl2br("\n\n");
             ?>
-
 
 	    	<div class="table-responsive">
                 <table class="table">
     				<thead><!--table header start-->
       					<tr>
-        				<th>S.No.</th>
-        				<th>Book Id</th>
-        				<th>Book Name</th>
-        				<th>Author</th>
+	        				<th>S.No.</th>
+	        				<th>Book Id</th>
+	        				<th>Book Name</th>
+	        				<th>Author</th>
         				</tr>
     				</thead><!--table header close-->
 
                 <!--fetch and display data from MySQL-->
                 <?php
                     $i=1;
-                while($row = mysqli_fetch_array($result))
-                {
-	                echo "<tr>";
-	                echo "<td>".$i."</td>";
-	                echo "<td>".$row["bid"]."</td>";
-	                echo "<td>" . $row["bname"] . "</td>";
-	                echo "<td>" . $row["author"]. "</td>";
-	                echo "</tr>";
-	                ++$i;
-                }
-            ?>
+
+	                while($row = mysqli_fetch_array($result)) {
+		                echo "<tr>";
+		                echo "<td>" . $i . "</td>";
+		                echo "<td>" . $row["bid"] . "</td>";
+		                echo "<td>" . $row["bname"] . "</td>";
+		                echo "<td>" . $row["author"] . "</td>";
+		                echo "</tr>";
+		                ++$i;
+	                }
+            	?>
+
                 </table>
             </div>
 	    </div><!--col-md-9 end-->

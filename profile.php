@@ -3,6 +3,8 @@
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
+
+	include 'count.php'; //shows badge notification
 ?>
 
 <!--Display submitted form data -->
@@ -20,6 +22,7 @@
 	</head>
 
 	<body>
+
 	    <!--top header-->
 	    <header style="height:100px;background-color:#1A1927;width:20%;position: fixed;">
 	        <a href="dashboard.php">
@@ -47,12 +50,24 @@
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
-	            <p>STATS</p>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Request status</a>
-	             </li>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Borrowed</a>
+				<p>STATUS</p>
+	            <li><a href="borrow.php">
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
+	            </li>
+	            <li><a href="lent.php">
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
 	            </li>
 	            <br>
 	            <p>SESSION</p>
@@ -66,7 +81,7 @@
 	    </div>
 
 	    <div class="col-md-9">
-	        <h3>Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3>
+	        <h3 style="font-size:30px;">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3><br>
 
               <div class="table-responsive"> <!-- user info table -->
                 <table class="table">
@@ -80,6 +95,7 @@
                             <td style="font-size:20px;">Username</td>
                             <td><?php echo $_SESSION["user"]?></td>
                         </tr>
+
                         <tr>
                             <td style="font-size:20px;">Password</td>
                             <td><?php echo $_SESSION["pass"]?></td>
@@ -101,14 +117,8 @@
                         </tr>
 
                     </thead><!--table header close-->
-                  </table>
+        		</table>
             </div>  <!-- table div close -->
-
-
-
-
-
-
 	    </div>
 	</body>
 </html>

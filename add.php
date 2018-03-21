@@ -5,10 +5,11 @@
 		header("Location:index.php");
 
 	require_once('db_connect.php'); //connect to database
+	include 'count.php'; //shows badge notification
 
     if(isset($_POST["add"])){
 
-        //generate unique user id
+        //generate unique book id
         $t = microtime(true);
         $micro = sprintf("%06d",($t - floor($t)) * 1000000);
         $d = new DateTime( date('Y-m-d H:i:s.'.$micro, $t) );
@@ -30,20 +31,19 @@
             $msg="Author name required";
         }
         else {
-            $query="insert into books(bid,bname,author,owner,status) values ('$bid','$bname','$bauthor','$owner',$status)";
-						$result = mysqli_query($link,$query);
+            $query="insert into books(bid,bname,author,owner) values ('$bid','$bname','$bauthor','$owner')";
+			$result = mysqli_query($link,$query);
 
             $success="Your Book added successfully";
             echo '<div class="alert alert-success" style="position:absolute;margin-top:330px;margin-left:425px;width:22%;">
-     				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$success.'</div>';
-
+     		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$success.'</div>';
         }
 
         if($flag){
             echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:330px;margin-left:425px;width:22%;">
-        		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'</div>';
+        	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'</div>';
 
-						unset($_POST);
+			unset($_POST);
         }
     }
 ?>
@@ -97,12 +97,24 @@
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
-	            <p>STATS</p>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Request status</a>
-	             </li>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Borrowed</a>
+				<p>STATUS</p>
+	            <li><a href="borrow.php">
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
+	            </li>
+	            <li><a href="lent.php">
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
 	            </li>
 	            <br>
 	            <p>SESSION</p>
@@ -117,8 +129,8 @@
 
         <!--form for adding books-->
         <div class="row col-md-9">
-        	<div style="padding-top:10px;padding-right:500px;padding-left:100px;">
-            	<h2 style="color:#868899;">Add Books</h2>
+        	<div style="padding-top:100px;padding-right:500px;padding-left:100px;">
+            	<h2>Add a Book</h2>
         	</div>
         	<form action="add.php" method="post" style="padding-left:100px;padding-right:300px;padding-top:30px;">
 				<div class="input-group">
@@ -133,7 +145,7 @@
 	           	<div style="float: left; width: 140px">
 	        		<input class="btn btn-block btn-primary" type="submit" name="add" value="Add" >
 	         	</div>
-	          	<div style="float: right; width: 140px;margin-right:260px;">
+	          	<div style="float: right; width: 140px;margin-right:258px;">
 	                <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset" >
 	          	</div>
 	        </form>

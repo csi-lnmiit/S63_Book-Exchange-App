@@ -4,10 +4,7 @@
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
 
-	//if delete button is confirmed
-	if(isset($_POST["delete"])){
-		echo $_SESSION["bid"];
-	}
+	include 'count.php'; //shows badge notification
 ?>
 
 <!DOCTYPE html>
@@ -54,12 +51,24 @@
 	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 	            </li>
 				<br>
-	            <p>STATS</p>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Request status</a>
-	             </li>
-	            <li><a href="#">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Borrowed</a>
+				<p>STATUS</p>
+	            <li><a href="borrow.php">
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
+	            </li>
+	            <li><a href="lent.php">
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
 	            </li>
                 <br>
                 <p>SESSION</p>
@@ -77,12 +86,12 @@
                 <table class="table"><!--table header start-->
     				<thead>
       					<tr>
-        				<th>S.No.</th>
-        				<th>Book Id</th>
-        				<th>Book Name</th>
-        				<th>Author</th>
-        				<th>Restore Book</th>
-        				<th>Delete Permanently</th>
+	        				<th>S.No.</th>
+	        				<th>Book Id</th>
+	        				<th>Book Name</th>
+	        				<th>Author</th>
+	        				<th>Restore Book</th>
+	        				<th>Delete Permanently</th>
       					</tr>
     				</thead><!--table header close-->
 
@@ -96,31 +105,30 @@
 		                    echo nl2br("Trash is empty !!\n");
 
 		           		$i=1;
-		                while($row = mysqli_fetch_array($result))
-		                {
+
+		                while($row = mysqli_fetch_array($result)) {
 		            ?>
 
             		<tbody><!--print table data-->
       					<tr>
-        				<td><?php echo $i ?></td>
-        				<td><?php echo $row["bid"] ?></td>
-        				<td><?php echo $row["bname"] ?></td>
-        				<td><?php echo $row["author"] ?></td>
-        				<td>
-        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?res=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#27AE60'>confirm restore</a>">
-        					<span class='glyphicon glyphicon-refresh' style='color:#27AE60;font-size:25px;padding:5px;'></span>
-        					</a>
-        				</td>
-        				<td>
-        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
-        					<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
-        					</a>
-        				</td>
+	        				<td><?php echo $i ?></td>
+	        				<td><?php echo $row["bid"] ?></td>
+	        				<td><?php echo $row["bname"] ?></td>
+	        				<td><?php echo $row["author"] ?></td>
+	        				<td>
+	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='query.php?res=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#27AE60'>confirm restore</a>">
+	        					<span class='glyphicon glyphicon-refresh' style='color:#27AE60;font-size:25px;padding:5px;'></span>
+	        					</a>
+	        				</td>
+	        				<td>
+	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
+	        						<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
+	        					</a>
+	        				</td>
 
-        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
+        					<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
 
       					</tr>
-
     				</tbody>
   				</table>
   			</div><!--table responsive div close-->
