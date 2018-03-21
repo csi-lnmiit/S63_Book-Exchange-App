@@ -62,7 +62,7 @@
 					 	?>
 				 	</a>
 	            </li>
-	            <li><a href="lent.php">
+	            <li><a href="lent.php" class="active">
 	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
 					 	<?php
 					 		if($lent!=0) {

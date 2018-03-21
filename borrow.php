@@ -53,7 +53,7 @@
 	            </li>
 				<br>
 				<p>STATUS</p>
-	            <li><a href="borrow.php">
+	            <li><a href="borrow.php" class="active">
 	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
 					 	<?php
 					 		if($borrow!=0) {

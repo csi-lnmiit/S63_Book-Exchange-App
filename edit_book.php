@@ -66,7 +66,8 @@
 	    </header>
 
 	    <!--left column list -->
-	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0;padding-top:100px"><!--col-md-3 start-->
+	    <!--left column list -->
+	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0;padding-top:100px">
 	        <ul>
 				<br>
 	            <p>MENU</p>
@@ -87,39 +88,60 @@
 				<br>
 				<p>STATUS</p>
 	            <li><a href="borrow.php">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
-	             </li>
-	            <li><a href="lent.php">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
 	            </li>
-                <br>
-                <p>SESSION</p>
+	            <li><a href="lent.php">
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
+	            </li>
+	            <br>
+	            <p>SESSION</p>
 	            <li><a href="logout.php">
 	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
 	            </li>
-	           	<li><a href="trash.php">
+	            <li><a href="trash.php">
 	                <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
 	            </li>
 	        </ul>
-	    </div><!--col-md-3 end-->
+	    </div>
 
 	    <div class="col-md-9"><!-- col md 9 start-->
-	    	<br>
+	    	<div style="padding-top:50px;">
+            	<h2>Edit Book Details</h2>
+        	</div>
 	    	<div class="container">
-			  
+			  <!--edit book details form-->
 			  <form action="edit_book.php?bid=<?php echo $row['bid']; ?>" method="post">
-			    <div class="form-group">
-			      <label for="bname">Edit Email:</label>
-			      <input type="text" class="form-control" id="bname" placeholder="<?php echo $old_bname;?>" name="bname">
+			  	<!--display book id-->
+			  	<div class="input-group">
+					<span class="input-group-addon" style="width: 100px;">Book ID</span>
+					<input type="text" disabled="disabled" class="form-control" style="width:250px;" name="bid" placeholder="<?php echo $row['bid'];?>">
 			    </div>
-			    <div class="form-group">
-			      <label for="author">Edit Author :</label>
-			      <input type="text" class="form-control" id="author" placeholder="<?php echo $old_author?>" name="author">
+			    <!--edit book name-->
+			    <div class="input-group">
+					<span class="input-group-addon" style="width: 100px;">Book Name</span>
+					<input type="text" class="form-control" style="width:250px;" name="bname" placeholder="<?php echo $old_bname;?>">
 			    </div>
-
-			    <input class="btn btn-block btn-primary" type="submit" name="update" value="Update" >
-			  </form>
-			</div>
+			    <!--edit author name-->
+				<div class="input-group">
+					<span class="input-group-addon" style="width: 100px;">Author</span>
+					<input type="text" class="form-control" style="width:250px;" name="author" placeholder="<?php echo $old_author;?>">
+				</div>
+				<br>
+			    <input class="btn btn-block btn-success" type="submit" name="update" value="Update" style="width:100px;">
+			  </form><!--end of form-->
+			</div><!--end of container-->
 	    </div><!--col md 9 end-->
 
 	    <!--JS SCRIPTS-->
