@@ -3,6 +3,8 @@
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
+
+	include 'count.php'; //shows badge notification
 ?>
 
 <!DOCTYPE html>
@@ -51,10 +53,22 @@
 				<br>
 				<p>STATUS</p>
 	            <li><a href="borrow.php">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
-	             </li>
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
+	            </li>
 	            <li><a href="lent.php">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
 	            </li>
                 <br>
                 <p>SESSION</p>
@@ -102,25 +116,12 @@
 	        				<td><?php echo $row["bname"] ?></td>
 	        				<td><?php echo $row["author"] ?></td>
 	        				<td>
-	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content='
-	        					<form action="modify.php">
-	  								<div class="form-group">
-									    <label for="email">Email address:</label>
-									    <input type="email" class="form-control" id="email">
-									</div>
-									<div class="form-group">
-									    <label for="pwd">Password:</label>
-									    <input type="password" class="form-control" id="pwd">
-									</div>
-									<a href="#"><button type="submit" class="btn btn-default">Submit</button>
-									</a>
-								</form>
-	        					'>
-	        					<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
+	        					<a href="edit_book.php?edit=<?php echo $row['bid']; ?>" >
+	        						<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
 	        					</a>
 	        				</td>
 	        				<td>
-	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?trash=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>Move to trash</a>">
+	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='query.php?trash=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>Move to trash</a>">
 	        						<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
 	        					</a>
 	        				</td>

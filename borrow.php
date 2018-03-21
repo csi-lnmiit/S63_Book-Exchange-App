@@ -3,6 +3,8 @@
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
+
+	include 'count.php'; //shows badge notification
 ?>
 
 <!DOCTYPE html>
@@ -51,11 +53,23 @@
 	            </li>
 				<br>
 				<p>STATUS</p>
-	            <li><a class="active" href="borrow.php">
-	                 	<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
+	            <li><a href="borrow.php">
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
 	            </li>
 	            <li><a href="lent.php">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
 	            </li>
                 <br>
                 <p>SESSION</p>
@@ -73,8 +87,8 @@
 				<br>
 				<div class="search-container">
 				    <form action="search.php" method="post">
-				      <input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
-				      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+				      	<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+				      	<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 				    </form>
 				</div>
 			</div><!--search bar nav end-->
@@ -82,7 +96,7 @@
             <?php
                 require_once('db_connect.php'); //connect with database
 
-                $query = "SELECT r.bid,b.bname,b.author,u.id,u.name,r.status FROM requests AS r, books AS b, users as u
+                $query = "SELECT * FROM requests AS r, books AS b, users as u
 						  WHERE b.bid=r.bid AND u.id=b.owner AND r.to_user=u.id AND r.from_user='" . $_SESSION['user_id'] . "'";
                 $result = mysqli_query($link,$query);
 
@@ -105,6 +119,7 @@
             				<th>Book Author</th>
             				<th>Lender Details</th>
             				<th>Status</th>
+							<th>Action</th>
         				</tr>
     				</thead><!--table header close-->
 
@@ -114,23 +129,29 @@
 
                         while($row = mysqli_fetch_array($result)) {
         	                echo "<tr>";
-        	                echo "<td>" . $i . "</td>";
+
+							if($row['sn']==1) {
+								echo "<td><span class='label label-primary'>NEW</span>" . $i . "</td>";
+							}
+							else
+        	                	echo "<td>" . $i . "</td>";
+
         	                echo "<td>" . $row["bid"] . "</td>";
         	                echo "<td>" . $row["bname"] . "</td>";
         	                echo "<td>" . $row["author"] . "</td>";
 
 							if($row['status'] == 1) {
-								
+
 								$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE u.id='".$row['id']."' AND r.bid=b.bid";
 								$info_result = mysqli_query($link,$info_query);
 								$info = mysqli_fetch_array($info_result);
 					?>
+
 								<td>
-									
 									<a href='#' data-toggle='popover' data-trigger='focus' data-content="
 									Email: <?php echo $info['email'] ?><br>
-									Mobile: <?php echo $info['mobile'];echo $info['name']; ?>">
-										<?php echo $row["name"] ;?>
+									Mobile: <?php echo $info['mobile']; ?>">
+										<?php echo $info['name']; ?>
 									</a>
 								</td>
 
@@ -142,13 +163,23 @@
 
 							if($row["status"] == 0) {
 								echo "<td><button class='btn btn-warning'>Pending</button></td>";
+								echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] .
+									 "'><input class='btn btn-primary' type='button' name='cancel' value='Cancel Request'>
+									 </a></td>";
 							}
 							else if($row["status"] == 1) {
 								echo "<td><button class='btn btn-success'>Accepted</button></td>";
+								echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] .
+									 "'><input class='btn btn-primary' type='button' name='return' value='Return Book'>
+									 </a></td>";
 							}
 							else if($row["status"] == 2) {
 								echo "<td><button class='btn btn-danger'>Declined</button></td>";
+								echo "<td><a href='query.php?request=" . $row['bid'] . "&to_user=" . $row['id'] .
+									 "'><input class='btn btn-primary' type='button' name='request' value='Request Again'>
+									 </a></td>";
 							}
+
         	                echo "</tr>";
         	                ++$i;
                         }
@@ -157,6 +188,11 @@
                 </table>
             </div>
 	    </div><!--col-md-9 end-->
+
+		<?php
+			$sql="UPDATE requests SET sn=0 WHERE from_user='" . $_SESSION['user_id'] . "'";
+			mysqli_query($link,$sql);
+		?>
 
 		<!--JS SCRIPTS-->
 	    <script  type='text/javascript'>

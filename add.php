@@ -5,6 +5,7 @@
 		header("Location:index.php");
 
 	require_once('db_connect.php'); //connect to database
+	include 'count.php'; //shows badge notification
 
     if(isset($_POST["add"])){
 
@@ -98,10 +99,22 @@
 				<br>
 				<p>STATUS</p>
 	            <li><a href="borrow.php">
-	                 <span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed</a>
-	             </li>
+	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+					 	<?php
+					 		if($borrow!=0) {
+								echo "<span class='badge'>$borrow</span>";
+					 		}
+					 	?>
+				 	</a>
+	            </li>
 	            <li><a href="lent.php">
-	                 <span class="glyphicon glyphicon-book"></span>&emsp;Lent</a>
+	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
+					 		}
+					 	?>
+					</a>
 	            </li>
 	            <br>
 	            <p>SESSION</p>
@@ -116,8 +129,8 @@
 
         <!--form for adding books-->
         <div class="row col-md-9">
-        	<div style="padding-top:10px;padding-right:500px;padding-left:100px;">
-            	<h2 style="color:#868899;">Add Books</h2>
+        	<div style="padding-top:100px;padding-right:500px;padding-left:100px;">
+            	<h2>Add a Book</h2>
         	</div>
         	<form action="add.php" method="post" style="padding-left:100px;padding-right:300px;padding-top:30px;">
 				<div class="input-group">
@@ -132,7 +145,7 @@
 	           	<div style="float: left; width: 140px">
 	        		<input class="btn btn-block btn-primary" type="submit" name="add" value="Add" >
 	         	</div>
-	          	<div style="float: right; width: 140px;margin-right:260px;">
+	          	<div style="float: right; width: 140px;margin-right:258px;">
 	                <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset" >
 	          	</div>
 	        </form>
