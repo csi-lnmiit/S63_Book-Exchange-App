@@ -64,9 +64,9 @@
 	            </li>
 	            <li><a href="lent.php">
 	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
-					 		<?php
-					 			if($lent!=0) {
-									echo "<span class='badge'>$lent</span>";
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
 					 		}
 					 	?>
 					</a>
@@ -127,12 +127,14 @@
                         $i=1;
 
                         while($row = mysqli_fetch_array($result)) {
-							if($row['rn']==1) {
-								echo "<span class='label label-primary'>NEW</span>";
-							}
-
         	                echo "<tr>";
-        	                echo "<td>" . $i . "</td>";
+
+							if($row['rn']==1) {
+								echo "<td><span class='label label-primary'>NEW</span>" . $i . "</td>";
+							}
+							else
+        	                	echo "<td>" . $i . "</td>";
+
         	                echo "<td>" . $row["bid"] . "</td>";
         	                echo "<td>" . $row["bname"] . "</td>";
         	                echo "<td>" . $row["author"] . "</td>";
@@ -161,23 +163,23 @@
 							if($row["status"]==0) {
 								echo "<td><button class='btn btn-warning'>Pending</button></td>";
 								echo "<td>
-									 <a href='query.php?accept=" . $row['bid'] . "&to_user=" . $row['id'] . "'>
+									 <a href='query.php?accept=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
 									 <input class='btn btn-primary' type='button' name='aceept' value='Accept'>
 									 </a>
-									 <a href='query.php?decline=" . $row["bid"] . "&to_user=" . $row['id'] . "'>
+									 <a href='query.php?decline=" . $row["bid"] . "&from_user=" . $row['id'] . "'>
 									 <input class='btn btn-primary' type='button' name='decline' value='Decline'>
 									 </a>
 									 </td>";
 							}
 							else if($row["status"]==1) {
 								echo "<td><button class='btn btn-success'>Accepted</button></td>";
-								echo "<td><a href='query.php?cancel=" . $row['bid'] . "&to_user=" . $row['id'] .
+								echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] .
 									 "'><input class='btn btn-primary' type='button' name='cancel' value='Cancel Request'>
 									 </a></td>";
 							}
 							else if($row["status"]==2) {
 								echo "<td><button class='btn btn-danger'>Declined</button></td>";
-								echo "<td><a href='query.php?cancel=" . $row['bid'] . "&to_user=" . $row['id'] .
+								echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] .
 									 "'><input class='btn btn-primary' type='button' name='cancel' value='Cancel Request'>
 									 </a></td>";
 							}

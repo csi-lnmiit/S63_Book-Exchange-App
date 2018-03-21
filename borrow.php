@@ -64,9 +64,9 @@
 	            </li>
 	            <li><a href="lent.php">
 	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
-					 		<?php
-					 			if($lent!=0) {
-									echo "<span class='badge'>$lent</span>";
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
 					 		}
 					 	?>
 					</a>
@@ -128,12 +128,14 @@
                         $i=1;
 
                         while($row = mysqli_fetch_array($result)) {
-							if($row['sn']==1) {
-								echo "<span class='label label-primary'>NEW</span>";
-							}
-
         	                echo "<tr>";
-        	                echo "<td>" . $i . "</td>";
+
+							if($row['sn']==1) {
+								echo "<td><span class='label label-primary'>NEW</span>" . $i . "</td>";
+							}
+							else
+        	                	echo "<td>" . $i . "</td>";
+
         	                echo "<td>" . $row["bid"] . "</td>";
         	                echo "<td>" . $row["bname"] . "</td>";
         	                echo "<td>" . $row["author"] . "</td>";

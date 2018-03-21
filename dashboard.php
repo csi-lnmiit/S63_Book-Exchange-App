@@ -64,10 +64,10 @@
 	            </li>
 	            <li><a href="lent.php">
 	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
-					 		<?php
-					 			if($lent!=0) {
-									echo "<span class='badge'>$lent</span>";
-					 		}
+					 	<?php
+					 		if($lent!=0) {
+								echo "<span class='badge'>$lent</span>";
+					 	}
 					 	?>
 					</a>
 	            </li>
