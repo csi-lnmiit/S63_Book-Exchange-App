@@ -31,7 +31,7 @@
             $msg="Author name required";
         }
         else {
-            $query="insert into books(bid,bname,author,owner,status) values ('$bid','$bname','$bauthor','$owner',$status)";
+            $query="insert into books(bid,bname,author,owner) values ('$bid','$bname','$bauthor','$owner')";
 			$result = mysqli_query($link,$query);
 
             $success="Your Book added successfully";
