@@ -1,0 +1,79 @@
+
+/*----left vertical navbar css ----*/
+#dashboard_left_col p {
+    padding-left: 35px;
+    padding-top:10px;
+    color: #868899;
+    font-size: 13px;
+}
+
+#dashboard_left_col ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 25%; /* corresponding to col-md-3  */
+    background-color: #35374C;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+    font-size: 15px;
+}
+
+#dashboard_left_col li a {
+    display: block;
+    color: #D6DBDF;
+    padding: 10px 35px;
+    text-decoration: none;
+}
+
+#dashboard_left_col li a.active {
+    background-color: #2D2E40;
+    color: white;
+    text-decoration: none;
+}
+
+#dashboard_left_col li a:hover:not(.active) {
+    background-color: #D6DBDF;/*light grey*/
+    color: #2D2E40;
+    text-decoration: none;
+}
+
+/*Top Navbar text */
+#nav_text {
+    padding-top: 35px;
+    font-size: 20px;
+    color: white;
+    padding-right: 100px;
+    text-align:right;
+}
+
+/* ---user profile card css -- */
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    height: 350px;
+}
+
+.title {
+    color: grey;
+    font-size: 18px;
+}
+
+/* ---edit profile button---*/
+#edit_profile {
+    font-size:25px;
+    padding:5px;
+    color: black;
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 60px;
+}
+
+
+/*---DASHBOARD CSS---*/

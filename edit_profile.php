@@ -9,64 +9,81 @@
 
 	$flag = 0;
 
-	//if edit glyphicon is clicked
-	if(isset($_GET['edit'])){
-		$bid = $_GET['edit'];
-		$query = "SELECT * FROM books WHERE bid='$bid'";
+	//if edit profile is clicked
+	if(isset($_GET['uid'])){
+		$uid = $_GET['uid'];
+		$query = "SELECT * FROM users WHERE id='$uid'";
 		$result = mysqli_query($link,$query);
 		$row = mysqli_fetch_array($result);
 	}
 
-	//if update is clicked under modify
-	if (isset($_POST["update"])) {
-		$bid = $_GET['edit'];
-		$query = "SELECT * FROM books WHERE bid='$bid'";
+	//if update is clicked under edit profile
+	if (isset($_POST["update_profile"])) {
+		$uid = $_GET['uid'];
+		$query = "SELECT * FROM users WHERE id='$uid'";
 		$result = mysqli_query($link,$query);
 		$row = mysqli_fetch_array($result);
 
-		if(trim($_POST["bname"])==NULL){
+		if(strlen($_POST["pass"])<6)
+        {
             $flag=1;
-            $msg="Book Name required";
+            $msg="Password should be of minimum 6 letters";
         }
-        else if(trim($_POST["bauthor"])==NULL){
+		else if(!is_numeric($_POST["mobile"]) && strlen($_POST["mobile"])!=10)
+        {
             $flag=1;
-            $msg="Author name required";
+            $msg="Invalid mobile number";
         }
 		else {
 
-			//if book name is not NULL
-			if(trim($_POST["bname"])!=NULL){
-	        	$bname=$_POST["bname"];
-	        	$query="UPDATE books SET bname='$bname' WHERE bid='$bid'";
+			//if username is not NULL
+			if(trim($_POST["name"])!=NULL){
+	        	$name=$_POST["name"];
+	        	$query="UPDATE users SET name='$name' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
+				$_SESSION["name"] = $name;
 	        }
-	     	//if author name is not NULL
-			if(trim($_POST["author"])!=NULL){
-				$bauthor = $_POST["author"];
-				$query="UPDATE books SET author='$bauthor' WHERE bid='$bid'";
+	     	//if password is not NULL
+			if(trim($_POST["pass"])!=NULL){
+				$pass = $_POST["pass"];
+				$query="UPDATE users SET password='$pass' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
+				$_SESSION["pass"] = $pass;
+			}
+			//if mobile is not NULL
+			if(trim($_POST["mobile"])!=NULL){
+				$mobile = $_POST["mobile"];
+				$query="UPDATE users SET mobile='$mobile' WHERE id='$uid'";
+				$result = mysqli_query($link,$query);
+				$_SESSION["mobile"] = $mobile;
+			}
+			//if email is not NULL
+			if(trim($_POST["email"])!=NULL){
+				$email = $_POST["email"];
+				$query="UPDATE users SET email='$email' WHERE id='$uid'";
+				$result = mysqli_query($link,$query);
+				$_SESSION["email"] = $email;
 			}
 
 			//tranfer to modify.php
-			header('location: modify.php');
+			header('location: profile.php');
 		}
 
 		if($flag)
 	    {
-	        echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:355px;margin-left:410px;width:350px;">
+	        echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:425px;margin-left:410px;width:350px;">
 	        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
 
-			unset($_POST);
+	        unset($_POST);
 	    }
 	}
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<link rel="shortcut icon" type="image/png" href="Images/favicon.png">
-	    <title>Modify</title>
+	    <title>Profile</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -141,37 +158,47 @@
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
 						<div style="background-color: #3498DB;height: 100px">
-							<div id="nav_text"><b>Edit a Book</b></div>
+							<div id="nav_text"><b>Edit Profile</b></div>
 						</div>
 
 						<div class="container-fluid">
 							<br>
-							<div style="font-size:30px;padding-left: 70px">Enter Book Details</div>
+				    		<div style="font-size:30px;padding-left: 70px">Enter Details</div>
 							<br>
 
-					    	<div class="container" style="padding-left: 70px">
-							  	<form action="edit_book.php?edit=<?php echo $row['bid']; ?>" method="post">
-								  	<!--display book id-->
+				    		<div class="container" style="padding-left: 70px">
+					  			<form action="edit_profile.php?uid=<?php echo $_SESSION["user_id"]; ?>" method="post">
+								  	<!--display username-->
 								  	<div class="input-group">
-										<span class="input-group-addon" style="width: 100px;">Book ID</span>
-										<input type="text" disabled="disabled" class="form-control" style="width:250px;" name="bid" placeholder="<?php echo $row['bid']; ?>">
+										<span class="input-group-addon" style="width: 100px;">Username</span>
+										<input type="text" disabled="disabled" class="form-control" style="width:250px;" name="uname" placeholder="<?php echo $_SESSION["user"];?>">
 								    </div>
-								    <!--edit book name-->
+								    <!--edit name-->
 								    <div class="input-group">
-										<span class="input-group-addon" style="width: 100px;">Book Name</span>
-										<input type="text" class="form-control" style="width:250px;" name="bname" placeholder="<?php echo $row['bname']; ?>">
+										<span class="input-group-addon" style="width: 100px;">Name</span>
+										<input type="text" class="form-control" style="width:250px;" name="name" placeholder="<?php echo $_SESSION["name"];?>">
 								    </div>
-								    <!--edit author name-->
+								    <!--edit password-->
 									<div class="input-group">
-										<span class="input-group-addon" style="width: 100px;">Author</span>
-										<input type="text" class="form-control" style="width:250px;" name="author" placeholder="<?php echo $row['author']; ?>">
+										<span class="input-group-addon" style="width: 100px;">Password</span>
+										<input type="text" class="form-control" style="width:250px;" name="pass" placeholder="<?php echo $_SESSION["pass"];?>">
 									</div>
+									<!--edit mobile-->
+								    <div class="input-group">
+										<span class="input-group-addon" style="width: 100px;">Mobile</span>
+										<input type="text" class="form-control" style="width:250px;" name="mobile" placeholder="<?php echo $_SESSION["mobile"];?>">
+								    </div>
+								    <!--edit email-->
+								    <div class="input-group">
+										<span class="input-group-addon" style="width: 100px;">E-Mail</span>
+										<input type="email" class="form-control" style="width:250px;" name="email" placeholder="<?php echo $_SESSION["email"];?>">
+								    </div>
 									<br>
-								    <input class="btn btn-block btn-primary" type="submit" name="update" value="Update" style="width:350px;">
-							  	</form><!--end of form-->
+								    <input class="btn btn-block btn-primary" type="submit" name="update_profile" value="Update" style="width:350px;">
+					  			</form><!--end of form-->
 							</div><!--end of container-->
-						</div>
-				    </div>
+				    	</div>
+					</div>
 				</div><!--end of col-md-9-->
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
