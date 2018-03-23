@@ -116,21 +116,8 @@
 	        				<td><?php echo $row["bname"] ?></td>
 	        				<td><?php echo $row["author"] ?></td>
 	        				<td>
-	        					<a href="#" data-toggle="popover" data-trigger="focus" data-content='
-	        					<form action="modify.php">
-	  								<div class="form-group">
-									    <label for="email">Email address:</label>
-									    <input type="email" class="form-control" id="email">
-									</div>
-									<div class="form-group">
-									    <label for="pwd">Password:</label>
-									    <input type="password" class="form-control" id="pwd">
-									</div>
-									<a href="#"><button type="submit" class="btn btn-default">Submit</button>
-									</a>
-								</form>
-	        					'>
-	        					<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
+	        					<a href="edit_book.php?edit=<?php echo $row['bid']; ?>" >
+	        						<span class='glyphicon glyphicon-edit' style='font-size:25px;padding:5px;'></span>
 	        					</a>
 	        				</td>
 	        				<td>
