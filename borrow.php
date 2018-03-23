@@ -27,14 +27,13 @@
 
 		<div class="container-fluid">
 			<div class="row"><!--start of row-->
-				<div class="col-md-3" >
+				<div class="col-md-3">
 					<div class="row"><!--nested row starts-->
-
-        				<div align="center" style="background-color: #1A1927;"><!--libromate logo-->
+        				<div class="col-md-3" align="center" style="background-color:#1A1927;position:fixed"><!--libromate logo-->
         					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px;"></a>
         				</div>
 
-        				<div id="dashboard_left_col"><!--start of vertical navbar-->
+        				<div id="dashboard_left_col" style="padding-top:100px"><!--start of vertical navbar-->
 					        <ul>
 								<br>
 					            <p>MENU</p>
@@ -83,39 +82,45 @@
 					        </ul>
 					    </div><!--end of vertical navbar-->
 					</div><!--end of nested row-->
-					
 				</div><!--end of col-md-3-->
+
 				<div class="col-md-9"><!--col-md-9 start-->
-					<div class="container-fluid">
-						<div class="row">
-							<div class="topnav"><!--search bar nav start-->
+					<div class="row">
+						<div style="height: 100px">
+							<div class="topnav">
 								<br>
-								<div class="search-container">
-								    <form action="search.php" method="post">
-								      	<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
-								      	<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-								    </form>
+								<div class="search-container" style="padding-left:85px">
+									<form action="search.php" method="post">
+										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+									</form>
 								</div>
-							</div><!--search bar nav end-->
+							</div>
+						</div>
 
-				            <?php
-				                require_once('db_connect.php'); //connect with database
+						<div class="container-fluid">
+							<br>
+							<div style="font-size:15px;padding-left: 70px">
 
-				                $query = "SELECT * FROM requests AS r, books AS b, users as u
-										  WHERE b.bid=r.bid AND u.id=b.owner AND r.to_user=u.id AND r.from_user='" . $_SESSION['user_id'] . "'";
-				                $result = mysqli_query($link,$query);
+					            <?php
+					                require_once('db_connect.php'); //connect with database
 
-				                if(mysqli_num_rows($result)==0)
-				                    echo nl2br("\nYou have not requested any book yet!!");
-				                else
-				                    echo nl2br("\nFollowing are the books requested by you:");
+					                $query = "SELECT * FROM requests AS r, books AS b, users as u
+											  WHERE b.bid=r.bid AND u.id=b.owner AND r.to_user=u.id AND r.from_user='" . $_SESSION['user_id'] . "'";
+					                $result = mysqli_query($link,$query);
 
-				                echo nl2br("\n\n");
-				            ?>
+					                if(mysqli_num_rows($result)==0)
+					                    echo nl2br("\nYou have not requested any book yet!!");
+					                else
+					                    echo nl2br("\nFollowing are the books requested by you:");
 
+					                echo nl2br("\n\n");
+					            ?>
 
-					    	<div class="table-responsive">
-				                <table class="table" style="width: 900px;" align="center">
+							</div>
+
+							<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+				                <table class="table" align="center">
 				    				<thead><!--table header start-->
 				      					<tr>
 				            				<th>S.No.</th>
@@ -167,22 +172,22 @@
 											}
 
 											if($row["status"] == 0) {
-												echo "<td><button class='btn btn-warning'>Pending</button></td>";
-												echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] .
-													 "'><input class='btn btn-primary' type='button' name='cancel' value='Cancel Request'>
-													 </a></td>";
+												echo "<td><button class='btn btn-warning' style='width:80px'>Pending</button></td>";
+												echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] . "'>
+													  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Request' style='width:143px'>
+													  </a></td>";
 											}
 											else if($row["status"] == 1) {
-												echo "<td><button class='btn btn-success'>Accepted</button></td>";
-												echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] .
-													 "'><input class='btn btn-primary' type='button' name='return' value='Return Book'>
-													 </a></td>";
+												echo "<td><button class='btn btn-success' style='width:80px'>Accepted</button></td>";
+												echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] ."'>
+													  <input class='btn btn-primary' type='button' name='return' value='Return Book' style='width:143px'>
+													  </a></td>";
 											}
 											else if($row["status"] == 2) {
-												echo "<td><button class='btn btn-danger'>Declined</button></td>";
-												echo "<td><a href='query.php?request=" . $row['bid'] . "&to_user=" . $row['id'] .
-													 "'><input class='btn btn-primary' type='button' name='request' value='Request Again'>
-													 </a></td>";
+												echo "<td><button class='btn btn-danger' style='width:80px'>Declined</button></td>";
+												echo "<td><a href='query.php?request=" . $row['bid'] . "&to_user=" . $row['id'] . "'>
+													  <input class='btn btn-primary' type='button' name='request' value='Request Again' style='width:143px'>
+													  </a></td>";
 											}
 
 				        	                echo "</tr>";
@@ -195,10 +200,12 @@
 						</div>
 				    </div>
 				</div><!--end of col-md-9-->
+
 				<?php
 					$sql="UPDATE requests SET sn=0 WHERE from_user='" . $_SESSION['user_id'] . "'";
 					mysqli_query($link,$sql);
-				?>				
+				?>
+
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
 

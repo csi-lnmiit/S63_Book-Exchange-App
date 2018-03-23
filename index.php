@@ -34,7 +34,7 @@
             //declaration of global session variables
             $_SESSION["user_id"] = $row["id"];
             $_SESSION["user"] = $_POST["user"];
-            $_SESSION["pass"] = md5($_POST["pass"]);
+            $_SESSION["pass"] = $_POST["pass"];
             $_SESSION["name"] = $row["name"];
             $_SESSION["email"] = $row["email"];
             $_SESSION["mobile"] = $row["mobile"];
@@ -112,7 +112,7 @@
             //declaration of global session variables
             $_SESSION["user_id"] = $user_id;
             $_SESSION["user"] = $_POST["user"];
-            $_SESSION["pass"] = md5($_POST["pass"]);
+            $_SESSION["pass"] = $_POST["pass"];
             $_SESSION["name"] = $_POST["name"];
             $_SESSION["email"] = $_POST["email"];
             $_SESSION["mobile"] = $_POST["mobile"];

@@ -26,14 +26,13 @@
 
 		<div class="container-fluid">
 			<div class="row"><!--start of row-->
-				<div class="col-md-3" >
+				<div class="col-md-3">
 					<div class="row"><!--nested row starts-->
-
-        				<div align="center" style="background-color: #1A1927;"><!--libromate logo-->
+        				<div class="col-md-3" align="center" style="background-color:#1A1927;position:fixed"><!--libromate logo-->
         					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px;"></a>
         				</div>
 
-        				<div id="dashboard_left_col"><!--start of vertical navbar-->
+        				<div id="dashboard_left_col" style="padding-top:100px"><!--start of vertical navbar-->
 					        <ul>
 								<br>
 					            <p>MENU</p>
@@ -82,15 +81,19 @@
 					        </ul>
 					    </div><!--end of vertical navbar-->
 					</div><!--end of nested row-->
-					
 				</div><!--end of col-md-3-->
+
 				<div class="col-md-9"><!--col-md-9 start-->
-					<div class="container-fluid">
-						<div class="row">
+					<div class="row">
+						<div style="background-color: #3498DB;height: 100px">
+							<div id="nav_text"><b>Modify or Delete a Book</b></div>
+						</div>
+
+						<div class="container-fluid">
 							<br>
-					    	<div class="table-responsive">
-				                <table class="table" align="center" style="width: 800px"><!--table header start-->
-				    				<thead>
+					    	<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+				                <table class="table" align="center">
+				    				<thead><!--table header start-->
 				      					<tr>
 					        				<th>S.No.</th>
 					        				<th>Book Id</th>

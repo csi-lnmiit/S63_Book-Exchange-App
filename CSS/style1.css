@@ -37,8 +37,9 @@
     color: #2D2E40;
     text-decoration: none;
 }
-/*My Profile text */
-#my_profile_text {
+
+/*Top Navbar text */
+#nav_text {
     padding-top: 35px;
     font-size: 20px;
     color: white;
@@ -76,4 +77,3 @@
 
 
 /*---DASHBOARD CSS---*/
-

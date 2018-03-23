@@ -26,17 +26,15 @@
 
 	<body>
 
-
 		<div class="container-fluid">
 			<div class="row"><!--start of row-->
-				<div class="col-md-3" >
+				<div class="col-md-3">
 					<div class="row"><!--nested row starts-->
-
-        				<div align="center" style="background-color: #1A1927;"><!--libromate logo-->
+        				<div class="col-md-3" align="center" style="background-color:#1A1927;position:fixed"><!--libromate logo-->
         					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px;"></a>
         				</div>
 
-        				<div id="dashboard_left_col"><!--start of vertical navbar-->
+        				<div id="dashboard_left_col" style="padding-top:100px"><!--start of vertical navbar-->
 					        <ul>
 								<br>
 					            <p>MENU</p>
@@ -85,100 +83,111 @@
 					        </ul>
 					    </div><!--end of vertical navbar-->
 					</div><!--end of nested row-->
-					
 				</div><!--end of col-md-3-->
+
 				<div class="col-md-9"><!--col-md-9 start-->
-					<div class="container-fluid">
-				    	<br>
-				    	<div class="topnav"><!--search bar nav start-->
-							<br>
-							<div class="search-container">
-							    <form action="search.php" method="post">
-							      <input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
-							      <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-							    </form>
+					<div class="row">
+						<div style="height: 100px">
+							<div class="topnav">
+								<br>
+								<div class="search-container" style="padding-left:85px">
+									<form action="search.php" method="post">
+										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+									</form>
+								</div>
 							</div>
-						</div><!--search bar nav end-->
+						</div>
 
+						<div class="container-fluid">
+							<br>
+							<div style="font-size:15px;padding-left: 70px">
 
-			            <?php
-				        	if(isset($_POST["search"])) {
-					        	$input = $_POST["search_input"];
+					            <?php
+						        	if(isset($_POST["search"])) {
+							        	$input = $_POST["search_input"];
 
-								$query = "SELECT * FROM books AS b, users AS u
-										  WHERE b.bname='" . $input . "' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] .
-										  "' OR b.author='" . $input . "' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] . "'";
-								$result = mysqli_query($link,$query);
+										$query = "SELECT * FROM books AS b, users AS u
+												  WHERE b.bname='" . $input . "' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] .
+												  "' OR b.author='" . $input . "' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] . "'";
+										$result = mysqli_query($link,$query);
 
-					            if(mysqli_num_rows($result)==0)
-					                echo nl2br("\nNo matching search found!!");
-					            else
-					            	echo nl2br("\n".mysqli_num_rows($result)." result(s) found.");
+							            if(mysqli_num_rows($result)==0)
+							                echo nl2br("\nNo matching search found!!");
+							            else
+							            	echo nl2br("\n".mysqli_num_rows($result)." result(s) found.");
 
-				            echo nl2br("\n\n");
-							}
-						?>
+						            echo nl2br("\n\n");
+									}
+								?>
 
-				    	<div class="table-responsive">
-			                <table class="table">
-			    				<thead><!--table header start-->
-			      					<tr>
-				        				<th>S.No.</th>
-				        				<th>Book Id</th>
-				        				<th>Book Name</th>
-				        				<th>Author</th>
-				        				<th>Owner Id</th>
-				        				<th>Owner Name</th>
-				        				<th>Request Book</th>
-			        				</tr>
-			    				</thead><!--table header close-->
+							</div>
 
-				                <!--fetch and display data from MySQL-->
-				                <?php
-				                    $i=1;
-				                	while($row = mysqli_fetch_array($result)) {
-				                ?>
+							<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+								<table class="table" align="center">
+				    				<thead><!--table header start-->
+				      					<tr>
+					        				<th>S.No.</th>
+					        				<th>Book Id</th>
+					        				<th>Book Name</th>
+					        				<th>Author</th>
+					        				<th>Owner Id</th>
+					        				<th>Owner Name</th>
+					        				<th>Request Book</th>
+				        				</tr>
+				    				</thead><!--table header close-->
 
-				                <tbody><!--print table data-->
-				      				<tr>
-					        			<td><?php echo $i ?></td>
-					        			<td><?php echo $row["bid"] ?></td>
-					        			<td><?php echo $row["bname"] ?></td>
-					        			<td><?php echo $row["author"] ?></td>
-					       				<td><?php echo $row["id"] ?></td>
-					        			<td><?php echo $row["name"] ?></td>
-					        			<td>
+					                <!--fetch and display data from MySQL-->
+					                <?php
+					                    $i=1;
+					                	while($row = mysqli_fetch_array($result)) {
+					                ?>
 
-											<?php
-												$query = "select * from requests where bid='" . $row['bid'] . "' and rn=1 and status=0";
-												$req = mysqli_query($link,$query);
-												$query = "select * from requests where bid='" . $row['bid'] . "' and rn=1 and status=1";
-												$acc = mysqli_query($link,$query);
+					                <tbody><!--print table data-->
+					      				<tr>
+						        			<td><?php echo $i ?></td>
+						        			<td><?php echo $row["bid"] ?></td>
+						        			<td><?php echo $row["bname"] ?></td>
+						        			<td><?php echo $row["author"] ?></td>
+						       				<td><?php echo $row["id"] ?></td>
+						        			<td><?php echo $row["name"] ?></td>
+						        			<td>
 
-												if(mysqli_num_rows($req))
-													echo "Requested";
+												<?php
+													$query = "select * from requests where bid='" . $row['bid'] . "' and from_user='" . $_SESSION['user_id'] . "' and status=0";
+													$req = mysqli_query($link,$query);
+													$query = "select * from requests where bid='" . $row['bid'] . "' and from_user='" . $_SESSION['user_id'] . "' and status=1";
+													$acc = mysqli_query($link,$query);
+													$query = "select * from requests where bid='" . $row['bid'] . "' and from_user<>'" . $_SESSION['user_id'] . "' and status=1";
+													$sha = mysqli_query($link,$query);
 
-												else if(mysqli_num_rows($acc))
-													echo "Accepted";
+													if(mysqli_num_rows($req))
+														echo "<button class='btn btn-warning' style='width:100px'>Requested</button>";
 
-												else {
-													echo "<a href='query.php?request="  . $row['bid'] . "&to_user=" . $row['id'] .
-														 "'><input class='btn btn-primary' type='button' name='request' value='Request'>
-													     </a>";
-												}
-											?>
+													else if(mysqli_num_rows($acc))
+														echo "<button class='btn btn-success' style='width:100px'>Accepted</button>";
 
-					        			</td>
+													else if(mysqli_num_rows($sha))
+														echo "<button class='btn btn-danger' style='width:100px'>Shared</button>";
 
-				        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
+													else {
+														echo "<a href='query.php?request="  . $row['bid'] . "&to_user=" . $row['id'] . "'>
+														      <input class='btn btn-primary' type='button' name='request' value='Request' style='width:100px'>
+														      </a>";
+													}
+												?>
 
-									</tr>
-								</tbody>
-							</table>
+						        			</td>
+
+					        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
+
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 				    </div>
 				</div><!--end of col-md-9-->
-
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
 	</body>

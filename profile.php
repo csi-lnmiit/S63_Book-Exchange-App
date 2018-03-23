@@ -21,17 +21,17 @@
 	    <link rel="stylesheet" type="text/css" href="CSS/style1.css">
 	</head>
 
-
 	<body>
 
 		<div class="container-fluid">
 			<div class="row"><!--start of row-->
 				<div class="col-md-3">
 					<div class="row"><!--nested row starts-->
-        				<div align="center" style="background-color: #1A1927"><!--libromate logo-->
-        					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px; "></a>
+        				<div class="col-md-3" align="center" style="background-color:#1A1927;position:fixed"><!--libromate logo-->
+        					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px;"></a>
         				</div>
-        				<div id="dashboard_left_col"><!--start of vertical navbar-->
+
+        				<div id="dashboard_left_col" style="padding-top:100px"><!--start of vertical navbar-->
 					        <ul>
 								<br>
 					            <p>MENU</p>
@@ -80,63 +80,65 @@
 					        </ul>
 					    </div><!--end of vertical navbar-->
 					</div><!--end of nested row-->
-					
 				</div><!--end of col-md-3-->
-				<div class="col-md-9" style="background-color: white;height: 100px;">
+
+				<div class="col-md-9">
 					<div class="row">
 						<div style="background-color: #3498DB;height: 100px">
-							<p id="my_profile_text"><b>My Profile</b></p>
+							<div id="nav_text"><b>My Profile</b></div>
 						</div>
+
 						<div class="container-fluid">
-							<h3 style="font-size:30px;padding-left: 70px">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</h3><br>
+							<br>
+				    		<div style="font-size:30px;padding-left: 70px">Enter Details</div>
+							<br>
+							
 							<div class="row">
-	        					
 	        					<div class="col-md-1"></div>
+
 								<div class="col-md-3 card"><!--start of card-->
-								  <img src="Images/geek_pic.png" alt="John" style="width:100%;">
-								  <h1><?php echo $_SESSION["name"]?></h1>
-								  <p class="title"><?php echo $_SESSION["user"]?></p>
-								  
+								  	<img src="Images/geek_pic.png" alt="My Pic" style="width:100%;">
+								  	<h1><?php echo $_SESSION["name"]?></h1>
+								  	<p class="title"><?php echo $_SESSION["user"]?></p>
 								</div><!--end of card-->
 
 								<div class="col-md-7"><!--col-md-7 starts-->
 									<div class="container-fluid">
 										<div class="row">
-											<div style="background-color: #212F3D;height: 100px">
+											<div style="background-color: #1A1927;height: 100px">
 												<a href="edit_profile.php?uid=<?php echo $_SESSION["user_id"]; ?>" >
-	        										<p id=edit_profile><b>EDIT PROFILE</b></p>
+	        										<p id="edit_profile"><b>EDIT PROFILE</b></p>
 	        									</a>
 											</div>
+
 											<div style="background-color: #D7DBDD;height: 250px">
 												<div class="table-responsive" style="padding-left: 10px;padding-top:10px"> <!-- user info table -->
 									                <table class="table" >
 									    				<thead><!--table header start-->
-									      					
 									                        <tr>
-									                            <td style="font-size:15px;"><b>Username</b></td>
+									                            <th style="font-size:15px;">Username</th>
 									                            <td><?php echo $_SESSION["user"]?></td>
 									                        </tr>
 
 									                        <tr>
-									                            <td style="font-size:15px;"><b>Password</b></td>
+									                            <th style="font-size:15px;">Password</th>
 									                            <td><?php echo $_SESSION["pass"]?></td>
 									                        </tr>
 
 									                        <tr>
-									                            <td style="font-size:15px;"><b>E-mail Id</b></td>
+									                            <th style="font-size:15px;">E-mail Id</th>
 									                            <td><?php echo $_SESSION["email"]?></td>
 									                        </tr>
 
 									                        <tr>
-									                            <td style="font-size:15px;"><b>Phone Number</b></td>
+									                            <th style="font-size:15px;">Phone Number</th>
 									                            <td><?php echo $_SESSION["mobile"]?></td>
 									                        </tr>
 
 									                        <tr>
-									                            <td style="font-size:15px;"><b>Points</b></td>
+									                            <th style="font-size:15px;">Points</th>
 									                            <td><?php echo $_SESSION["points"]?></td>
 									                        </tr>
-
 									                    </thead><!--table header close-->
 									        		</table>
 									            </div>  <!-- table div close -->
@@ -144,16 +146,13 @@
 										</div><!--end of row-->
 									</div><!--end of container fluid-->
 								</div><!--col-md-7 starts-->
+
 								<div class="col-md-1"></div>
-
 							</div>
-
 						</div>
-
 					</div>
 				</div><!--end of col-md-9 -->
 			</div><!--end of row-->
 		</div><!--end of container-fluid-->
-
 	</body>
 </html>

@@ -40,7 +40,7 @@
         }
 
         if($flag){
-            echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:330px;margin-left:425px;width:22%;">
+            echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:320px;margin-left:410px;width:292px">
         	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'</div>';
 
 			unset($_POST);
@@ -70,19 +70,17 @@
 	    }
     </script>
 
-
 	<body>
 
 		<div class="container-fluid">
 			<div class="row"><!--start of row-->
-				<div class="col-md-3" >
+				<div class="col-md-3">
 					<div class="row"><!--nested row starts-->
-
-        				<div align="center" style="background-color: #1A1927;"><!--libromate logo-->
+        				<div class="col-md-3" align="center" style="background-color:#1A1927;position:fixed"><!--libromate logo-->
         					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px;"></a>
         				</div>
 
-        				<div id="dashboard_left_col"><!--start of vertical navbar-->
+        				<div id="dashboard_left_col" style="padding-top:100px"><!--start of vertical navbar-->
 					        <ul>
 								<br>
 					            <p>MENU</p>
@@ -131,31 +129,38 @@
 					        </ul>
 					    </div><!--end of vertical navbar-->
 					</div><!--end of nested row-->
-					
 				</div><!--end of col-md-3-->
+
 				<div class="col-md-9"><!--col-md-9 start-->
-					<div class="container-fluid">
-						<div class="row">
-							<div style="padding-top:100px;padding-right:500px;padding-left:100px;">
-				            	<h2>Add a Book</h2>
-				        	</div>
-				        	<form action="add.php" method="post" style="padding-left:100px;padding-right:300px;padding-top:30px;">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
-									<input type="text" class="form-control" style="width:250px;" name="bname" placeholder="Book Name">
-							    </div>
-								<div class="input-group">
-									<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-									<input type="text" class="form-control" style="width:250px;" name="bauthor" placeholder="Author name">
-								</div>
-					            <br>
-					           	<div style="float: left; width: 140px">
-					        		<input class="btn btn-block btn-primary" type="submit" name="add" value="Add" >
-					         	</div>
-					          	<div style="float: right; width: 140px;margin-right:258px;">
-					                <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset" >
-					          	</div>
-					        </form>
+					<div class="row">
+						<div style="background-color: #3498DB;height: 100px">
+							<div id="nav_text"><b>Add a Book</b></div>
+						</div>
+
+						<div class="container-fluid">
+							<br>
+				    		<div style="font-size:30px;padding-left: 70px">Enter Book Details</div>
+							<br>
+
+							<div class="container" style="padding-left: 70px">
+					        	<form action="add.php" method="post">
+									<div class="input-group">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-book"></i></span>
+										<input type="text" class="form-control" style="width:250px;" name="bname" placeholder="Book Name">
+								    </div>
+									<div class="input-group">
+										<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+										<input type="text" class="form-control" style="width:250px;" name="bauthor" placeholder="Author name">
+									</div>
+						            <br>
+						           	<div style="float: left; width: 140px">
+						        		<input class="btn btn-block btn-primary" type="submit" name="add" value="Add" >
+						         	</div>
+						          	<div style="float: right; width: 140px;margin-right:795px;">
+						                <input class="btn btn-block btn-primary" type="reset" name="reset" value="Reset" >
+						          	</div>
+						        </form>
+							</div>
 				        </div>
 				    </div>
 				</div><!--end of col-md-9-->

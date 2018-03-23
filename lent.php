@@ -27,14 +27,13 @@
 
 		<div class="container-fluid">
 			<div class="row"><!--start of row-->
-				<div class="col-md-3" >
+				<div class="col-md-3">
 					<div class="row"><!--nested row starts-->
-
-        				<div align="center" style="background-color: #1A1927;"><!--libromate logo-->
+        				<div class="col-md-3" align="center" style="background-color:#1A1927;position:fixed"><!--libromate logo-->
         					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px;"></a>
         				</div>
 
-        				<div id="dashboard_left_col"><!--start of vertical navbar-->
+        				<div id="dashboard_left_col" style="padding-top:100px"><!--start of vertical navbar-->
 					        <ul>
 								<br>
 					            <p>MENU</p>
@@ -83,38 +82,45 @@
 					        </ul>
 					    </div><!--end of vertical navbar-->
 					</div><!--end of nested row-->
-					
 				</div><!--end of col-md-3-->
+
 				<div class="col-md-9"><!--col-md-9 start-->
-					<div class="container-fluid">
-						<div class="row">
-							<div class="topnav"><!--search bar nav start-->
+					<div class="row">
+						<div style="height: 100px">
+							<div class="topnav">
 								<br>
-								<div class="search-container">
-								    <form action="search.php" method="post">
-								      	<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
-								      	<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-								    </form>
+								<div class="search-container" style="padding-left:85px">
+									<form action="search.php" method="post">
+										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+									</form>
 								</div>
-							</div><!--search bar nav end-->
-							<?php
-				                require_once('db_connect.php'); //connect with database
+							</div>
+						</div>
 
-				                $query = "SELECT * FROM requests AS r, books AS b, users as u
-										  WHERE b.bid=r.bid AND r.from_user=u.id AND r.to_user='" . $_SESSION['user_id'] . "'";
-				                $result = mysqli_query($link,$query);
+						<div class="container-fluid">
+							<br>
+							<div style="font-size:15px;padding-left: 70px">
 
-				                if(mysqli_num_rows($result)==0)
-				                    echo nl2br("\nYou have not requested any book yet!!");
-				                else
-				                    echo nl2br("\nFollowing are the books requested from others:");
+								<?php
+					                require_once('db_connect.php'); //connect with database
 
-				                echo nl2br("\n\n");
-				            ?>
+					                $query = "SELECT * FROM requests AS r, books AS b, users as u
+											  WHERE b.bid=r.bid AND r.from_user=u.id AND r.to_user='" . $_SESSION['user_id'] . "'";
+					                $result = mysqli_query($link,$query);
 
+					                if(mysqli_num_rows($result)==0)
+					                    echo nl2br("\nYou have not requested any book yet!!");
+					                else
+					                    echo nl2br("\nFollowing are the books requested from others:");
 
-					    	<div class="table-responsive">
-				                <table class="table" style="width: 800px" align="center">
+					                echo nl2br("\n\n");
+					            ?>
+
+							</div>
+
+							<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+				                <table class="table" align="center">
 				    				<thead><!--table header start-->
 				      					<tr>
 				            				<th>S.No.</th>
@@ -169,24 +175,24 @@
 												echo "<td><button class='btn btn-warning' style='width:80px'>Pending</button></td>";
 												echo "<td>
 													 <a href='query.php?accept=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
-													 <input class='btn btn-primary' type='button' name='accept' value='Accept'>
+													 <input class='btn btn-primary' type='button' name='accept' value='Accept' style='width:70px'>
 													 </a>
 													 <a href='query.php?decline=" . $row["bid"] . "&from_user=" . $row['id'] . "'>
-													 <input class='btn btn-primary' type='button' name='decline' value='Decline'>
+													 <input class='btn btn-primary' type='button' name='decline' value='Decline' style='width:70px'>
 													 </a>
 													 </td>";
 											}
 											else if($row["status"]==1) {
-												echo "<td><button class='btn btn-success'style='width:80px'>Shared</button></td>";
-												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] .
-													 "'><input class='btn btn-primary' type='button' name='cancel' value='Remove'>
-													 </a></td>";
+												echo "<td><button class='btn btn-success' style='width:80px'>Shared</button></td>";
+												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
+													  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Accept' style='width:143px'>
+													  </a></td>";
 											}
 											else if($row["status"]==2) {
-												echo "<td><button class='btn btn-danger'style='width:80px'>Declined</button></td>";
-												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] .
-													 "'><input class='btn btn-primary' type='button' name='cancel' value='Remove'>
-													 </a></td>";
+												echo "<td><button class='btn btn-danger' style='width:80px'>Declined</button></td>";
+												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
+													  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Decline' style='width:143px'>
+												 	  </a></td>";
 											}
 
 											echo "</tr>";
@@ -199,7 +205,6 @@
 						</div>
 				    </div>
 				</div><!--end of col-md-9-->
-
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
 

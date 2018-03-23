@@ -29,14 +29,13 @@
 
 		<div class="container-fluid">
 			<div class="row"><!--start of row-->
-				<div class="col-md-3" >
+				<div class="col-md-3">
 					<div class="row"><!--nested row starts-->
-
-        				<div align="center" style="background-color: #1A1927;"><!--libromate logo-->
+        				<div class="col-md-3" align="center" style="background-color:#1A1927;position:fixed"><!--libromate logo-->
         					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px;"></a>
         				</div>
 
-        				<div id="dashboard_left_col"><!--start of vertical navbar-->
+        				<div id="dashboard_left_col" style="padding-top:100px"><!--start of vertical navbar-->
 					        <ul>
 								<br>
 					            <p>MENU</p>
@@ -85,65 +84,70 @@
 					        </ul>
 					    </div><!--end of vertical navbar-->
 					</div><!--end of nested row-->
-					
 				</div><!--end of col-md-3-->
+
 				<div class="col-md-9"><!--col-md-9 start-->
-					<div class="container-fluid">
-						<br>
-				    	<div class="table-responsive">
-			                <table class="table" style="width: 800px;" align="center"><!--table header start-->
-			    				<thead>
-			      					<tr>
-			        				<th>S.No.</th>
-			        				<th>Book Id</th>
-			        				<th>Book Name</th>
-			        				<th>Author</th>
-			        				<th>Restore Book</th>
-			        				<th>Delete Permanently</th>
-			      					</tr>
-			    				</thead><!--table header close-->
+					<div class="row">
+						<div style="background-color: #3498DB;height: 100px">
+							<div id="nav_text"><b>Trash</b></div>
+						</div>
 
-								<?php
-					                require_once('db_connect.php'); //connect with database
+						<div class="container-fluid">
+							<br>
+							<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+				                <table class="table" align="center">
+				    				<thead><!--table header start-->
+				      					<tr>
+					        				<th>S.No.</th>
+					        				<th>Book Id</th>
+					        				<th>Book Name</th>
+					        				<th>Author</th>
+					        				<th>Restore Book</th>
+					        				<th>Delete Permanently</th>
+				      					</tr>
+				    				</thead><!--table header close-->
 
-					                $query = "select * from books b where b.trash='1' AND b.owner='".$_SESSION['user_id']."'";
-					                $result = mysqli_query($link,$query);
+									<?php
+						                require_once('db_connect.php'); //connect with database
 
-					                if(mysqli_num_rows($result)==0)
-					                    echo nl2br("Trash is empty !!\n");
+						                $query = "select * from books b where b.trash='1' AND b.owner='".$_SESSION['user_id']."'";
+						                $result = mysqli_query($link,$query);
 
-					           		$i=1;
-					                while($row = mysqli_fetch_array($result))
-					                {
-					            ?>
+						                if(mysqli_num_rows($result)==0)
+						                    echo nl2br("Trash is empty !!\n");
 
-			            		<tbody><!--print table data-->
-			      					<tr>
-			        				<td><?php echo $i ?></td>
-			        				<td><?php echo $row["bid"] ?></td>
-			        				<td><?php echo $row["bname"] ?></td>
-			        				<td><?php echo $row["author"] ?></td>
-			        				<td>
-			        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?res=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#27AE60'>confirm restore</a>">
-			        					<span class='glyphicon glyphicon-refresh' style='color:#27AE60;font-size:25px;padding:5px;'></span>
-			        					</a>
-			        				</td>
-			        				<td>
-			        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
-			        					<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
-			        					</a>
-			        				</td>
+						           		$i=1;
+						                while($row = mysqli_fetch_array($result))
+						                {
+						            ?>
 
-			        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
+				            		<tbody><!--print table data-->
+				      					<tr>
+				        				<td><?php echo $i ?></td>
+				        				<td><?php echo $row["bid"] ?></td>
+				        				<td><?php echo $row["bname"] ?></td>
+				        				<td><?php echo $row["author"] ?></td>
+				        				<td>
+				        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?res=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#27AE60'>confirm restore</a>">
+				        					<span class='glyphicon glyphicon-refresh' style='color:#27AE60;font-size:25px;padding:5px;'></span>
+				        					</a>
+				        				</td>
+				        				<td>
+				        					<a href="#" data-toggle="popover" data-trigger="focus" data-content="<a href='delete_book.php?del=<?php echo $row['bid']; ?>'style='text-decoration:none;color:#E74C3C'>confirm delete</a>">
+				        					<span class='glyphicon glyphicon-trash' style='color:#E74C3C;font-size:25px;padding:5px;'></span>
+				        					</a>
+				        				</td>
 
-			      					</tr>
+				        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
 
-			    				</tbody>
-			  				</table>
-			  			</div><!--table responsive div close-->
+				      					</tr>
+
+				    				</tbody>
+				  				</table>
+				  			</div><!--table responsive div close-->
+						</div>
 				    </div>
 				</div><!--end of col-md-9-->
-
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
 
