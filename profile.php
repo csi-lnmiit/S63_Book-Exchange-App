@@ -26,7 +26,7 @@
 
 		<div class="container-fluid">
 			<div class="row"><!--start of row-->
-				<div class="col-md-3" style="height: 100px";>
+				<div class="col-md-3">
 					<div class="row"><!--nested row starts-->
         				<div align="center" style="background-color: #1A1927"><!--libromate logo-->
         					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px; "></a>
@@ -81,7 +81,7 @@
 					    </div><!--end of vertical navbar-->
 					</div><!--end of nested row-->
 					
-				</div><!--end of col-md-2-->
+				</div><!--end of col-md-3-->
 				<div class="col-md-9" style="background-color: white;height: 100px;">
 					<div class="row">
 						<div style="background-color: #3498DB;height: 100px">

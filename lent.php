@@ -19,179 +19,189 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+	    <link rel="stylesheet" type="text/css" href="CSS/style1.css">
 	   	<link rel="stylesheet" type="text/css" href="CSS/search_nav.css">
 	</head>
 
 	<body>
 
-	    <!--top header-->
-	    <header style="height:100px;background-color:#1A1927;width:20%;position: fixed;">
-	        <a href="dashboard.php">
-                <img src="Images/logo.png" style="height:100px; margin-left:25px;">
-            </a>
-	    </header>
+		<div class="container-fluid">
+			<div class="row"><!--start of row-->
+				<div class="col-md-3" >
+					<div class="row"><!--nested row starts-->
 
-	    <!--left column list -->
-	    <div id="dashboard_left_col" class="col-md-3" style="padding-left: 0;padding-top:100px"><!--col-md-3 start-->
-	        <ul>
-				<br>
-	            <p>MENU</p>
-	            <li><a href="dashboard.php">
-	                <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
-	            </li>
-	            <li><a href="profile.php">
-	                <span class="glyphicon glyphicon-user"></span>&emsp;Profile</a>
-	            </li>
-				<br>
-	            <p>BOOKS</p>
-	            <li><a href="add.php">
-	                <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
-	            </li>
-	            <li><a href="modify.php">
-	                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
-	            </li>
-				<br>
-				<p>STATUS</p>
-	            <li><a href="borrow.php">
-	            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
-					 	<?php
-					 		if($borrow!=0) {
-								echo "<span class='badge'>$borrow</span>";
-					 		}
-					 	?>
-				 	</a>
-	            </li>
-	            <li><a href="lent.php" class="active">
-	                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
-					 	<?php
-					 		if($lent!=0) {
-								echo "<span class='badge'>$lent</span>";
-					 		}
-					 	?>
-					</a>
-	            </li>
-                <br>
-                <p>SESSION</p>
-	            <li><a href="logout.php">
-	                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
-	            </li>
-                <li><a href="trash.php">
-                    <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
-                </li>
-	        </ul>
-	    </div><!--col-md-3 end-->
+        				<div align="center" style="background-color: #1A1927;"><!--libromate logo-->
+        					<a href="dashboard.php"><img src="Images/logo.png" style="height:100px;"></a>
+        				</div>
 
-	    <div class="col-md-9"><!--col-md-9 start-->
-	    	<div class="topnav"><!--search bar nav start-->
-				<br>
-				<div class="search-container">
-				    <form action="search.php" method="post">
-				      	<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
-				      	<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-				    </form>
-				</div>
-			</div><!--search bar nav end-->
-			<?php
-                require_once('db_connect.php'); //connect with database
+        				<div id="dashboard_left_col"><!--start of vertical navbar-->
+					        <ul>
+								<br>
+					            <p>MENU</p>
+					            <li><a href="dashboard.php">
+					                <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
+					            </li>
+					            <li><a href="profile.php">
+					                <span class="glyphicon glyphicon-user"></span>&emsp;Profile</a>
+					            </li>
+								<br>
+					            <p>BOOKS</p>
+					            <li><a href="add.php">
+					                <span class="glyphicon glyphicon-plus"></span>&emsp;Add</a>
+					            </li>
+					            <li><a href="modify.php">
+					                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
+					            </li>
+								<br>
+								<p>STATUS</p>
+					            <li><a href="borrow.php">
+					            		<span class="glyphicon glyphicon-hourglass"></span>&emsp;Borrowed
+									 	<?php
+									 		if($borrow!=0) {
+												echo "<span class='badge'>$borrow</span>";
+									 		}
+									 	?>
+								 	</a>
+					            </li>
+					            <li><a href="lent.php" class="active">
+					                	<span class="glyphicon glyphicon-book"></span>&emsp;Lent
+									 	<?php
+									 		if($lent!=0) {
+												echo "<span class='badge'>$lent</span>";
+									 		}
+									 	?>
+									</a>
+					            </li>
+					            <br>
+					            <p>SESSION</p>
+					            <li><a href="logout.php">
+					                <span class="glyphicon glyphicon-log-out"></span>&emsp;Logout</a>
+					            </li>
+					            <li><a href="trash.php">
+					                <span class="glyphicon glyphicon-trash"></span>&emsp;Trash</a>
+					            </li>
+					        </ul>
+					    </div><!--end of vertical navbar-->
+					</div><!--end of nested row-->
+					
+				</div><!--end of col-md-3-->
+				<div class="col-md-9"><!--col-md-9 start-->
+					<div class="container-fluid">
+						<div class="row">
+							<div class="topnav"><!--search bar nav start-->
+								<br>
+								<div class="search-container">
+								    <form action="search.php" method="post">
+								      	<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+								      	<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+								    </form>
+								</div>
+							</div><!--search bar nav end-->
+							<?php
+				                require_once('db_connect.php'); //connect with database
 
-                $query = "SELECT * FROM requests AS r, books AS b, users as u
-						  WHERE b.bid=r.bid AND r.from_user=u.id AND r.to_user='" . $_SESSION['user_id'] . "'";
-                $result = mysqli_query($link,$query);
+				                $query = "SELECT * FROM requests AS r, books AS b, users as u
+										  WHERE b.bid=r.bid AND r.from_user=u.id AND r.to_user='" . $_SESSION['user_id'] . "'";
+				                $result = mysqli_query($link,$query);
 
-                if(mysqli_num_rows($result)==0)
-                    echo nl2br("\nYou have not requested any book yet!!");
-                else
-                    echo nl2br("\nFollowing are the books requested from others:");
+				                if(mysqli_num_rows($result)==0)
+				                    echo nl2br("\nYou have not requested any book yet!!");
+				                else
+				                    echo nl2br("\nFollowing are the books requested from others:");
 
-                echo nl2br("\n\n");
-            ?>
+				                echo nl2br("\n\n");
+				            ?>
 
 
-	    	<div class="table-responsive">
-                <table class="table">
-    				<thead><!--table header start-->
-      					<tr>
-            				<th>S.No.</th>
-            				<th>Book Id</th>
-            				<th>Book Name</th>
-            				<th>Book Author</th>
-            				<th>Requested By</th>
-							<th>Status</th>
-            				<th>Action</th>
-        				</tr>
-    				</thead><!--table header close-->
+					    	<div class="table-responsive">
+				                <table class="table" style="width: 800px" align="center">
+				    				<thead><!--table header start-->
+				      					<tr>
+				            				<th>S.No.</th>
+				            				<th>Book Id</th>
+				            				<th>Book Name</th>
+				            				<th>Book Author</th>
+				            				<th>Requested By</th>
+											<th>Status</th>
+				            				<th>Action</th>
+				        				</tr>
+				    				</thead><!--table header close-->
 
-                    <!--fetch and display data from MySQL-->
-                    <?php
-                        $i=1;
+				                    <!--fetch and display data from MySQL-->
+				                    <?php
+				                        $i=1;
 
-                        while($row = mysqli_fetch_array($result)) {
-        	                echo "<tr>";
+				                        while($row = mysqli_fetch_array($result)) {
+				        	                echo "<tr>";
 
-							if($row['rn']==1) {
-								echo "<td><span class='label label-primary'>NEW</span>" . $i . "</td>";
-							}
-							else
-        	                	echo "<td>" . $i . "</td>";
+											if($row['rn']==1) {
+												echo "<td><span class='label label-primary'>NEW</span>" . $i . "</td>";
+											}
+											else
+				        	                	echo "<td>" . $i . "</td>";
 
-        	                echo "<td>" . $row["bid"] . "</td>";
-        	                echo "<td>" . $row["bname"] . "</td>";
-        	                echo "<td>" . $row["author"] . "</td>";
+				        	                echo "<td>" . $row["bid"] . "</td>";
+				        	                echo "<td>" . $row["bname"] . "</td>";
+				        	                echo "<td>" . $row["author"] . "</td>";
 
-							if($row['status'] == 1) {
+											if($row['status'] == 1) {
 
-								$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE u.id='".$row['id']."' AND r.bid=b.bid";
-								$info_result = mysqli_query($link,$info_query);
-								$info = mysqli_fetch_array($info_result);
-					?>
+												$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE u.id='".$row['id']."' AND r.bid=b.bid";
+												$info_result = mysqli_query($link,$info_query);
+												$info = mysqli_fetch_array($info_result);
+									?>
 
-					<td>
-						<a href='#' data-toggle='popover' data-trigger='focus' data-content="
-						Email: <?php echo $info['email'] ?><br>
-						Mobile: <?php echo $info['mobile']; ?>">
-							<?php echo $info['name']; ?>
-						</a>
-					</td>
+									<td>
+										<a href='#' data-toggle='popover' data-trigger='focus' data-content="
+										Email: <?php echo $info['email'] ?><br>
+										Mobile: <?php echo $info['mobile']; ?>">
+											<?php echo $info['name']; ?>
+										</a>
+									</td>
 
-					<?php
-							}
-							else {
-								echo "<td>" . $row["name"] . "</td>";
-							}
+									<?php
+											}
+											else {
+												echo "<td>" . $row["name"] . "</td>";
+											}
 
-							if($row["status"]==0) {
-								echo "<td><button class='btn btn-warning' style='width:80px'>Pending</button></td>";
-								echo "<td>
-									 <a href='query.php?accept=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
-									 <input class='btn btn-primary' type='button' name='accept' value='Accept'>
-									 </a>
-									 <a href='query.php?decline=" . $row["bid"] . "&from_user=" . $row['id'] . "'>
-									 <input class='btn btn-primary' type='button' name='decline' value='Decline'>
-									 </a>
-									 </td>";
-							}
-							else if($row["status"]==1) {
-								echo "<td><button class='btn btn-success'style='width:80px'>Shared</button></td>";
-								echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] .
-									 "'><input class='btn btn-primary' type='button' name='cancel' value='Remove'>
-									 </a></td>";
-							}
-							else if($row["status"]==2) {
-								echo "<td><button class='btn btn-danger'style='width:80px'>Declined</button></td>";
-								echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] .
-									 "'><input class='btn btn-primary' type='button' name='cancel' value='Remove'>
-									 </a></td>";
-							}
+											if($row["status"]==0) {
+												echo "<td><button class='btn btn-warning' style='width:80px'>Pending</button></td>";
+												echo "<td>
+													 <a href='query.php?accept=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
+													 <input class='btn btn-primary' type='button' name='accept' value='Accept'>
+													 </a>
+													 <a href='query.php?decline=" . $row["bid"] . "&from_user=" . $row['id'] . "'>
+													 <input class='btn btn-primary' type='button' name='decline' value='Decline'>
+													 </a>
+													 </td>";
+											}
+											else if($row["status"]==1) {
+												echo "<td><button class='btn btn-success'style='width:80px'>Shared</button></td>";
+												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] .
+													 "'><input class='btn btn-primary' type='button' name='cancel' value='Remove'>
+													 </a></td>";
+											}
+											else if($row["status"]==2) {
+												echo "<td><button class='btn btn-danger'style='width:80px'>Declined</button></td>";
+												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] .
+													 "'><input class='btn btn-primary' type='button' name='cancel' value='Remove'>
+													 </a></td>";
+											}
 
-							echo "</tr>";
-        	                ++$i;
-                        }
-                    ?>
+											echo "</tr>";
+				        	                ++$i;
+				                        }
+				                    ?>
 
-                </table>
-            </div>
-	    </div><!--col-md-9 end-->
+				                </table>
+				            </div>
+						</div>
+				    </div>
+				</div><!--end of col-md-9-->
+
+			</div><!--end of row-->
+		</div><!--end of container fluid-->
 
 		<!--JS SCRIPTS-->
 	    <script  type='text/javascript'>
