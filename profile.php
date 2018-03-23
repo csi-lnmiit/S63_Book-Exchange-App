@@ -18,7 +18,7 @@
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+	    <link rel="stylesheet" type="text/css" href="CSS/style1.css">
 	</head>
 
 
@@ -92,18 +92,20 @@
 							<div class="row">
 	        					
 	        					<div class="col-md-1"></div>
-								<div class="col-md-3 card">
+								<div class="col-md-3 card"><!--start of card-->
 								  <img src="Images/geek_pic.png" alt="John" style="width:100%;">
 								  <h1><?php echo $_SESSION["name"]?></h1>
 								  <p class="title"><?php echo $_SESSION["user"]?></p>
 								  <p>Harvard University</p>
 								</div><!--end of card-->
 
-								<div class="col-md-7">
+								<div class="col-md-7"><!--col-md-7 starts-->
 									<div class="container-fluid">
 										<div class="row">
 											<div style="background-color: #212F3D;height: 100px">
-												
+												<a href="edit_book.php?edit=<?php echo $row['bid']; ?>" >
+	        										<p id=edit_profile><b>EDIT PROFILE</b></p>
+	        									</a>
 											</div>
 											<div style="background-color: #D7DBDD;height: 250px">
 												<div class="table-responsive" style="padding-left: 10px;padding-top:10px"> <!-- user info table -->
@@ -139,9 +141,9 @@
 									        		</table>
 									            </div>  <!-- table div close -->
 											</div>
-										</div>
-									</div>
-								</div>
+										</div><!--end of row-->
+									</div><!--end of container fluid-->
+								</div><!--col-md-7 starts-->
 								<div class="col-md-1"></div>
 
 							</div>

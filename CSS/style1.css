@@ -48,17 +48,31 @@
 
 /* ---user profile card css -- */
 .card {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  max-width: 300px;
-  margin: auto;
-  text-align: center;
-  font-family: arial;
-  height: 350px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: auto;
+    text-align: center;
+    font-family: arial;
+    height: 350px;
 }
 
 .title {
-  color: grey;
-  font-size: 18px;
+    color: grey;
+    font-size: 18px;
 }
+
+/* ---edit profile button---*/
+#edit_profile {
+    font-size:25px;
+    padding:5px;
+    color: black;
+    font-size: 15px;
+    color: white;
+    text-decoration: none;
+    text-align: right;
+    padding-right: 10px;
+    padding-top: 60px;
+}
+
 
 
