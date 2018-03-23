@@ -96,14 +96,14 @@
 								  <img src="Images/geek_pic.png" alt="John" style="width:100%;">
 								  <h1><?php echo $_SESSION["name"]?></h1>
 								  <p class="title"><?php echo $_SESSION["user"]?></p>
-								  <p>Harvard University</p>
+								  
 								</div><!--end of card-->
 
 								<div class="col-md-7"><!--col-md-7 starts-->
 									<div class="container-fluid">
 										<div class="row">
 											<div style="background-color: #212F3D;height: 100px">
-												<a href="edit_book.php?edit=<?php echo $row['bid']; ?>" >
+												<a href="edit_profile.php?uid=<?php echo $_SESSION["user_id"]; ?>" >
 	        										<p id=edit_profile><b>EDIT PROFILE</b></p>
 	        									</a>
 											</div>
