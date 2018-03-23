@@ -115,7 +115,7 @@
 
 
 					    	<div class="table-responsive">
-				                <table class="table">
+				                <table class="table" style="width: 900px;" align="center">
 				    				<thead><!--table header start-->
 				      					<tr>
 				            				<th>S.No.</th>
