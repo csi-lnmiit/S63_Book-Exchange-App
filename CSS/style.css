@@ -1,40 +1,63 @@
 
-ul {
+/*----left vertical navbar css ----*/
+#dashboard_left_col p {
+    padding-left: 35px;
+    padding-top:10px;
+    color: #868899;
+    font-size: 13px;
+}
+
+#dashboard_left_col ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    width: 20%;
+    width: 25%; /* corresponding to col-md-3  */
     background-color: #35374C;
     position: fixed;
     height: 100%;
     overflow: auto;
-    font-size: 14px;
+    font-size: 15px;
 }
 
-li a {
+#dashboard_left_col li a {
     display: block;
     color: #D6DBDF;
-    padding: 10px 25px;
+    padding: 10px 35px;
     text-decoration: none;
 }
 
-li a.active {
+#dashboard_left_col li a.active {
     background-color: #2D2E40;
     color: white;
     text-decoration: none;
 }
 
-li a:hover:not(.active) {
-    background-color: #35374C;
+#dashboard_left_col li a:hover:not(.active) {
+    background-color: #3498DB;/*light blue*/
     color: white;
     text-decoration: none;
 }
+/*My Profile text */
+#my_profile_text {
+    padding-top: 35px;
+    font-size: 20px;
+    color: white;
+    padding-right: 100px;
+    text-align:right;
+}
 
-#dashboard_left_col p {
-    padding-left: 25px;
-    padding-top:10px;
-    color: #868899;
-    font-size: 12px;
+/* ---user profile card css -- */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
 }
 
 
