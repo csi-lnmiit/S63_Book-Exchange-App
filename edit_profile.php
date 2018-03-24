@@ -38,7 +38,7 @@
 			    $msg="Password should be of minimum 6 letters";
 			}
 			else if(trim($_POST["pass"])!=NULL && $flag==0){
-				$pass = $_POST["pass"];
+				$pass = md5($_POST["pass"]);
 				$query="UPDATE users SET password='$pass' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
 				$_SESSION["pass"] = $pass;
@@ -183,12 +183,20 @@
 								    </div>
 								    <!--edit password-->
 									<div class="input-group">
-										<span class="input-group-addon" style="width: 100px;">Password</span>
+										<span class="input-group-addon" style="width: 100px;">Password 
+										</span>
+										
+										<span class="glyphicon glyphicon-alert" data-toggle="tooltip" title="Password should have minimum 6 characters" data-placement="bottom" style="color:#E74C3C;padding-top: 10px;padding-left: 5px"></span>	
+										
 										<input type="text" class="form-control" style="width:250px;" name="pass" placeholder="<?php echo $_SESSION["pass"];?>">
+
 									</div>
 									<!--edit mobile-->
 								    <div class="input-group">
-										<span class="input-group-addon" style="width: 100px;">Mobile</span>
+										<span class="input-group-addon" style="width: 100px;">Mobile
+										</span>
+										<span class="glyphicon glyphicon-alert" data-toggle="tooltip" title="Enter a valid 10-digit mobile number" data-placement="bottom" style="color:#E74C3C;padding-top: 10px;padding-left: 5px">									
+										</span>
 										<input type="text" class="form-control" style="width:250px;" name="mobile" placeholder="<?php echo $_SESSION["mobile"];?>">
 								    </div>
 								    <!--edit email-->
@@ -211,6 +219,9 @@
 			if ( window.history.replaceState ) {
 				window.history.replaceState( null, null, window.location.href );
 			}
+			$(document).ready(function(){
+    		$('[data-toggle="tooltip"]').tooltip();   
+			});
 		</script>
 	</body>
 </html>

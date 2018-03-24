@@ -21,7 +21,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" type="text/css" href="CSS/style1.css">
-	   	<link rel="stylesheet" type="text/css" href="CSS/search_nav.css">
 	</head>
 
 	<body>
@@ -87,12 +86,11 @@
 
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
-						<div style="height: 100px">
+						<div style="background-color: #3498DB;height: 100px">
 							<div class="topnav">
-								<br>
-								<div class="search-container" style="padding-left:85px">
+								<div class="search-container" align="center">
 									<form action="search.php" method="post">
-										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
 										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 									</form>
 								</div>
@@ -154,22 +152,21 @@
 						        			<td>
 
 												<?php
-													$query = "select * from requests where bid='" . $row['bid'] . "' and from_user='" . $_SESSION['user_id'] . "' and status=0";
-													$req = mysqli_query($link,$query);
-													$query = "select * from requests where bid='" . $row['bid'] . "' and from_user='" . $_SESSION['user_id'] . "' and status=1";
-													$acc = mysqli_query($link,$query);
-													$query = "select * from requests where bid='" . $row['bid'] . "' and from_user<>'" . $_SESSION['user_id'] . "' and status=1";
-													$sha = mysqli_query($link,$query);
+													$query1 = "select * from requests where bid='" . $row['bid'] . "' and from_user!='" . $_SESSION['user_id'] . "' and to_user='".$row['id']."' and status=1";
+													$sha = mysqli_query($link,$query1);
+													$query2 = "select * from requests where bid='" . $row['bid'] . "' and from_user='" . $_SESSION['user_id'] . "' and status=0";
+													$req = mysqli_query($link,$query2);
+													$query3 = "select * from requests where bid='" . $row['bid'] . "' and from_user='" . $_SESSION['user_id'] . "' and status=1";
+													$acc = mysqli_query($link,$query3);
+													
 
-													if(mysqli_num_rows($req))
+													if(mysqli_num_rows($sha))
+														echo "<button class='btn btn-danger' style='width:100px'>N.A.</button>";
+													else if(mysqli_num_rows($req))
 														echo "<button class='btn btn-warning' style='width:100px'>Requested</button>";
 
 													else if(mysqli_num_rows($acc))
 														echo "<button class='btn btn-success' style='width:100px'>Accepted</button>";
-
-													else if(mysqli_num_rows($sha))
-														echo "<button class='btn btn-danger' style='width:100px'>Shared</button>";
-
 													else {
 														echo "<a href='query.php?request="  . $row['bid'] . "&to_user=" . $row['id'] . "'>
 														      <input class='btn btn-primary' type='button' name='request' value='Request' style='width:100px'>
