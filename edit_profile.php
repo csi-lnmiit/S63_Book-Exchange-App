@@ -24,17 +24,6 @@
 		$result = mysqli_query($link,$query);
 		$row = mysqli_fetch_array($result);
 
-		if(strlen($_POST["pass"])<6)
-        {
-            $flag=1;
-            $msg="Password should be of minimum 6 letters";
-        }
-		else if(!is_numeric($_POST["mobile"]) && strlen($_POST["mobile"])!=10)
-        {
-            $flag=1;
-            $msg="Invalid mobile number";
-        }
-		else {
 
 			//if username is not NULL
 			if(trim($_POST["name"])!=NULL){
@@ -43,15 +32,28 @@
 				$result = mysqli_query($link,$query);
 				$_SESSION["name"] = $name;
 	        }
-	     	//if password is not NULL
-			if(trim($_POST["pass"])!=NULL){
+	     	//if password is not NULL and check if its < 6 chars
+	     	if(trim($_POST["pass"])!=NULL && strlen($_POST["pass"])<6){
+			    $flag=1;
+			    $msg="Password should be of minimum 6 letters";
+			}
+			else if(trim($_POST["pass"])!=NULL && $flag==0){
 				$pass = $_POST["pass"];
 				$query="UPDATE users SET password='$pass' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
 				$_SESSION["pass"] = $pass;
 			}
-			//if mobile is not NULL
-			if(trim($_POST["mobile"])!=NULL){
+			//if mobile is not NULL and check if its 10 digit
+			if(trim($_POST["mobile"])!=NULL && !is_numeric($_POST["mobile"])){
+			    $flag=1;
+			    $msg="Invalid number.Enter digits.";
+			}
+			else if(trim($_POST["mobile"])!=NULL && strlen($_POST["mobile"])!=10){
+			    $flag=1;
+			    $msg="Invalid mobile number";
+			}
+			else if(trim($_POST["mobile"])!=NULL && $flag==0){
+				
 				$mobile = $_POST["mobile"];
 				$query="UPDATE users SET mobile='$mobile' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
@@ -64,10 +66,7 @@
 				$result = mysqli_query($link,$query);
 				$_SESSION["email"] = $email;
 			}
-
-			//tranfer to modify.php
-			header('location: profile.php');
-		}
+		
 
 		if($flag)
 	    {
@@ -75,6 +74,10 @@
 	        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
 
 	        unset($_POST);
+	    }
+	    else{
+	    	//tranfer to profile.php
+			header('location: profile.php');
 	    }
 	}
 ?>
