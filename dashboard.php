@@ -20,7 +20,6 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" type="text/css" href="CSS/style1.css">
-	   	<link rel="stylesheet" type="text/css" href="CSS/search_nav.css">
 	</head>
 
 	<body>
@@ -86,18 +85,17 @@
 
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
-						<div style="height: 100px">
+						<div style="background-color: #3498DB;height: 100px">
 							<div class="topnav">
-								<br>
-								<div class="search-container" style="padding-left:85px">
+								<div class="search-container" align="center">
 									<form action="search.php" method="post">
-										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="65%">
+										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
 										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 									</form>
 								</div>
 							</div>
 						</div>
-
+						
 						<div class="container-fluid">
 							<br>
 					        <div style="font-size:30px;padding-left: 70px">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</div>
