@@ -32,8 +32,6 @@
 	else if(isset($_GET["request"])) {
 		$bid = $_GET['request'];
 		$to_user = $_GET['to_user'];
-		$sql = "delete from requests where bid='" . $bid . "' and to_user='" . $to_user . "'";
-		mysqli_query($link,$sql);
 		$sql = "insert into requests values('" . $bid . "','" . $_SESSION['user_id'] . "','" . $to_user . "',0,1,0)";
 		mysqli_query($link,$sql);
 		header('location:borrow.php');

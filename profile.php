@@ -90,7 +90,7 @@
 
 						<div class="container-fluid">
 							<br>
-				    		<div style="font-size:30px;padding-left: 70px">Enter Details</div>
+				    		<div style="font-size:30px;padding-left: 70px">Hello <?php echo $_SESSION["user"]?>,</div>
 							<br>
 							
 							<div class="row">

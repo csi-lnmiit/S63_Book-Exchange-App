@@ -24,17 +24,6 @@
 		$result = mysqli_query($link,$query);
 		$row = mysqli_fetch_array($result);
 
-		if(strlen($_POST["pass"])<6)
-        {
-            $flag=1;
-            $msg="Password should be of minimum 6 letters";
-        }
-		else if(!is_numeric($_POST["mobile"]) && strlen($_POST["mobile"])!=10)
-        {
-            $flag=1;
-            $msg="Invalid mobile number";
-        }
-		else {
 
 			//if username is not NULL
 			if(trim($_POST["name"])!=NULL){
@@ -43,15 +32,28 @@
 				$result = mysqli_query($link,$query);
 				$_SESSION["name"] = $name;
 	        }
-	     	//if password is not NULL
-			if(trim($_POST["pass"])!=NULL){
-				$pass = $_POST["pass"];
+	     	//if password is not NULL and check if its < 6 chars
+	     	if(trim($_POST["pass"])!=NULL && strlen($_POST["pass"])<6){
+			    $flag=1;
+			    $msg="Password should be of minimum 6 letters";
+			}
+			else if(trim($_POST["pass"])!=NULL && $flag==0){
+				$pass = md5($_POST["pass"]);
 				$query="UPDATE users SET password='$pass' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
 				$_SESSION["pass"] = $pass;
 			}
-			//if mobile is not NULL
-			if(trim($_POST["mobile"])!=NULL){
+			//if mobile is not NULL and check if its 10 digit
+			if(trim($_POST["mobile"])!=NULL && !is_numeric($_POST["mobile"])){
+			    $flag=1;
+			    $msg="Invalid number.Enter digits.";
+			}
+			else if(trim($_POST["mobile"])!=NULL && strlen($_POST["mobile"])!=10){
+			    $flag=1;
+			    $msg="Invalid mobile number";
+			}
+			else if(trim($_POST["mobile"])!=NULL && $flag==0){
+				
 				$mobile = $_POST["mobile"];
 				$query="UPDATE users SET mobile='$mobile' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
@@ -64,10 +66,7 @@
 				$result = mysqli_query($link,$query);
 				$_SESSION["email"] = $email;
 			}
-
-			//tranfer to modify.php
-			header('location: profile.php');
-		}
+		
 
 		if($flag)
 	    {
@@ -75,6 +74,10 @@
 	        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
 
 	        unset($_POST);
+	    }
+	    else{
+	    	//tranfer to profile.php
+			header('location: profile.php');
 	    }
 	}
 ?>
@@ -180,12 +183,20 @@
 								    </div>
 								    <!--edit password-->
 									<div class="input-group">
-										<span class="input-group-addon" style="width: 100px;">Password</span>
+										<span class="input-group-addon" style="width: 100px;">Password 
+										</span>
+										
+										<span class="glyphicon glyphicon-alert" data-toggle="tooltip" title="Password should have minimum 6 characters" data-placement="bottom" style="color:#E74C3C;padding-top: 10px;padding-left: 5px"></span>	
+										
 										<input type="text" class="form-control" style="width:250px;" name="pass" placeholder="<?php echo $_SESSION["pass"];?>">
+
 									</div>
 									<!--edit mobile-->
 								    <div class="input-group">
-										<span class="input-group-addon" style="width: 100px;">Mobile</span>
+										<span class="input-group-addon" style="width: 100px;">Mobile
+										</span>
+										<span class="glyphicon glyphicon-alert" data-toggle="tooltip" title="Enter a valid 10-digit mobile number" data-placement="bottom" style="color:#E74C3C;padding-top: 10px;padding-left: 5px">									
+										</span>
 										<input type="text" class="form-control" style="width:250px;" name="mobile" placeholder="<?php echo $_SESSION["mobile"];?>">
 								    </div>
 								    <!--edit email-->
@@ -208,6 +219,9 @@
 			if ( window.history.replaceState ) {
 				window.history.replaceState( null, null, window.location.href );
 			}
+			$(document).ready(function(){
+    		$('[data-toggle="tooltip"]').tooltip();   
+			});
 		</script>
 	</body>
 </html>
