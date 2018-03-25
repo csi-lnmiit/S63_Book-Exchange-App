@@ -85,7 +85,7 @@
 
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
-						<div style="background-color: #3498DB;height: 100px">
+						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
 							<div id="nav_text"><b>Modify or Delete a Book</b></div>
 						</div>
 

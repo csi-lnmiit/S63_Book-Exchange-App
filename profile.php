@@ -84,7 +84,7 @@
 
 				<div class="col-md-9">
 					<div class="row">
-						<div style="background-color: #3498DB;height: 100px">
+						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
 							<div id="nav_text"><b>My Profile</b></div>
 						</div>
 
@@ -92,7 +92,7 @@
 							<br>
 				    		<div style="font-size:30px;padding-left: 70px">Hello <?php echo $_SESSION["user"]?>,</div>
 							<br>
-							
+
 							<div class="row">
 	        					<div class="col-md-1"></div>
 
@@ -102,9 +102,9 @@
 								  	<p class="title"><?php echo $_SESSION["user"]?></p>
 								</div><!--end of card-->
 
-								<div class="col-md-7"><!--col-md-7 starts-->
+								<div class="col-md-8"><!--col-md-8 starts-->
 									<div class="container-fluid">
-										<div class="row">
+										<div class="row" style="padding-right:50px">
 											<div style="background-color: #1A1927;height: 100px">
 												<a href="edit_profile.php?uid=<?php echo $_SESSION["user_id"]; ?>" >
 	        										<p id="edit_profile"><b>EDIT PROFILE</b></p>
@@ -145,9 +145,7 @@
 											</div>
 										</div><!--end of row-->
 									</div><!--end of container fluid-->
-								</div><!--col-md-7 starts-->
-
-								<div class="col-md-1"></div>
+								</div><!--col-md-8 starts-->
 							</div>
 						</div>
 					</div>

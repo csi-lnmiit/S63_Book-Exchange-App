@@ -53,7 +53,7 @@
 			    $msg="Invalid mobile number";
 			}
 			else if(trim($_POST["mobile"])!=NULL && $flag==0){
-				
+
 				$mobile = $_POST["mobile"];
 				$query="UPDATE users SET mobile='$mobile' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
@@ -66,7 +66,7 @@
 				$result = mysqli_query($link,$query);
 				$_SESSION["email"] = $email;
 			}
-		
+
 
 		if($flag)
 	    {
@@ -160,7 +160,7 @@
 
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
-						<div style="background-color: #3498DB;height: 100px">
+						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
 							<div id="nav_text"><b>Edit Profile</b></div>
 						</div>
 
@@ -183,11 +183,11 @@
 								    </div>
 								    <!--edit password-->
 									<div class="input-group">
-										<span class="input-group-addon" style="width: 100px;">Password 
+										<span class="input-group-addon" style="width: 100px;">Password
 										</span>
-										
-										<span class="glyphicon glyphicon-alert" data-toggle="tooltip" title="Password should have minimum 6 characters" data-placement="bottom" style="color:#E74C3C;padding-top: 10px;padding-left: 5px"></span>	
-										
+
+										<span class="glyphicon glyphicon-alert" data-toggle="tooltip" title="Password should have minimum 6 characters" data-placement="bottom" style="color:#E74C3C;padding-top: 10px;padding-left: 5px"></span>
+
 										<input type="text" class="form-control" style="width:250px;" name="pass" placeholder="<?php echo $_SESSION["pass"];?>">
 
 									</div>
@@ -195,7 +195,7 @@
 								    <div class="input-group">
 										<span class="input-group-addon" style="width: 100px;">Mobile
 										</span>
-										<span class="glyphicon glyphicon-alert" data-toggle="tooltip" title="Enter a valid 10-digit mobile number" data-placement="bottom" style="color:#E74C3C;padding-top: 10px;padding-left: 5px">									
+										<span class="glyphicon glyphicon-alert" data-toggle="tooltip" title="Enter a valid 10-digit mobile number" data-placement="bottom" style="color:#E74C3C;padding-top: 10px;padding-left: 5px">
 										</span>
 										<input type="text" class="form-control" style="width:250px;" name="mobile" placeholder="<?php echo $_SESSION["mobile"];?>">
 								    </div>
@@ -220,7 +220,7 @@
 				window.history.replaceState( null, null, window.location.href );
 			}
 			$(document).ready(function(){
-    		$('[data-toggle="tooltip"]').tooltip();   
+    		$('[data-toggle="tooltip"]').tooltip();
 			});
 		</script>
 	</body>

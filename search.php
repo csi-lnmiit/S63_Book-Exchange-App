@@ -86,15 +86,17 @@
 
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
-						<div style="background-color: #3498DB;height: 100px">
-							<div class="topnav">
-								<div class="search-container" align="center">
+						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
+							<div class="topnav col-md-9" style="padding-left:70px">
+								<div class="search-container" align="left">
 									<form action="search.php" method="post">
 										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
 										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 									</form>
 								</div>
 							</div>
+
+							<div class="col-md-3" id="nav_text"><b>Search a Book</b></div>
 						</div>
 
 						<div class="container-fluid">
@@ -121,7 +123,7 @@
 
 							</div>
 
-							<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+							<div class="table-responsive" style="padding-left:70px;padding-right:50px">
 								<table class="table" align="center">
 				    				<thead><!--table header start-->
 				      					<tr>
@@ -158,15 +160,15 @@
 													$req = mysqli_query($link,$query2);
 													$query3 = "select * from requests where bid='" . $row['bid'] . "' and from_user='" . $_SESSION['user_id'] . "' and status=1";
 													$acc = mysqli_query($link,$query3);
-													
+
 
 													if(mysqli_num_rows($sha))
 														echo "<button class='btn btn-danger' style='width:100px'>N.A.</button>";
 													else if(mysqli_num_rows($req))
 														echo "<button class='btn btn-warning' style='width:100px'>Requested</button>";
-
 													else if(mysqli_num_rows($acc))
 														echo "<button class='btn btn-success' style='width:100px'>Accepted</button>";
+
 													else {
 														echo "<a href='query.php?request="  . $row['bid'] . "&to_user=" . $row['id'] . "'>
 														      <input class='btn btn-primary' type='button' name='request' value='Request' style='width:100px'>

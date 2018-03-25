@@ -88,13 +88,13 @@
 
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
-						<div style="background-color: #3498DB;height: 100px">
+						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
 							<div id="nav_text"><b>Trash</b></div>
 						</div>
 
 						<div class="container-fluid">
 							<br>
-							<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+							<div class="table-responsive" style="padding-left:70px;padding-right:50px">
 				                <table class="table" align="center">
 				    				<thead><!--table header start-->
 				      					<tr>

@@ -85,15 +85,17 @@
 
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
-						<div style="background-color: #3498DB;height: 100px">
-							<div class="topnav">
-								<div class="search-container" align="center">
+						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
+							<div class="topnav col-md-9" style="padding-left:70px">
+								<div class="search-container" align="left">
 									<form action="search.php" method="post">
 										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
 										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 									</form>
 								</div>
 							</div>
+
+							<div class="col-md-3" id="nav_text"><b>Books Lent</b></div>
 						</div>
 
 						<div class="container-fluid">
@@ -117,7 +119,7 @@
 
 							</div>
 
-							<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+							<div class="table-responsive" style="padding-left:70px;padding-right:50px">
 				                <table class="table" align="center">
 				    				<thead><!--table header start-->
 				      					<tr>
@@ -170,7 +172,7 @@
 											}
 
 											if($row["status"]==0) {
-												echo "<td><button class='btn btn-warning' style='width:80px'>Pending</button></td>";
+												echo "<td><button class='btn btn-warning' style='width:100px'>Pending</button></td>";
 												echo "<td>
 													 <a href='query.php?accept=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
 													 <input class='btn btn-primary' type='button' name='accept' value='Accept' style='width:70px'>
@@ -181,13 +183,13 @@
 													 </td>";
 											}
 											else if($row["status"]==1) {
-												echo "<td><button class='btn btn-success' style='width:80px'>Shared</button></td>";
+												echo "<td><button class='btn btn-success' style='width:100px'>Shared</button></td>";
 												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
 													  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Accept' style='width:143px'>
 													  </a></td>";
 											}
 											else if($row["status"]==2) {
-												echo "<td><button class='btn btn-danger' style='width:80px'>Declined</button></td>";
+												echo "<td><button class='btn btn-danger' style='width:100px'>Declined</button></td>";
 												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
 													  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Decline' style='width:143px'>
 												 	  </a></td>";

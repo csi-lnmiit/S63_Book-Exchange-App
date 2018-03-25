@@ -85,17 +85,19 @@
 
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
-						<div style="background-color: #3498DB;height: 100px">
-							<div class="topnav">
-								<div class="search-container" align="center">
+						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
+							<div class="topnav col-md-9" style="padding-left:70px">
+								<div class="search-container" align="left">
 									<form action="search.php" method="post">
 										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
 										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 									</form>
 								</div>
 							</div>
+
+							<div class="col-md-3" id="nav_image"><img src="Images/geek_pic.png" alt="My Pic" style="width:40%;"></div>
 						</div>
-						
+
 						<div class="container-fluid">
 							<br>
 					        <div style="font-size:30px;padding-left: 70px">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</div>
@@ -117,7 +119,7 @@
 
 							</div>
 
-							<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+							<div class="table-responsive" style="padding-left:70px;padding-right:50px">
 				                <table class="table" align="center">
 				    				<thead><!--table header start-->
 				      					<tr>

@@ -43,7 +43,13 @@
     padding-top: 35px;
     font-size: 20px;
     color: white;
-    padding-right: 100px;
+    padding-right: 50px;
+    text-align:right;
+}
+
+#nav_image {
+    padding-top: 15px;
+    padding-right: 50px;
     text-align:right;
 }
 
@@ -80,7 +86,7 @@
 
 /*---SEARCH BAR CSS---*/
 .topnav {
-  overflow: hidden; 
+  overflow: hidden;
 }
 .topnav a {
   float: left;
@@ -112,7 +118,7 @@ textarea:focus, input:focus{
     outline: none;
 }
 .topnav .search-container button {
-  
+
   padding: 6.5px 40px;
   background: #273746;
   font-size: 17px;
