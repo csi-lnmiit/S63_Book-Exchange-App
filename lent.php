@@ -85,17 +85,35 @@
 
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
-						<div style="background-color: #3498DB;height: 100px">
-							<div class="topnav">
-								<div class="search-container" align="center">
+						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
+							
+							<div class="col-md-1"></div>
+
+							<div class="topnav col-md-9">
+								<div class="search-container">
 									<form action="search.php" method="post">
 										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
 										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
 									</form>
 								</div>
 							</div>
-						</div>
 
+							<div class="col-md-2" id="nav_image">
+								<div class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none">
+										<img src="Images/geek_pic.png" alt="My Pic" style="width:35%;" >
+  									<span class="caret" style="color: black"></span>
+  									</a>
+									<ul class="dropdown-menu">
+										<li><p>Signed in as</p></li>
+										<li><p><b><?php echo $_SESSION['user'];?></b></p></li>
+										<li><a href="profile.php">Your Profile</a></li>
+									    <li><a href="logout.php">Logout</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						
 						<div class="container-fluid">
 							<br>
 							<div style="font-size:15px;padding-left: 70px">
@@ -117,7 +135,7 @@
 
 							</div>
 
-							<div class="table-responsive" style="padding-left:70px;padding-right:30px">
+							<div class="table-responsive" style="padding-left:70px;padding-right:50px">
 				                <table class="table" align="center">
 				    				<thead><!--table header start-->
 				      					<tr>
@@ -170,7 +188,7 @@
 											}
 
 											if($row["status"]==0) {
-												echo "<td><button class='btn btn-warning' style='width:80px'>Pending</button></td>";
+												echo "<td><button class='btn btn-warning' style='width:100px'>Pending</button></td>";
 												echo "<td>
 													 <a href='query.php?accept=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
 													 <input class='btn btn-primary' type='button' name='accept' value='Accept' style='width:70px'>
@@ -181,13 +199,13 @@
 													 </td>";
 											}
 											else if($row["status"]==1) {
-												echo "<td><button class='btn btn-success' style='width:80px'>Shared</button></td>";
+												echo "<td><button class='btn btn-success' style='width:100px'>Shared</button></td>";
 												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
 													  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Accept' style='width:143px'>
 													  </a></td>";
 											}
 											else if($row["status"]==2) {
-												echo "<td><button class='btn btn-danger' style='width:80px'>Declined</button></td>";
+												echo "<td><button class='btn btn-danger' style='width:100px'>Declined</button></td>";
 												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
 													  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Decline' style='width:143px'>
 												 	  </a></td>";

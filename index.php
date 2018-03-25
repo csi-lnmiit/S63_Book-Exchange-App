@@ -175,6 +175,7 @@
 
         <div class="col-md-12" align="center">
             <div class="col-md-4"></div><!--left div end-->
+            
             <div class="col-md-4">
                 <div style="padding-top: 70px"><!--mid div start-->
 
@@ -245,6 +246,7 @@
                     </div><!--tab pill end-->
                 </div><!--mid div end-->
             </div>
+
             <div class="col-md-4"></div><!--right div end-->
         </div>
 
