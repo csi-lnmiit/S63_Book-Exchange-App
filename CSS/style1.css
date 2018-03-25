@@ -38,18 +38,18 @@
     text-decoration: none;
 }
 
-/*Top Navbar text */
-#nav_text {
-    padding-top: 35px;
-    font-size: 20px;
-    color: white;
-    padding-right: 50px;
-    text-align:right;
-}
-
+/*Top Navbar Profile Image */
 #nav_image {
     padding-top: 25px;
     text-align:center;
+}
+
+.dropdown ul li p{
+  padding-left: 20px;
+  color: #5D6D7E;
+}
+.dropdown ul li a:hover{
+  background-color: #1F7AE7;/*navy blue*/
 }
 
 /*-----PROFILE PAGE CSS------*/

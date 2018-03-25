@@ -106,6 +106,8 @@
   									<span class="caret" style="color: black"></span>
   									</a>
 									<ul class="dropdown-menu">
+										<li><p>Signed in as</p></li>
+										<li><p><b><?php echo $_SESSION['user'];?></b></p></li>
 										<li><a href="profile.php">Your Profile</a></li>
 									    <li><a href="logout.php">Logout</a></li>
 									</ul>
@@ -119,7 +121,7 @@
 
 					            <?php
 						        	if(isset($_POST["search"])) {
-							        	$input = $_POST["search_input"];
+							        	$input = ucwords($_POST["search_input"]);
 
 										$query = "SELECT * FROM books AS b, users AS u
 												  WHERE b.bname='" . $input . "' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] .
