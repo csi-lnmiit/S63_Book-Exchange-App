@@ -24,40 +24,36 @@
 		$result = mysqli_query($link,$query);
 		$row = mysqli_fetch_array($result);
 
-		if(trim($_POST["bname"])==NULL){
-            $flag=1;
-            $msg="Book Name required";
-        }
-        else if(trim($_POST["bauthor"])==NULL){
-            $flag=1;
-            $msg="Author name required";
-        }
-		else {
-
-			//if book name is not NULL
-			if(trim($_POST["bname"])!=NULL){
-	        	$bname=$_POST["bname"];
-	        	$query="UPDATE books SET bname='$bname' WHERE bid='$bid'";
-				$result = mysqli_query($link,$query);
-	        }
-	     	//if author name is not NULL
-			if(trim($_POST["author"])!=NULL){
-				$bauthor = $_POST["author"];
-				$query="UPDATE books SET author='$bauthor' WHERE bid='$bid'";
-				$result = mysqli_query($link,$query);
-			}
-
-			//tranfer to modify.php
-			header('location: modify.php');
+		//if book name is not NULL
+		if(trim($_POST["bname"])!=NULL){
+	        $bname=$_POST["bname"];
+	       	$query="UPDATE books SET bname='$bname' WHERE bid='$bid'";
+			$result = mysqli_query($link,$query);
+			$row['bname'] = $bname;
+			$flag++;
+	   	}
+	    //if author name is not NULL
+		if(trim($_POST["author"])!=NULL){
+			$bauthor = $_POST["author"];
+			$query="UPDATE books SET author='$bauthor' WHERE bid='$bid'";
+			$result = mysqli_query($link,$query);
+			$row['author'] = $bauthor;
+			$flag++;
 		}
 
-		if($flag)
-	    {
-	        echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:355px;margin-left:410px;width:350px;">
+		
+		if($flag){
+			$msg = "Book details successfully updated !!";
+			echo '<div class="alert alert-success alert-dismissable fade in" style="position:absolute;margin-top:355px;margin-left:410px;width:350px;">
 	        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
-
-			unset($_POST);
-	    }
+		}
+		else if(!$flag){
+			$msg = "No input to update !!";
+			echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:355px;margin-left:410px;width:350px;">
+	        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
+		}
+	   
+		unset($_POST);
 	}
 
 ?>
@@ -141,7 +137,30 @@
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
 						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
-							<div id="nav_text"><b>Edit a Book</b></div>
+							
+							<div class="col-md-1"></div>
+
+							<div class="topnav col-md-9">
+								<div class="search-container">
+									<form action="search.php" method="post">
+										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
+										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+									</form>
+								</div>
+							</div>
+
+							<div class="col-md-2" id="nav_image">
+								<div class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none">
+										<img src="Images/geek_pic.png" alt="My Pic" style="width:35%;" >
+  									<span class="caret" style="color: black"></span>
+  									</a>
+									<ul class="dropdown-menu">
+										<li><a href="profile.php">Your Profile</a></li>
+									    <li><a href="logout.php">Logout</a></li>
+									</ul>
+								</div>
+							</div>
 						</div>
 
 						<div class="container-fluid">

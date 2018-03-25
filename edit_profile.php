@@ -8,6 +8,7 @@
 	require_once('db_connect.php');
 
 	$flag = 0;
+	$isInput = 0;
 
 	//if edit profile is clicked
 	if(isset($_GET['uid'])){
@@ -31,6 +32,7 @@
 	        	$query="UPDATE users SET name='$name' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
 				$_SESSION["name"] = $name;
+				$isInput++;
 	        }
 	     	//if password is not NULL and check if its < 6 chars
 	     	if(trim($_POST["pass"])!=NULL && strlen($_POST["pass"])<6){
@@ -42,6 +44,7 @@
 				$query="UPDATE users SET password='$pass' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
 				$_SESSION["pass"] = $pass;
+				$isInput++;
 			}
 			//if mobile is not NULL and check if its 10 digit
 			if(trim($_POST["mobile"])!=NULL && !is_numeric($_POST["mobile"])){
@@ -58,6 +61,7 @@
 				$query="UPDATE users SET mobile='$mobile' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
 				$_SESSION["mobile"] = $mobile;
+				$isInput++;
 			}
 			//if email is not NULL
 			if(trim($_POST["email"])!=NULL){
@@ -65,6 +69,7 @@
 				$query="UPDATE users SET email='$email' WHERE id='$uid'";
 				$result = mysqli_query($link,$query);
 				$_SESSION["email"] = $email;
+				$isInput++;
 			}
 
 
@@ -72,13 +77,21 @@
 	    {
 	        echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:425px;margin-left:410px;width:350px;">
 	        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
-
-	        unset($_POST);
 	    }
 	    else{
-	    	//tranfer to profile.php
-			header('location: profile.php');
+	    		if($isInput){
+	    			$msg = "Details successfully updated !!";
+					echo '<div class="alert alert-success alert-dismissable fade in" style="position:absolute;margin-top:425px;margin-left:410px;width:350px;">
+	        		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
+	    		}
+				else if(!$isInput){
+					$msg = "No input to update !!";
+					echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:425px;margin-left:410px;width:350px;">
+	        		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
+				}
 	    }
+
+	    unset($_POST);
 	}
 ?>
 
@@ -161,7 +174,30 @@
 				<div class="col-md-9"><!--col-md-9 start-->
 					<div class="row">
 						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
-							<div id="nav_text"><b>Edit Profile</b></div>
+							
+							<div class="col-md-1"></div>
+
+							<div class="topnav col-md-9">
+								<div class="search-container">
+									<form action="search.php" method="post">
+										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
+										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
+									</form>
+								</div>
+							</div>
+
+							<div class="col-md-2" id="nav_image">
+								<div class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none">
+										<img src="Images/geek_pic.png" alt="My Pic" style="width:35%;" >
+  									<span class="caret" style="color: black"></span>
+  									</a>
+									<ul class="dropdown-menu">
+										<li><a href="profile.php">Your Profile</a></li>
+									    <li><a href="logout.php">Logout</a></li>
+									</ul>
+								</div>
+							</div>
 						</div>
 
 						<div class="container-fluid">
