@@ -123,9 +123,11 @@
 						        	if(isset($_POST["search"])) {
 							        	$input = ucwords($_POST["search_input"]);
 
+							        	// ADVANCED SEARCH QUERY //
 										$query = "SELECT * FROM books AS b, users AS u
-												  WHERE b.bname='" . $input . "' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] .
-												  "' OR b.author='" . $input . "' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] . "'";
+												  WHERE b.bname LIKE '%{$input}%' 
+												  AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] ."' 
+												  OR b.author LIKE '%{$input}%' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] . "'";
 										$result = mysqli_query($link,$query);
 
 							            if(mysqli_num_rows($result)==0)
@@ -179,7 +181,7 @@
 
 
 													if(mysqli_num_rows($sha))
-														echo "<button class='btn btn-danger' style='width:100px'>N.A.</button>";
+														echo "<button class='btn btn-danger' style='width:100px' data-toggle='tooltip' title='Not Available'>N.A.</button>";
 													else if(mysqli_num_rows($req))
 														echo "<button class='btn btn-warning' style='width:100px'>Requested</button>";
 													else if(mysqli_num_rows($acc))
@@ -206,4 +208,9 @@
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
 	</body>
+	<script>
+		$(document).ready(function(){
+		    $('[data-toggle="tooltip"]').tooltip(); 
+		});
+	</script>
 </html>
