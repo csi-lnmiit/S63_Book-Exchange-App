@@ -70,7 +70,9 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" type="text/css" href="CSS/style1.css">
+	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+	    <script type="text/javascript" src="JS/script.js"></script>
+
 	</head>
 
 	<body>
@@ -197,11 +199,5 @@
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
 
-		<!--JS SCRIPTS-->
-	    <script  type='text/javascript'>
-			if ( window.history.replaceState ) {
-				window.history.replaceState( null, null, window.location.href );
-			}
-		</script>
 	</body>
 </html>

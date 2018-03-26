@@ -20,7 +20,7 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" type="text/css" href="CSS/style1.css">
+	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
 	</head>
 
 	<body>
@@ -130,7 +130,7 @@
 												  OR b.author LIKE '%{$input}%' AND b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] . "'";
 										$result = mysqli_query($link,$query);
 
-							            if(mysqli_num_rows($result)==0)
+							            if(mysqli_num_rows($result)==0 OR $input==NULL)
 							                echo nl2br("\nNo matching search found!!");
 							            else
 							            	echo nl2br("\n".mysqli_num_rows($result)." result(s) found.");
@@ -157,8 +157,9 @@
 
 					                <!--fetch and display data from MySQL-->
 					                <?php
-					                    $i=1;
-					                	while($row = mysqli_fetch_array($result)) {
+					                	if($input!=NULL){
+					                   		$i=1;
+					                		while($row = mysqli_fetch_array($result)) {
 					                ?>
 
 					                <tbody><!--print table data-->
@@ -196,7 +197,7 @@
 
 						        			</td>
 
-					        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
+					        				<?php ++$i; }} ?> <!--php to increment S.NO. count of books-->
 
 										</tr>
 									</tbody>
@@ -208,9 +209,4 @@
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
 	</body>
-	<script>
-		$(document).ready(function(){
-		    $('[data-toggle="tooltip"]').tooltip(); 
-		});
-	</script>
 </html>
