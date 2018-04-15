@@ -97,6 +97,24 @@
 
 						<div class="container-fluid">
 							<br>
+							<div style="font-size:15px;padding-left: 70px">
+
+								<?php
+									require_once('db_connect.php'); //connect with database
+
+									$query = "select * from books b where b.trash='1' AND b.owner='".$_SESSION['user_id']."'";
+									$result = mysqli_query($link,$query);
+
+									if(mysqli_num_rows($result)==0)
+										echo nl2br("Trash is empty !!\n");
+									else {
+										echo nl2br("\nYou can restore or permanently delete these books:");
+									}
+									echo nl2br("\n\n");
+								?>
+
+							</div>
+
 							<div class="table-responsive" style="padding-left:70px;padding-right:50px">
 				                <table class="table" align="center">
 				    				<thead><!--table header start-->
@@ -111,14 +129,6 @@
 				    				</thead><!--table header close-->
 
 									<?php
-						                require_once('db_connect.php'); //connect with database
-
-						                $query = "select * from books b where b.trash='1' AND b.owner='".$_SESSION['user_id']."'";
-						                $result = mysqli_query($link,$query);
-
-						                if(mysqli_num_rows($result)==0)
-						                    echo nl2br("Trash is empty !!\n");
-
 						           		$i=1;
 						                while($row = mysqli_fetch_array($result))
 						                {

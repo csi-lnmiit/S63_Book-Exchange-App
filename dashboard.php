@@ -139,7 +139,7 @@
 
 							</div>
 
-							<div class="table-responsive" style="padding-left:70px;padding-right:50px">
+							<div class="table-responsive" style="padding-left:70px;padding-right:50px;max-height:400px">
 				                <table class="table">
 				    				<thead id="thead"><!--table header start-->
 				      					<tr>
@@ -150,21 +150,24 @@
 				        				</tr>
 				    				</thead><!--table header close-->
 
-					                <!--fetch and display data from MySQL-->
-					                <?php
-					                    $i=1;
+									<tbody>
 
-						                while($row = mysqli_fetch_array($result)) {
-							                echo "<tr>";
-							                echo "<td>" . $i . "</td>";
-							                echo "<td>" . $row["bid"] . "</td>";
-							                echo "<td>" . $row["bname"] . "</td>";
-							                echo "<td>" . $row["author"] . "</td>";
-							                echo "</tr>";
-							                ++$i;
-						                }
-					            	?>
+						                <!--fetch and display data from MySQL-->
+						                <?php
+						                    $i=1;
 
+							                while($row = mysqli_fetch_array($result)) {
+								                echo "<tr>";
+								                echo "<td>" . $i . "</td>";
+								                echo "<td>" . $row["bid"] . "</td>";
+								                echo "<td>" . $row["bname"] . "</td>";
+								                echo "<td>" . $row["author"] . "</td>";
+								                echo "</tr>";
+								                ++$i;
+							                }
+						            	?>
+
+									</tbody>
 				                </table>
 				            </div><!--end of responsive table-->
 			        	</div>

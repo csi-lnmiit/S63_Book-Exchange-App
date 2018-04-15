@@ -112,7 +112,7 @@
 
 						<div class="container-fluid">
 							<br>
-							<div style="font-size:15px;padding-left: 70px">
+							<div style="font-size:15px;padding-left:70px">
 
 					            <?php
 					                require_once('db_connect.php'); //connect with database
@@ -145,67 +145,70 @@
 				        				</tr>
 				    				</thead><!--table header close-->
 
-				                    <!--fetch and display data from MySQL-->
-				                    <?php
-				                        $i=1;
+									<tbody>
+										
+					                    <!--fetch and display data from MySQL-->
+					                    <?php
+					                        $i=1;
 
-				                        while($row = mysqli_fetch_array($result)) {
+					                        while($row = mysqli_fetch_array($result)) {
 
-											if($row['sn'] == 1)
-												echo "<tr style='background-color:white'>";
-											else
-												echo "<tr>";
+												if($row['sn'] == 1)
+													echo "<tr style='background-color:white'>";
+												else
+													echo "<tr>";
 
-											echo "<td>" . $i . "</td>";
-				        	                echo "<td>" . $row["bid"] . "</td>";
-				        	                echo "<td>" . $row["bname"] . "</td>";
-				        	                echo "<td>" . $row["author"] . "</td>";
+												echo "<td>" . $i . "</td>";
+					        	                echo "<td>" . $row["bid"] . "</td>";
+					        	                echo "<td>" . $row["bname"] . "</td>";
+					        	                echo "<td>" . $row["author"] . "</td>";
 
-											if($row['status'] == 1) {
+												if($row['status'] == 1) {
 
-												$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE u.id='".$row['id']."' AND r.bid=b.bid";
-												$info_result = mysqli_query($link,$info_query);
-												$info = mysqli_fetch_array($info_result);
-									?>
+													$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE u.id='".$row['id']."' AND r.bid=b.bid";
+													$info_result = mysqli_query($link,$info_query);
+													$info = mysqli_fetch_array($info_result);
+										?>
 
-												<td>
-													<a href='#' data-toggle='popover' data-trigger='focus' data-content="
-													Email: <?php echo $info['email'] ?><br>
-													Mobile: <?php echo $info['mobile']; ?>">
-														<?php echo $info['name']; ?>
-													</a>
-												</td>
+													<td>
+														<a href='#' data-toggle='popover' data-trigger='focus' data-content="
+														Email: <?php echo $info['email'] ?><br>
+														Mobile: <?php echo $info['mobile']; ?>">
+															<?php echo $info['name']; ?>
+														</a>
+													</td>
 
-									<?php
-											}
-											else {
-												echo "<td>" . $row["name"] . "</td>";
-											}
+										<?php
+												}
+												else {
+													echo "<td>" . $row["name"] . "</td>";
+												}
 
-											if($row["status"] == 0) {
-												echo "<td><button class='btn btn-warning' style='width:100px'>Pending</button></td>";
-												echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] . "'>
-													  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Request' style='width:143px'>
-													  </a></td>";
-											}
-											else if($row["status"] == 1) {
-												echo "<td><button class='btn btn-success' style='width:100px'>Accepted</button></td>";
-												echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] ."'>
-													  <input class='btn btn-primary' type='button' name='return' value='Return Book' style='width:143px'>
-													  </a></td>";
-											}
-											else if($row["status"] == 2) {
-												echo "<td><button class='btn btn-danger' style='width:100px'>Declined</button></td>";
-												echo "<td><a href='borrow.php?request=" . $row['bid'] . "&to_user=" . $row['id'] . "'>
-													  <input class='btn btn-primary' type='button' name='request' value='Request Again' style='width:143px'>
-													  </a></td>";
-											}
+												if($row["status"] == 0) {
+													echo "<td><button class='btn btn-warning' style='width:100px'>Pending</button></td>";
+													echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] . "'>
+														  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Request' style='width:143px'>
+														  </a></td>";
+												}
+												else if($row["status"] == 1) {
+													echo "<td><button class='btn btn-success' style='width:100px'>Accepted</button></td>";
+													echo "<td><a href='query.php?return=" . $row['bid'] . "&to_user=" . $row['id'] ."'>
+														  <input class='btn btn-primary' type='button' name='return' value='Return Book' style='width:143px'>
+														  </a></td>";
+												}
+												else if($row["status"] == 2) {
+													echo "<td><button class='btn btn-danger' style='width:100px'>Declined</button></td>";
+													echo "<td><a href='borrow.php?request=" . $row['bid'] . "&to_user=" . $row['id'] . "'>
+														  <input class='btn btn-primary' type='button' name='request' value='Request Again' style='width:143px'>
+														  </a></td>";
+												}
 
-				        	                echo "</tr>";
-				        	                ++$i;
-				                        }
-				                    ?>
+					        	                echo "</tr>";
+					        	                ++$i;
+					                        }
+					                    ?>
 
+									</tbody>
 				                </table>
 				            </div>
 						</div>
