@@ -13,5 +13,12 @@ We have used PHP for backend development and MySQL for database management.Tech 
   * Username: slp
   * Password: qwerty
   * Database_name: libromate
+```
+CREATE USER 'slp'@'localhost' IDENTIFIED BY 'qwerty';
+GRANT ALL PRIVILEGES ON libromate.* TO 'slp'@'localhost';
+```
 * Dump the database.sql file to the database.
+```
+mysql -u slp -p -h localhost libromate < database.sql;
+```
 * Run the project using the URL - “localhost”
