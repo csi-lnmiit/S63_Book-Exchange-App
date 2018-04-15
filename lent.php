@@ -127,72 +127,75 @@
 				        				</tr>
 				    				</thead><!--table header close-->
 
-				                    <!--fetch and display data from MySQL-->
-				                    <?php
-				                        $i=1;
+									<tbody>
 
-				                        while($row = mysqli_fetch_array($result)) {
+					                    <!--fetch and display data from MySQL-->
+					                    <?php
+					                        $i=1;
 
-											if($row['rn'] == 1)
- 											   echo "<tr style='background-color:white'>";
- 										   	else
- 											   echo "<tr>";
+					                        while($row = mysqli_fetch_array($result)) {
 
-											echo "<td>" . $i . "</td>";
-				        	                echo "<td>" . $row["bid"] . "</td>";
-				        	                echo "<td>" . $row["bname"] . "</td>";
-				        	                echo "<td>" . $row["author"] . "</td>";
+												if($row['rn'] == 1)
+	 											   echo "<tr style='background-color:white'>";
+	 										   	else
+	 											   echo "<tr>";
 
-											if($row['status'] == 1) {
+												echo "<td>" . $i . "</td>";
+					        	                echo "<td>" . $row["bid"] . "</td>";
+					        	                echo "<td>" . $row["bname"] . "</td>";
+					        	                echo "<td>" . $row["author"] . "</td>";
 
-												$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE u.id='".$row['id']."' AND r.bid=b.bid";
-												$info_result = mysqli_query($link,$info_query);
-												$info = mysqli_fetch_array($info_result);
-									?>
+												if($row['status'] == 1) {
 
-									<td>
-										<a href='#' data-toggle='popover' data-trigger='focus' data-content="
-										Email: <?php echo $info['email'] ?><br>
-										Mobile: <?php echo $info['mobile']; ?>">
-											<?php echo $info['name']; ?>
-										</a>
-									</td>
+													$info_query = "SELECT * from users AS u,requests AS r,books AS b WHERE u.id='".$row['id']."' AND r.bid=b.bid";
+													$info_result = mysqli_query($link,$info_query);
+													$info = mysqli_fetch_array($info_result);
+										?>
 
-									<?php
-											}
-											else {
-												echo "<td>" . $row["name"] . "</td>";
-											}
+										<td>
+											<a href='#' data-toggle='popover' data-trigger='focus' data-content="
+											Email: <?php echo $info['email'] ?><br>
+											Mobile: <?php echo $info['mobile']; ?>">
+												<?php echo $info['name']; ?>
+											</a>
+										</td>
 
-											if($row["status"]==0) {
-												echo "<td><button class='btn btn-warning' style='width:100px'>Pending</button></td>";
-												echo "<td>
-													 <a href='query.php?accept=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
-													 <input class='btn btn-primary' type='button' name='accept' value='Accept' style='width:70px'>
-													 </a>
-													 <a href='query.php?decline=" . $row["bid"] . "&from_user=" . $row['id'] . "'>
-													 <input class='btn btn-primary' type='button' name='decline' value='Decline' style='width:70px'>
-													 </a>
-													 </td>";
-											}
-											else if($row["status"]==1) {
-												echo "<td><button class='btn btn-success' style='width:100px'>Shared</button></td>";
-												echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
-													  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Accept' style='width:143px'>
-													  </a></td>";
-											}
-											else if($row["status"]==2) {
-												echo "<td><button class='btn btn-danger' style='width:100px'>Declined</button></td>";
-												echo "<td><a href='query.php?delete=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
-													  <input class='btn btn-primary' type='button' name='delete' value='Delete Request' style='width:143px'>
-												 	  </a></td>";
-											}
+										<?php
+												}
+												else {
+													echo "<td>" . $row["name"] . "</td>";
+												}
 
-											echo "</tr>";
-				        	                ++$i;
-				                        }
-				                    ?>
+												if($row["status"]==0) {
+													echo "<td><button class='btn btn-warning' style='width:100px'>Pending</button></td>";
+													echo "<td>
+														 <a href='query.php?accept=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
+														 <input class='btn btn-primary' type='button' name='accept' value='Accept' style='width:70px'>
+														 </a>
+														 <a href='query.php?decline=" . $row["bid"] . "&from_user=" . $row['id'] . "'>
+														 <input class='btn btn-primary' type='button' name='decline' value='Decline' style='width:70px'>
+														 </a>
+														 </td>";
+												}
+												else if($row["status"]==1) {
+													echo "<td><button class='btn btn-success' style='width:100px'>Shared</button></td>";
+													echo "<td><a href='query.php?cancel=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
+														  <input class='btn btn-primary' type='button' name='cancel' value='Cancel Accept' style='width:143px'>
+														  </a></td>";
+												}
+												else if($row["status"]==2) {
+													echo "<td><button class='btn btn-danger' style='width:100px'>Declined</button></td>";
+													echo "<td><a href='query.php?delete=" . $row['bid'] . "&from_user=" . $row['id'] . "'>
+														  <input class='btn btn-primary' type='button' name='delete' value='Delete Request' style='width:143px'>
+													 	  </a></td>";
+												}
 
+												echo "</tr>";
+					        	                ++$i;
+					                        }
+					                    ?>
+
+									</tbody>
 				                </table>
 				            </div>
 						</div>

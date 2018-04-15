@@ -158,15 +158,22 @@ textarea:focus, input:focus{
 }
 
 /**--Table CSS--*/
+
+.table-responsive {
+    max-height: 450px;
+}
+
 .table {
-     align: center;
-     background-color: #D7DBDD;
-     overflow:auto;
+    background-color: #D7DBDD;
 }
 
 thead {
     background-color: #1A1927;
     color: white;
+}
+
+tbody {
+    overflow:auto;
 }
 
 th {

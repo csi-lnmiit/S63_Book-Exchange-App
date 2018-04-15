@@ -93,6 +93,24 @@
 
 						<div class="container-fluid">
 							<br>
+							<div style="font-size:15px;padding-left: 70px">
+
+								<?php
+									require_once('db_connect.php'); //connect with database
+
+									$query = "select * from books b where b.trash='0' AND b.owner='".$_SESSION['user_id']."'";
+									$result = mysqli_query($link,$query);
+
+									if(mysqli_num_rows($result)==0)
+										echo nl2br("You don't have any books in your repository\n");
+									else {
+										echo nl2br("\nEdit or delete any book you have added:");
+									}
+									echo nl2br("\n\n");
+								?>
+
+							</div>
+							
 					    	<div class="table-responsive" style="padding-left:70px;padding-right:30px">
 				                <table class="table" align="center">
 				    				<thead><!--table header start-->
@@ -107,14 +125,6 @@
 				    				</thead><!--table header close-->
 
 									<?php
-						                require_once('db_connect.php'); //connect with database
-
-						                $query = "select * from books b where b.trash='0' AND b.owner='".$_SESSION['user_id']."'";
-						                $result = mysqli_query($link,$query);
-
-						                if(mysqli_num_rows($result)==0)
-						                    echo nl2br("You don't have any books in your repository\n");
-
 						           		$i=1;
 						                while($row = mysqli_fetch_array($result)) {
 						            ?>
