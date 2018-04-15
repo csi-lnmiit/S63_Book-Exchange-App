@@ -7,24 +7,38 @@
 	//if confirm delete is clicked on modify
 	if (isset($_GET['trash'])) {
 		$bid = $_GET['trash'];
+
 		$sql="UPDATE books b SET b.trash='1' WHERE bid='$bid'";
 		mysqli_query($link,$sql);
+
+		$query = "update users set points=points-1 where id='" . $_SESSION['user_id'] . "'";
+		mysqli_query($link,$query);
+		$_SESSION['points']--;
+
 		header('location: modify.php');
 	}
 
 	//if confirm delete is clicked on trash
 	else if (isset($_GET['del'])) {
 		$bid = $_GET['del'];
+
 		$sql="DELETE FROM books WHERE bid='$bid'";
 		mysqli_query($link,$sql);
+
 		header('location: trash.php');
 	}
 
 	//if confirm restore is clicked on trash
 	else if (isset($_GET['res'])) {
 		$bid = $_GET['res'];
+
 		$sql="UPDATE books b SET b.trash='0' WHERE bid='$bid'";
 		mysqli_query($link,$sql);
+
+		$query = "update users set points=points+1 where id='" . $_SESSION['user_id'] . "'";
+		mysqli_query($link,$query);
+		$_SESSION['points']++;
+
 		header('location:trash.php');
 	}
 
@@ -32,8 +46,10 @@
 	else if(isset($_GET["request"])) {
 		$bid = $_GET['request'];
 		$to_user = $_GET['to_user'];
+
 		$sql = "insert into requests values('" . $bid . "','" . $_SESSION['user_id'] . "','" . $to_user . "',0,1,0)";
 		mysqli_query($link,$sql);
+
 		header('location:borrow.php');
 	}
 
@@ -41,10 +57,12 @@
 	else if(isset($_GET["request_again"])) {
 		$bid = $_GET['request_again'];
 		$to_user = $_GET['to_user'];
+
 		$sql = "delete from requests where bid='" . $bid . "' and from_user='" . $_SESSION['user_id'] . "' and to_user='" . $to_user . "'";
 		mysqli_query($link,$sql);
 		$sql = "insert into requests values('" . $bid . "','" . $_SESSION['user_id'] . "','" . $to_user . "',0,1,0)";
 		mysqli_query($link,$sql);
+
 		header('location:borrow.php');
 	}
 
@@ -52,8 +70,10 @@
 	else if(isset($_GET["return"])) {
 		$bid = $_GET['return'];
 		$to_user = $_GET['to_user'];
+
 		$sql = "delete from requests where bid='" . $bid . "' and from_user='" . $_SESSION['user_id'] . "' and to_user='" . $to_user . "'";
 		mysqli_query($link,$sql);
+
 		header('location:borrow.php');
 	}
 
@@ -61,8 +81,17 @@
     else if(isset($_GET["accept"])) {
         $bid=$_GET['accept'];
 		$from_user = $_GET['from_user'];
+
         $sql="UPDATE requests SET sn=1,rn=0,status=1 WHERE bid='$bid' and from_user='$from_user' and to_user='" . $_SESSION['user_id'] . "'";
         mysqli_query($link,$sql);
+
+		$query = "update users set points=points+4 where id='" . $from_user . "'";
+		mysqli_query($link,$query);
+		$_SESSION['points'] += 4;
+
+		$query = "update users set points=points-2 where id='" . $to_user . "'";
+		mysqli_query($link,$query);
+
         header('location:lent.php');
     }
 
@@ -70,8 +99,10 @@
     else if(isset($_GET["decline"])) {
         $bid=$_GET['decline'];
 		$from_user = $_GET['from_user'];
+
         $sql="UPDATE requests SET sn=1,rn=0,status=2 WHERE bid='$bid' and from_user='$from_user' and to_user='" . $_SESSION['user_id'] . "'";
         mysqli_query($link,$sql);
+
         header('location:lent.php');
     }
 
@@ -79,8 +110,28 @@
     else if(isset($_GET["cancel"])) {
         $bid=$_GET['cancel'];
 		$from_user = $_GET['from_user'];
+
         $sql="UPDATE requests r SET r.sn=0,r.rn=1,status=0 WHERE bid='$bid' and from_user='$from_user' and to_user='" . $_SESSION['user_id'] . "'";
         mysqli_query($link,$sql);
+
+		$query = "update users set points=points-4 where id='" . $from_user . "'";
+		mysqli_query($link,$query);
+		$_SESSION['points'] -= 4;
+
+		$query = "update users set points=points+2 where id='" . $to_user . "'";
+		mysqli_query($link,$query);
+
+        header('location:lent.php');
+    }
+
+	//if delete request is clicked on lent
+    else if(isset($_GET["delete"])) {
+        $bid=$_GET['delete'];
+		$from_user = $_GET['from_user'];
+
+        $sql="DELETE from requests WHERE bid='$bid' and from_user='$from_user' and to_user='" . $_SESSION['user_id'] . "'";
+        mysqli_query($link,$sql);
+
         header('location:lent.php');
     }
 ?>

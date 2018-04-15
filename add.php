@@ -31,16 +31,20 @@
             $msg="Author name required";
         }
         else {
-            $query="insert into books(bid,bname,author,owner) values ('$bid','$bname','$bauthor','$owner')";
-			$result = mysqli_query($link,$query);
+            $query = "insert into books(bid,bname,author,owner) values ('$bid','$bname','$bauthor','$owner')";
+			mysqli_query($link,$query);
+
+			$query = "update users set points=points+1 where id='" . $_SESSION['user_id'] . "'";
+			mysqli_query($link,$query);
+			$_SESSION['points']++;
 
             $success="Your Book added successfully";
-            echo '<div class="alert alert-success" style="position:absolute;margin-top:330px;margin-left:425px;width:22%;">
+            echo '<div class="alert alert-success" style="position:absolute;margin-top:320px;margin-left:410px;width:292px;">
      		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$success.'</div>';
         }
 
         if($flag){
-            echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:320px;margin-left:410px;width:292px">
+            echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:320px;margin-left:410px;width:292px;">
         	<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'.$msg.'</div>';
 
 			unset($_POST);
@@ -93,6 +97,9 @@
 					            <li><a href="modify.php">
 					                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 					            </li>
+								<li><a href="browse.php">
+					                <span class="glyphicon glyphicon-eye-open"></span>&emsp;Browse all</a>
+					            </li>
 								<br>
 								<p>STATUS</p>
 					            <li><a href="borrow.php">
@@ -126,36 +133,9 @@
 					</div><!--end of nested row-->
 				</div><!--end of col-md-3-->
 
-				<div class="col-md-9"><!--col-md-9 start-->
-					<div class="row">
-						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
-							
-							<div class="col-md-1"></div>
-
-							<div class="topnav col-md-9">
-								<div class="search-container">
-									<form action="search.php" method="post">
-										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
-										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-									</form>
-								</div>
-							</div>
-
-							<div class="col-md-2" id="nav_image">
-								<div class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none">
-										<img src="Images/geek_pic.png" alt="My Pic" style="width:35%;" >
-  									<span class="caret" style="color: black"></span>
-  									</a>
-									<ul class="dropdown-menu">
-										<li><p>Signed in as</p></li>
-										<li><p><b><?php echo $_SESSION['user'];?></b></p></li>
-										<li><a href="profile.php">Your Profile</a></li>
-									    <li><a href="logout.php">Logout</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
+				<?php
+					include "topnav.php";
+				?>
 
 						<div class="container-fluid">
 							<br>

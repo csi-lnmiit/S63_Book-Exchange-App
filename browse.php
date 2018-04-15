@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	require_once('db_connect.php'); //connect with database
 
 	if(!isset($_SESSION["user"]))
 		header("Location:index.php");
@@ -11,7 +12,7 @@
 <html lang="en">
 	<head>
 		<link rel="shortcut icon" type="image/png" href="Images/favicon.png">
-	    <title>Dashboard</title>
+	    <title>Browse all Books</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -36,7 +37,7 @@
 					        <ul>
 								<br>
 					            <p>MENU</p>
-					            <li><a class="active" href="dashboard.php">
+					            <li><a href="dashboard.php">
 					                <span class="glyphicon glyphicon-home"></span>&emsp;Dashboard</a>
 					            </li>
 					            <li><a href="profile.php">
@@ -50,7 +51,7 @@
 					            <li><a href="modify.php">
 					                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
 					            </li>
-								<li><a href="browse.php">
+								<li><a href="browse.php" class="active">
 					                <span class="glyphicon glyphicon-eye-open"></span>&emsp;Browse all</a>
 					            </li>
 								<br>
@@ -86,88 +87,91 @@
 					</div><!--end of nested row-->
 				</div><!--end of col-md-3-->
 
-				<div class="col-md-9"><!--col-md-9 start-->
-				    <div class="row">
-				        <div class="container-fluid" style="background-color: #3498DB;height: 100px">
-
-				            <div class="col-md-1"></div>
-
-				            <div class="topnav col-md-9">
-				                <div class="search-container">
-				                    <form action="search.php" method="post">
-				                        <input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
-				                        <button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-				                    </form>
-				                </div>
-				            </div>
-
-				            <div class="col-md-2" id="nav_image">
-				                <div class="dropdown">
-				                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none">
-				                        <img src="Images/geek_pic.png" alt="My Pic" style="width:35%;" >
-				                    <span class="caret" style="color: black"></span>
-				                    </a>
-				                    <ul class="dropdown-menu">
-				                        <li><p>Signed in as</p></li>
-				                        <li><p><b><?php echo $_SESSION['user'];?></b></p></li>
-				                        <li><a href="profile.php">Your Profile</a></li>
-				                        <li><a href="logout.php">Logout</a></li>
-				                    </ul>
-				                </div>
-				            </div>
-				        </div>
-
+				<?php
+					include "topnav.php";
+				?>
 
 						<div class="container-fluid">
 							<br>
-					        <div style="font-size:30px;padding-left: 70px">Hello <?php echo htmlentities($_SESSION["user"]); ?>,</div>
 							<div style="font-size:15px;padding-left: 70px">
 
 					            <?php
-					                require_once('db_connect.php'); //connect with database
+									$query = "SELECT * FROM books AS b, users AS u
+											  WHERE b.owner=u.id AND b.owner!='" . $_SESSION["user_id"] ."'";
+									$result = mysqli_query($link,$query);
 
-					                $query = "select * from books b where b.trash='0' AND b.owner='".$_SESSION['user_id']."'";
-					                $result = mysqli_query($link,$query);
+						            if(mysqli_num_rows($result)==0)
+						                echo nl2br("\nNo books found!!");
+						            else
+						            	echo nl2br("\nFollowing are the books you can request:");
 
-					                if(mysqli_num_rows($result)==0)
-					                    echo nl2br("\nOops !! you have not added any books recently");
-					                else {
-					                    echo nl2br("\nFollowing is the list of books you have added:");
-					                }
-					                echo nl2br("\n\n");
-					            ?>
+						            echo nl2br("\n\n");
+								?>
 
 							</div>
 
 							<div class="table-responsive" style="padding-left:70px;padding-right:50px">
-				                <table class="table">
-				    				<thead id="thead"><!--table header start-->
+								<table class="table" align="center">
+				    				<thead><!--table header start-->
 				      					<tr>
 					        				<th>S.No.</th>
 					        				<th>Book Id</th>
 					        				<th>Book Name</th>
 					        				<th>Author</th>
+					        				<th>Owner Id</th>
+					        				<th>Owner Name</th>
+					        				<th>Request Book</th>
 				        				</tr>
 				    				</thead><!--table header close-->
 
 					                <!--fetch and display data from MySQL-->
 					                <?php
-					                    $i=1;
+				                   		$i=1;
+				                		while($row = mysqli_fetch_array($result)) {
+					                ?>
 
-						                while($row = mysqli_fetch_array($result)) {
-							                echo "<tr>";
-							                echo "<td>" . $i . "</td>";
-							                echo "<td>" . $row["bid"] . "</td>";
-							                echo "<td>" . $row["bname"] . "</td>";
-							                echo "<td>" . $row["author"] . "</td>";
-							                echo "</tr>";
-							                ++$i;
-						                }
-					            	?>
+					                <tbody><!--print table data-->
+					      				<tr>
+						        			<td><?php echo $i ?></td>
+						        			<td><?php echo $row["bid"] ?></td>
+						        			<td><?php echo $row["bname"] ?></td>
+						        			<td><?php echo $row["author"] ?></td>
+						       				<td><?php echo $row["id"] ?></td>
+						        			<td><?php echo $row["name"] ?></td>
+						        			<td>
 
-				                </table>
-				            </div><!--end of responsive table-->
-			        	</div>
+												<?php
+													$query1 = "select * from requests where bid='" . $row['bid'] . "' and from_user!='" . $_SESSION['user_id'] . "' and to_user='".$row['id']."' and status=1";
+													$sha = mysqli_query($link,$query1);
+													$query2 = "select * from requests where bid='" . $row['bid'] . "' and from_user='" . $_SESSION['user_id'] . "' and status=0";
+													$req = mysqli_query($link,$query2);
+													$query3 = "select * from requests where bid='" . $row['bid'] . "' and from_user='" . $_SESSION['user_id'] . "' and status=1";
+													$acc = mysqli_query($link,$query3);
+
+
+													if(mysqli_num_rows($sha))
+														echo "<button class='btn btn-danger' style='width:100px'>N.A.</button>";
+													else if(mysqli_num_rows($req))
+														echo "<button class='btn btn-warning' style='width:100px'>Requested</button>";
+													else if(mysqli_num_rows($acc))
+														echo "<button class='btn btn-success' style='width:100px'>Accepted</button>";
+
+													else {
+														echo "<a href='browse.php?request="  . $row['bid'] . "&to_user=" . $row['id'] . "'>
+														      <input class='btn btn-primary' type='button' name='request' value='Request' style='width:100px'>
+														      </a>";
+													}
+												?>
+
+						        			</td>
+
+					        				<?php ++$i; } ?> <!--php to increment S.NO. count of books-->
+
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
 				    </div>
 				</div><!--end of col-md-9-->
 			</div><!--end of row-->
