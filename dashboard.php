@@ -108,8 +108,8 @@
 				                    <span class="caret" style="color: black"></span>
 				                    </a>
 				                    <ul class="dropdown-menu">
-				                        <li><p>Signed in as</p></li>
-				                        <li><p><b><?php echo $_SESSION['user'];?></b></p></li>
+										<li><p>Signed in as <br><b><?php echo $_SESSION['user'];?></b></p></li>
+				                        <li class="divider"></li>
 				                        <li><a href="profile.php">Your Profile</a></li>
 				                        <li><a href="logout.php">Logout</a></li>
 				                    </ul>
