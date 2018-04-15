@@ -41,7 +41,7 @@
 			$flag++;
 		}
 
-		
+
 		if($flag){
 			$msg = "Book details successfully updated !!";
 			echo '<div class="alert alert-success alert-dismissable fade in" style="position:absolute;margin-top:355px;margin-left:410px;width:350px;">
@@ -52,7 +52,7 @@
 			echo '<div class="alert alert-danger alert-dismissable fade in" style="position:absolute;margin-top:355px;margin-left:410px;width:350px;">
 	        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' . $msg . '</div>';
 		}
-	   
+
 		unset($_POST);
 	}
 
@@ -70,7 +70,9 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" type="text/css" href="CSS/style1.css">
+	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+	    <script type="text/javascript" src="JS/script.js"></script>
+
 	</head>
 
 	<body>
@@ -100,6 +102,9 @@
 					            </li>
 					            <li><a href="modify.php">
 					                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
+					            </li>
+								<li><a href="browse.php">
+					                <span class="glyphicon glyphicon-eye-open"></span>&emsp;Browse all</a>
 					            </li>
 								<br>
 								<p>STATUS</p>
@@ -134,36 +139,9 @@
 					</div><!--end of nested row-->
 				</div><!--end of col-md-3-->
 
-				<div class="col-md-9"><!--col-md-9 start-->
-					<div class="row">
-						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
-							
-							<div class="col-md-1"></div>
-
-							<div class="topnav col-md-9">
-								<div class="search-container">
-									<form action="search.php" method="post">
-										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
-										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-									</form>
-								</div>
-							</div>
-
-							<div class="col-md-2" id="nav_image">
-								<div class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none">
-										<img src="Images/geek_pic.png" alt="My Pic" style="width:35%;" >
-  									<span class="caret" style="color: black"></span>
-  									</a>
-									<ul class="dropdown-menu">
-										<li><p>Signed in as</p></li>
-										<li><p><b><?php echo $_SESSION['user'];?></b></p></li>
-										<li><a href="profile.php">Your Profile</a></li>
-									    <li><a href="logout.php">Logout</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
+				<?php
+					include "topnav.php";
+				?>
 
 						<div class="container-fluid">
 							<br>
@@ -188,7 +166,12 @@
 										<input type="text" class="form-control" style="width:250px;" name="author" placeholder="<?php echo $row['author']; ?>">
 									</div>
 									<br>
-								    <input class="btn btn-block btn-primary" type="submit" name="update" value="Update" style="width:350px;">
+									<div style="float: left; width: 170px">
+						        		<input class="btn btn-block btn-primary" type="submit" name="update" value="Update">
+						         	</div>
+						          	<div style="float: right; width: 170px;margin-right:735px;">
+						                <input class="btn btn-block btn-primary" type="button" name="cancel" value="Cancel" onclick="javascript:history.back();">
+						          	</div>
 							  	</form><!--end of form-->
 							</div><!--end of container-->
 						</div>
@@ -197,11 +180,5 @@
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
 
-		<!--JS SCRIPTS-->
-	    <script  type='text/javascript'>
-			if ( window.history.replaceState ) {
-				window.history.replaceState( null, null, window.location.href );
-			}
-		</script>
 	</body>
 </html>

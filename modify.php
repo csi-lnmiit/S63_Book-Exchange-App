@@ -19,7 +19,8 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-	    <link rel="stylesheet" type="text/css" href="CSS/style1.css">
+	    <link rel="stylesheet" type="text/css" href="CSS/style.css">
+	    <script type="text/javascript" src="JS/script.js"></script>
 	</head>
 
 	<body>
@@ -49,6 +50,9 @@
 					            </li>
 					            <li><a href="modify.php" class="active">
 					                <span class="glyphicon glyphicon-edit"></span>&emsp;Modify</a>
+					            </li>
+								<li><a href="browse.php">
+					                <span class="glyphicon glyphicon-eye-open"></span>&emsp;Browse all</a>
 					            </li>
 								<br>
 								<p>STATUS</p>
@@ -83,36 +87,9 @@
 					</div><!--end of nested row-->
 				</div><!--end of col-md-3-->
 
-				<div class="col-md-9"><!--col-md-9 start-->
-					<div class="row">
-						<div class="container-fluid" style="background-color: #3498DB;height: 100px">
-							
-							<div class="col-md-1"></div>
-
-							<div class="topnav col-md-9">
-								<div class="search-container">
-									<form action="search.php" method="post">
-										<input type="text" placeholder=" Search book name or author name ..." name="search_input" size="55%">
-										<button type="submit" name="search"><i class="glyphicon glyphicon-search"></i></button>
-									</form>
-								</div>
-							</div>
-
-							<div class="col-md-2" id="nav_image">
-								<div class="dropdown">
-									<a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-decoration: none">
-										<img src="Images/geek_pic.png" alt="My Pic" style="width:35%;" >
-  									<span class="caret" style="color: black"></span>
-  									</a>
-									<ul class="dropdown-menu">
-										<li><p>Signed in as</p></li>
-										<li><p><b><?php echo $_SESSION['user'];?></b></p></li>
-										<li><a href="profile.php">Your Profile</a></li>
-									    <li><a href="logout.php">Logout</a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
+				<?php
+					include "topnav.php";
+				?>
 
 						<div class="container-fluid">
 							<br>
@@ -171,11 +148,5 @@
 			</div><!--end of row-->
 		</div><!--end of container fluid-->
 
-	    <!--JS SCRIPTS-->
-	    <script  type='text/javascript'>
-	    	//popover script
-	    	$("[data-toggle=popover]")
-			.popover({html:true})
-		</script>
 	</body>
 </html>
