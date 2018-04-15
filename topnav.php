@@ -21,7 +21,7 @@
                         <img src="Images/geek_pic.png" alt="My Pic" style="width:35%;">
                         <span class="caret" style="color: black;"></span>
                     </a>
-                    <ul class="dropdown-content">
+                    <ul class="dropdown-menu">
                         <li><p>Signed in as <br><b><?php echo $_SESSION['user'];?></b></p></li>
                         <li class="divider"></li>
                         <li><a href="profile.php">Your Profile</a></li>
